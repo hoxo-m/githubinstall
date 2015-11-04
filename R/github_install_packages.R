@@ -3,7 +3,7 @@ contains_username <- function(repo) {
 }
 
 find_username <- function(repo) {
-  data <- read.csv("data/github_repos.csv")
+  data <- read.csv(system.file("data", "github_repos.csv", package = "githubinstall"))
   data[data$repo == repo, ]$username[1]
 }
 
