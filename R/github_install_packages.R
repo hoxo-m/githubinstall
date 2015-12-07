@@ -32,3 +32,4 @@ install_github_package <- function(repo, username = NULL, ref = "master", subdir
     devtools::install_github(repo, ref=ref, subdir=subdir, auth_token=auth_token, host=host, ...)
   }
 }
+
