@@ -1,11 +1,12 @@
 Package: githubinstall
 Type: Package
-Title: You can install R packages on GitHub by only repository names
-Version: 0.0.1
-Date: 2015-11-04
+Title: You can install R packages on GitHub by only package names
+Version: 0.0.2
+Date: 2015-12-07
 Author: Koji MAKIYAMA(@hoxo_m)
 Maintainer: Koji MAKIYAMA <hoxo.smile@gmail.com>
-Description: You can install R packages on GitHub by only repository names.
+Description: You can install R packages on GitHub by only package names.
 License: MIT
 Imports: 
-  devtools
+  devtools,
+  jsonlite
