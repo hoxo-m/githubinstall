@@ -9,4 +9,6 @@ Description: You can install R packages on GitHub by only package names.
 License: MIT
 Imports: 
   devtools,
-  jsonlite
+  jsonlite,
+  stringr,
+  rlist
