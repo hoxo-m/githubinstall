@@ -28,28 +28,7 @@
 gh_install_packages <- function(pkgs, build_args = NULL, build_vignettes = TRUE,
                                 uninstall = FALSE, verbose = TRUE,
                                 dependencies = c("Depends", "Imports", "Suggests"), ...) {
-  load_package_list_if_not_yet()
-  repos <- sapply(pkgs, function(package_name) {
-    if(is_full_repo_name(package_name)) {
-      package_name
-    } else {
-      candidates <- get_candidates(package_name)
-      if(is.null(candidates)) {
-        error_message <- sprintf('Not found the GitHub repository named "%s".', package_name)
-        stop(error_message, call. = FALSE)
-      } else if(length(candidates) == 1) {
-        paste0(candidates, "/", package_name)
-      } else {
-        choices <- format_choices(candidates, package_name)
-        choice <- menu(choices = choices, title = "Select a repository or, hit 0 to cancel.")
-        if(choice == 0) {
-          stop("Canceled installing.", call. = FALSE)
-        } else {
-          paste0(candidates[choice], "/", package_name)
-        }
-      }
-    }
-  })
+  repos <- sapply(pkgs, select_repository)
   install_github(repo = repos, build_args = build_args, build_vignettes = build_vignettes,
                  uninstall = uninstall, verbose = verbose, dependencies = dependencies, ... = ...)
 }
@@ -59,6 +38,7 @@ is_full_repo_name <- function(package_name) {
 }
 
 get_candidates <- function(package_name) {
+  load_package_list_if_not_yet()
   ind <- .options$package_list$package_name == package_name
   if(all(!ind)) return(NULL)
   authors <- .options$package_list$author[ind]
@@ -71,4 +51,26 @@ format_choices <- function(candidates, package_name) {
   max_nchars <- max(nchars)
   spaces <- sapply(max_nchars - nchars, function(n) paste(rep(" ", n + 1), collapse=""))
   paste0(candidates, "/", package_name, spaces, "(", attr(candidates, "title"), ")")
+}
+
+select_repository <- function(package_name) {
+  if(is_full_repo_name(package_name)) {
+    package_name
+  } else {
+    candidates <- get_candidates(package_name)
+    if(is.null(candidates)) {
+      error_message <- sprintf('Not found the GitHub repository named "%s".', package_name)
+      stop(error_message, call. = FALSE)
+    } else if(length(candidates) == 1) {
+      paste0(candidates, "/", package_name)
+    } else {
+      choices <- format_choices(candidates, package_name)
+      choice <- menu(choices = choices, title = "Select a repository or, hit 0 to cancel.")
+      if(choice == 0) {
+        stop("Canceled installing.", call. = FALSE)
+      } else {
+        paste0(candidates[choice], "/", package_name)
+      }
+    }
+  }
 }

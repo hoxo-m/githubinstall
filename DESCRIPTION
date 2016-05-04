@@ -13,9 +13,9 @@ License: MIT + file LICENSE
 Imports:
     data.table,
     ghit,
+    jsonlite,
     utils,
     devtools,
-    jsonlite,
     stringr,
     rlist
 Suggests:

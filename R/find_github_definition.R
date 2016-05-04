@@ -1,4 +1,5 @@
 find_github_definition <- function(package, func_name, user_name=NULL) {
+  .Deprecated("gh_find_func_definition")
   user_name <- .pkg_list[.pkg_list$repo_name == package, "author"]
   if(length(user_name) == 0) {
     stop("not found")
