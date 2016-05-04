@@ -7,8 +7,8 @@ Description: Easy to install R packages on GitHub.
 Authors@R: c(
     person("Koji", "Makiyama", email = "hoxo.smile@gmail.com", role = c("cre", "aut")),
     person("Atsushi", "Hayakawa", role = "ctb"))
-URL: https://github.com/hoxo-m/githubinst
-BugReports: https://github.com/hoxo-m/githubinst/issues
+URL: https://github.com/hoxo-m/githubinstall
+BugReports: https://github.com/hoxo-m/githubinstall/issues
 License: MIT + file LICENSE
 Imports:
     data.table,
