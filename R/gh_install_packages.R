@@ -28,9 +28,7 @@
 gh_install_packages <- function(pkgs, build_args = NULL, build_vignettes = TRUE,
                                 uninstall = FALSE, verbose = TRUE,
                                 dependencies = c("Depends", "Imports", "Suggests"), ...) {
-  if(!exists("package_list", envir = .options)) {
-    gh_update_package_list()
-  }
+  load_package_list_if_not_yet()
   repos <- sapply(pkgs, function(package_name) {
     if(is_full_repo_name(package_name)) {
       package_name
