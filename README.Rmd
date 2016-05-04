@@ -1,7 +1,14 @@
-# githubinstall: Easy to install R packages on GitHub
-Koji MAKIYAMA (@hoxo_m)  
+---
+title: "githubinstall: Easy to install R packages on GitHub"
+author: Koji MAKIYAMA (@hoxo_m)
+output: 
+  html_document:
+    keep_md: true
+---
 
-
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 [![CRAN Version](http://www.r-pkg.org/badges/version/githubinstall)](http://cran.rstudio.com/web/packages/githubinstall)
 
@@ -13,8 +20,7 @@ The package provides a easy way to install packages on GitHub.
 
 You can install the package from GitHub.
 
-
-```r
+```{r eval=FALSE}
 install.packages("devtools") # if you have not installed "devtools" package
 devtools::install_github("hoxo-m/githubinstall")
 ```
@@ -27,21 +33,18 @@ The source code for **githubinstall** package is available on GitHub at
 
 This package completes `username` automatically.
 
-
-```r
+```{r}
 library(githubinstall)
 ```
 
-
-```r
+```{r eval=FALSE}
 githubinstlal("multidplyr")
 # This is same as devtools::install_github("hadley/multidplyr")
 ```
 
 Or
 
-
-```r
+```{r eval=FALSE}
 gh_install_packages("multidplyr")
 ```
 
@@ -54,47 +57,19 @@ Installing multidplyr
 
 You can show the list of repositories on GitHub by `username`.
 
-
-```r
+```{r}
 hadleyverse <-  gh_get_package_info("hadley")
 head(hadleyverse)
 ```
 
-```
-##   author package_name
-## 1 hadley   assertthat
-## 2 hadley    babynames
-## 3 hadley    bigrquery
-## 4 hadley     bookdown
-## 5 hadley   clusterfly
-## 6 hadley      decumar
-##                                                                 title
-## 1                                      User friendly assertions for R
-## 2               An R package contain all baby names data from the SSA
-## 3                           An interface to Google's bigquery from R.
-## 4                                                               Watch
-## 5 An R package for visualising high-dimensional clustering algorithms
-## 6                                            An alternative to sweave
-```
-
 You can guess repository names or user names.
 
-
-```r
+```{r}
 gh_guess_repository("multdplyr", fullname = TRUE)
 ```
 
-```
-## [1] "hadley/multidplyr"
-```
-
-
-```r
+```{r}
 gh_guess_username("hadly")
-```
-
-```
-## [1] "hadley"
 ```
 
 ## 4. Related Work

@@ -18,6 +18,4 @@ Imports:
     devtools,
     stringr,
     rlist
-Suggests:
-    testthat
 RoxygenNote: 5.0.1
