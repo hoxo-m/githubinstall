@@ -7,7 +7,7 @@ Koji MAKIYAMA (@hoxo_m)
 
 ## 1. Overview
 
-The package provides a easy way to install packages on GitHub.
+The package provides an easy way to install packages on GitHub.
 
 ## 2. Installation
 
@@ -34,7 +34,7 @@ library(githubinstall)
 
 
 ```r
-githubinstlal("multidplyr")
+githubinstall("multidplyr")
 # This is same as devtools::install_github("hadley/multidplyr")
 ```
 
