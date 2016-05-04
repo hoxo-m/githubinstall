@@ -19,7 +19,7 @@
 #' gh_install_packages("multidplyr")
 #' }
 #'
-#' @importFrom utils menu
+#' @importFrom utils menu packageDescription
 #' @importFrom ghit install_github
 #'
 #' @rdname githubinstall
@@ -29,6 +29,13 @@ gh_install_packages <- function(pkgs, build_args = NULL, build_vignettes = TRUE,
                                 uninstall = FALSE, verbose = TRUE,
                                 dependencies = c("Depends", "Imports", "Suggests"), ...) {
   repos <- sapply(pkgs, select_repository)
+  lib <- list(...)$lib
+  if(is_conflict_installed_packages(repos, lib)) {
+    choice <- menu(choices = c("Cancel Installation", "Forcibly Install (Overwirte)"), title = "Warning occurred. Do you cancel the installation?")
+    if(choice <= 1) {
+      stop("Canceled installing.", call. = FALSE)
+    }
+  }
   install_github(repo = repos, build_args = build_args, build_vignettes = build_vignettes,
                  uninstall = uninstall, verbose = verbose, dependencies = dependencies, ... = ...)
 }
@@ -73,4 +80,38 @@ select_repository <- function(package_name) {
       }
     }
   }
+}
+
+is_conflict_installed_packages <- function(repo_full_names, lib) {
+  if(missing(lib)) lib <- NULL
+  splitted <- strsplit(repo_full_names, "/")
+  usernames <- sapply(splitted, function(x) x[1])
+  package_names <- sapply(splitted, function(x) x[2])
+  descs <- lapply(package_names, function(pkg) suppressWarnings(packageDescription(pkg, lib.loc = lib)))
+  ind <- !is.na(descs)
+  is_conflict <- mapply(function(user, pkg, desc) {
+    if(exists("GithubRepo", where = desc)) {
+      if(desc$GithubUsername != user) {
+        repo <- paste0(user, "/", pkg)
+        installed_repo <- paste0(desc$GithubUsername, "/", desc$GithubRepo)
+        message <- sprintf('Installing "%s", but already installed "%s"', repo, installed_repo)
+        warning(message, call. = FALSE, immediate. = TRUE)
+        return(TRUE)
+      } else if(desc$GithubRef != "master") {
+        message <- sprintf('Installing master branch of "%s", but already installed "%s" branch.', repo, desc$GithubRef)
+        warning(message, call. = FALSE, immediate. = TRUE)
+        return(TRUE)
+      }
+      return(FALSE)
+    } else {
+      if(exists("Repository", where = desc)) {
+        message <- sprintf('Installing "%s" package from GitHub, but it was installed from %s.', pkg, desc$Repository)
+      } else {
+        message <- sprintf('Installing "%s" package from GitHub, but it was installed from unknown repository.', pkg)
+      }
+      warning(message, call. = FALSE, immediate. = TRUE)
+      return(TRUE)
+    }
+  }, usernames[ind], package_names[ind], descs[ind])
+  any(is_conflict)
 }
