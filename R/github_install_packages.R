@@ -21,6 +21,7 @@ find_username <- function(repo_name) {
 #' @export
 install_github_package <- function(repo, username = NULL, ref = "master", subdir = NULL,
                                     auth_token = devtools::github_pat(), host = "api.github.com", ...) {
+  .Deprecated("gh_install_packages")
   if(!is.null(username)) {
     devtools::install_github(repo, username=username, ref=ref, subdir=subdir, 
                              auth_token=auth_token, host=host, ...)

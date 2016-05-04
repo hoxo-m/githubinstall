@@ -1,14 +1,23 @@
 Package: githubinstall
 Type: Package
-Title: You can install R packages on GitHub by only package names
-Version: 0.0.2
-Date: 2015-12-07
-Author: Koji MAKIYAMA(@hoxo_m)
-Maintainer: Koji MAKIYAMA <hoxo.smile@gmail.com>
-Description: You can install R packages on GitHub by only package names.
-License: MIT
-Imports: 
-  devtools,
-  jsonlite,
-  stringr,
-  rlist
+Version: 0.0.0.9000
+Date: 2016-05-04
+Title: Easy to Install R Packages on GitHub
+Description: Easy to install R packages on GitHub.
+Authors@R: c(
+    person("Koji", "Makiyama", email = "hoxo.smile@gmail.com", role = c("cre", "aut")),
+    person("Atsushi", "Hayakawa", role = "ctb"))
+URL: https://github.com/hoxo-m/githubinst
+BugReports: https://github.com/hoxo-m/githubinst/issues
+License: MIT + file LICENSE
+Imports:
+    data.table,
+    ghit,
+    utils,
+    devtools,
+    jsonlite,
+    stringr,
+    rlist
+Suggests:
+    testthat
+RoxygenNote: 5.0.1

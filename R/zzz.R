@@ -1,4 +1,10 @@
 .onLoad <- function(libname, pkgname) {
+  # Create Option Environment -----------------------------------------------
+  package_option_env <- new.env(parent = emptyenv())
+  package_namespace <- asNamespace(pkgname)
+  assign(".options", package_option_env, envir = package_namespace)
+  
+  # Old Version -------------------------------------------------------------
   url <- "http://rpkg.gepuro.net/download"
   pkg_list <- jsonlite::fromJSON(url)
   repos <- strsplit(pkg_list$pkg_list$pkg_name, "/")
