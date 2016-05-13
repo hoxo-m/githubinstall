@@ -13,6 +13,7 @@ License: MIT + file LICENSE
 Imports:
     data.table,
     ghit,
+    httr,
     jsonlite,
     utils
 RoxygenNote: 5.0.1
