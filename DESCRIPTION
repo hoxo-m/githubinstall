@@ -1,7 +1,7 @@
 Package: githubinstall
 Type: Package
-Version: 0.0.0.9000
-Date: 2016-05-04
+Version: 0.0.0.9001
+Date: 2016-05-13
 Title: Easy to Install R Packages on GitHub
 Description: Easy to install R packages on GitHub.
 Authors@R: c(
@@ -14,8 +14,5 @@ Imports:
     data.table,
     ghit,
     jsonlite,
-    utils,
-    devtools,
-    stringr,
-    rlist
+    utils
 RoxygenNote: 5.0.1
