@@ -16,16 +16,14 @@ gh_show_source <- function(func, repo = NULL) {
   if(is.character(func)) {
     func_name <- func
   } else {
-    func_name <- substitute(func)
+    func_name <- as.character(substitute(func))
   }
   if(is.null(repo)) {
     func <- match.fun(func)
     ns <- environment(func)
-    package_name <- get(".packageName", ns)
-    repo_name <- select_repository(package_name)
-  } else {
-    repo_name <- select_repository(repo)
+    repo <- get(".packageName", ns)
   }
+  repo_name <- select_repository(repo)
   
   contents_url <- sprintf("https://api.github.com/repos/%s/contents/R", repo_name)
   download_urls <- fromJSON(contents_url)$download_url
