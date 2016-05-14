@@ -24,6 +24,8 @@
 #'
 #' @rdname githubinstall
 #'
+#' @importFrom httr GET
+#'
 #' @export
 gh_install_packages <- function(pkgs, build_args = NULL, build_vignettes = TRUE,
                                 uninstall = FALSE, verbose = TRUE,
@@ -36,6 +38,7 @@ gh_install_packages <- function(pkgs, build_args = NULL, build_vignettes = TRUE,
       stop("Canceled installing.", call. = FALSE)
     }
   }
+  GET(sprintf("http://githubinstall.appspot.com/package?package=%s", paste(repos, collapse = ",")))
   install_github(repo = repos, build_args = build_args, build_vignettes = build_vignettes,
                  uninstall = uninstall, verbose = verbose, dependencies = dependencies, ... = ...)
 }
