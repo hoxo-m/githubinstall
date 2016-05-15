@@ -2,7 +2,9 @@
 #'
 #' @param vague_repo_name a character as GitHub repository name that may not be exact.
 #' You can pass full repository names e.g. "hadley/bigquery".
-#' @param fullname logical. Default is \code{FALSE}. If \code{TRUE}, it returns full repoitory names e.g. "hadley/bigrquery".
+#' @param fullname logical. Indicates to return full repoitory names e.g. "hadley/bigrquery". 
+#' If you pass full repository name to \code{vague_repo_name}, force \code{TRUE}.
+#' Default is \code{FALSE}.
 #' 
 #' @return a character vector of the closest repository names to input.
 #' 
