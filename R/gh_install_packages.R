@@ -1,6 +1,6 @@
 #' Install Packages from GitHub
 #'
-#' @param pkgs character vector of the names of packages.
+#' @param packages character vector of the names of packages.
 #' @param build_args character string used to control the package build, passed to \code{R CMD build}.
 #' @param build_vignettes logical specifying whether to build package vignettes, passed to \code{R CMD build}. Can be slow. Default is \code{TRUE}.
 #' @param uninstall logical
@@ -19,21 +19,23 @@
 #' gh_install_packages("multidplyr")
 #' }
 #'
-#' @importFrom utils menu packageDescription
 #' @importFrom ghit install_github
+#' @importFrom utils menu packageDescription
 #'
 #' @rdname githubinstall
 #'
 #' @importFrom httr GET
 #'
 #' @export
-gh_install_packages <- function(pkgs, build_args = NULL, build_vignettes = TRUE,
+gh_install_packages <- function(packages, build_args = NULL, build_vignettes = TRUE,
                                 uninstall = FALSE, verbose = TRUE,
                                 dependencies = c("Depends", "Imports", "Suggests"), ...) {
-  repos <- sapply(pkgs, select_repository)
+  packages <- reserve_suffix(packages)
+  repos <- sapply(packages, select_repository)
+  repos <- paste0(repos, attr(packages, "suffix"))
   lib <- list(...)$lib
   if(is_conflict_installed_packages(repos, lib)) {
-    choice <- menu(choices = c("Cancel Installation", "Forcibly Install (Overwirte)"), title = "Warning occurred. Do you cancel the installation?")
+    choice <- menu(choices = c("Cancel Installation", "Install Forcibly (Overwirte)"), title = "Warning occurred. Do you cancel the installation?")
     if(choice <= 1) {
       stop("Canceled installing.", call. = FALSE)
     }

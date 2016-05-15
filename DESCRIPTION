@@ -15,5 +15,7 @@ Imports:
     ghit,
     httr,
     jsonlite,
+    stringr,
     utils
 RoxygenNote: 5.0.1
+Suggests: testthat
