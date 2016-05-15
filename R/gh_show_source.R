@@ -9,7 +9,7 @@
 #' }
 #' 
 #' @importFrom jsonlite fromJSON
-#' @importFrom utils browseURL
+#' @importFrom httr BROWSE
 #' 
 #' @export
 gh_show_source <- function(func, repo = NULL) {
@@ -41,7 +41,7 @@ gh_show_source <- function(func, repo = NULL) {
   if(found) {
     line_num <- which(grepl(paste0(func_name, "<-"), gsub("\\s", "", readLines(url))))
     url <- sprintf("https://github.com/%s/tree/master/R/%s#L%d", repo_name, basename(url), line_num)
-    browseURL(url)
+    BROWSE(url)
   } else {
     stop("not found")
   }
