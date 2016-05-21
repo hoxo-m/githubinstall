@@ -3,6 +3,7 @@ Koji MAKIYAMA (@hoxo_m)
 
 
 
+[![Travis-CI Build Status](https://travis-ci.org/hoxo-m/githubinstall.svg?branch=master)](https://travis-ci.org/hoxo-m/githubinstall)
 [![CRAN Version](http://www.r-pkg.org/badges/version/githubinstall)](http://cran.rstudio.com/web/packages/githubinstall)
 
 ## 1. Overview
