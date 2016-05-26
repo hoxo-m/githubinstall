@@ -5,6 +5,7 @@ Koji MAKIYAMA (@hoxo_m)
 
 [![Travis-CI Build Status](https://travis-ci.org/hoxo-m/githubinstall.svg?branch=master)](https://travis-ci.org/hoxo-m/githubinstall)
 [![CRAN Version](http://www.r-pkg.org/badges/version/githubinstall)](http://cran.rstudio.com/web/packages/githubinstall)
+[![Coverage Status](https://coveralls.io/repos/github/hoxo-m/githubinstall/badge.svg?branch=master)](https://coveralls.io/github/hoxo-m/githubinstall?branch=master)
 
 ## 1. Overview
 
@@ -86,7 +87,7 @@ gh_guess_repository("multdplyr", fullname = TRUE)
 ```
 
 ```
-## [1] "hadley/multidplyr"
+## [1] "hadley/multidplyr"    "jeblundell/multiplyr"
 ```
 
 
