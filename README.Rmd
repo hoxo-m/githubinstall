@@ -40,14 +40,14 @@ library(githubinstall)
 ```
 
 ```{r eval=FALSE}
-githubinstall("multidplyr")
-# This is same as devtools::install_github("hadley/multidplyr")
+githubinstall("AnomalyDetection")
+# This is same as devtools::install_github("twitter/AnomalyDetection")
 ```
 
 Or
 
 ```{r eval=FALSE}
-gh_install_packages("multidplyr")
+gh_install_packages("AnomalyDetection", build_vignettes = F)
 ```
 
 ```
