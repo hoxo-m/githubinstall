@@ -45,16 +45,12 @@ gh_install_packages <- function(packages, build_args = NULL, build_vignettes = T
                  uninstall = uninstall, verbose = verbose, dependencies = dependencies, ... = ...)
 }
 
-is_full_repo_name <- function(package_name) {
-  grepl("/", package_name)
-}
-
 get_candidates <- function(package_name) {
-  load_package_list_if_not_yet()
-  ind <- .options$package_list$package_name == package_name
+  package_list <- get_package_list()
+  ind <- package_list$package_name == package_name
   if(all(!ind)) return(NULL)
-  authors <- .options$package_list$author[ind]
-  attr(authors, "title") <- .options$package_list$title[ind]
+  authors <- package_list$author[ind]
+  attr(authors, "title") <- package_list$title[ind]
   authors
 }
 
