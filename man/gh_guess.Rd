@@ -2,28 +2,26 @@
 % Please edit documentation in R/gh_guess.R
 \name{gh_guess}
 \alias{gh_guess}
-\title{Guess Github Repository from Incomplete or Vague Names}
+\title{Guess Github Repository Name from a Incomplete Name}
 \usage{
-gh_guess(vague_repo_name)
+gh_guess(repo_name, keep_title = FALSE)
 }
 \arguments{
-\item{repo_name}{a character.}
+\item{repo_name}{a character. A part of a repository name.}
 }
 \value{
-complete repository name.
+candidates for the repository name.
 }
 \description{
-Guess Github Repository from Incomplete or Vague Names
+Guess Github Repository Name from a Incomplete Name
 }
 \examples{
-\dontrun{
-gh_guess("bigquery")
-# [1] "bigrquery"
-gh_guess_repository("bigquery", fullname = TRUE)
-# [1] "hadley/bigrquery"    "rstats-db/bigrquery"
-gh_guess_repository("hadley/bigquery")
-# [1] "hadley/bigrquery"
-}
+gh_guess("AnomalyDetection")
+# [1] "twitter/AnomalyDetection"
+gh_guess("BnomalyDetection")
+# [1] "twitter/AnomalyDetection"
+gh_guess("Uwitter/BnomalyDetection")
+# [1] "twitter/AnomalyDetection"
 
 }
 

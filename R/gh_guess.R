@@ -1,8 +1,9 @@
-#' Guess Github Repository from Incomplete or Vague Names
+#' Guess Github Repository Name from a Incomplete Name
 #' 
-#' @param repo_name a character.
+#' @param repo_name a character. A part of a repository name.
+#' @param keep_title logical. Indicates to keep the package titles as an attrbite. Default \code{FALSE}.
 #' 
-#' @return complete repository name.
+#' @return candidates for the repository name.
 #' 
 #' @examples 
 #' gh_guess("AnomalyDetection")
@@ -14,22 +15,25 @@
 #' 
 #' @importFrom stringr str_c
 #' @importFrom utils adist
+#' 
 #' @export
-gh_guess <- function (vague_repo_name) {
-  vague_repo_name <- vague_repo_name[1]
+gh_guess <- function (repo_name, keep_title = FALSE) {
+  repo_name <- repo_name[1]
   package_list <- get_package_list()
   
-  if (is_full_repo_name(vague_repo_name)) {
+  if (is_full_repo_name(repo_name)) {
     target <- str_c(package_list$author, "/", package_list$package_name)
+    if(keep_title) titles <- package_list$title
   } else {
     target <- unique(package_list$package_name)
   }
   
-  dist <- adist(vague_repo_name, target)[1, ]
+  dist <- adist(repo_name, target)[1, ]
   mindist <- min(dist)
   result <- target[dist == mindist]
   
-  if (is_full_repo_name(vague_repo_name)) {
+  if (is_full_repo_name(repo_name)) {
+    if(keep_title) attr(result, "title") <- titles[dist == mindist]
     result
   } else {
     candidate_list <- lapply(result, function(package_name) {
@@ -42,6 +46,11 @@ gh_guess <- function (vague_repo_name) {
         candidates
       }
     })
-    unlist(Filter(Negate(is.null), candidate_list))
+    result <- unlist(candidate_list)
+    if(keep_title) {
+      titles <- Reduce(function(x, y) c(attr(x, "title"), attr(y, "title")), init = c(), candidate_list)
+      attr(result, "title") <- titles
+    }
+    result
   }
 }

@@ -19,7 +19,7 @@ test_that("multi result", {
 test_that("has title", {
   repo <- "AnomalyDetection"
   
-  act <- gh_guess(repo)
+  act <- gh_guess(repo, keep_title = TRUE)
   
   expect_false(is.null(attr(act, "title")))
 })

@@ -40,9 +40,10 @@ gh_install_packages <- function(packages, build_args = NULL, build_vignettes = T
       stop("Canceled installing.", call. = FALSE)
     }
   }
-  GET(sprintf("http://githubinstall.appspot.com/package?package=%s", paste(repos, collapse = ",")))
-  install_github(repo = repos, build_args = build_args, build_vignettes = build_vignettes,
+  result <- install_github(repo = repos, build_args = build_args, build_vignettes = build_vignettes,
                  uninstall = uninstall, verbose = verbose, dependencies = dependencies, ... = ...)
+  GET(sprintf("http://githubinstall.appspot.com/package?package=%s", paste(repos, collapse = ",")))
+  result
 }
 
 get_candidates <- function(package_name) {
