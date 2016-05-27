@@ -15,8 +15,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' githubinstall("multidplyr")
-#' gh_install_packages("multidplyr")
+#' githubinstall("AnomalyDetection")
+#' gh_install_packages("AnomalyDetection")
 #' }
 #'
 #' @importFrom ghit install_github
