@@ -1,4 +1,19 @@
+#' Guess Github Repository from Incomplete or Vague Names
+#' 
+#' @param repo_name a character.
+#' 
+#' @return complete repository name.
+#' 
+#' @examples 
+#' gh_guess("AnomalyDetection")
+#' # [1] "twitter/AnomalyDetection"
+#' gh_guess("BnomalyDetection")
+#' # [1] "twitter/AnomalyDetection"
+#' gh_guess("Uwitter/BnomalyDetection")
+#' # [1] "twitter/AnomalyDetection"
+#' 
 #' @importFrom stringr str_c
+#' @importFrom utils adist
 #' @export
 gh_guess <- function (vague_repo_name) {
   vague_repo_name <- vague_repo_name[1]
