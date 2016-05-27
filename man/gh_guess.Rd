@@ -8,6 +8,8 @@ gh_guess(repo_name, keep_title = FALSE)
 }
 \arguments{
 \item{repo_name}{a character. A part of a repository name.}
+
+\item{keep_title}{logical. Indicates to keep the package titles as an attrbite. Default \code{FALSE}.}
 }
 \value{
 candidates for the repository name.
