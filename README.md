@@ -36,15 +36,15 @@ library(githubinstall)
 
 
 ```r
-githubinstall("multidplyr")
-# This is same as devtools::install_github("hadley/multidplyr")
+githubinstall("AnomalyDetection")
+# This is same as devtools::install_github("twitter/AnomalyDetection")
 ```
 
 Or
 
 
 ```r
-gh_install_packages("multidplyr")
+gh_install_packages("AnomalyDetection", build_vignettes = F)
 ```
 
 ```
@@ -103,3 +103,4 @@ gh_guess_username("hadly")
 
 - [ghit: Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit)
 - [Drat R Archive Template](https://github.com/eddelbuettel/drat)
+- [Tools to make an R developer's life easier](https://github.com/hadley/devtools)

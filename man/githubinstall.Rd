@@ -6,12 +6,12 @@
 \title{Install Packages from GitHub}
 \usage{
 gh_install_packages(packages, build_args = NULL, build_vignettes = TRUE,
-  uninstall = FALSE, verbose = TRUE, dependencies = c("Depends",
-  "Imports", "Suggests"), ...)
+  uninstall = FALSE, verbose = TRUE, dependencies = c("Imports",
+  "Depends", "Suggests"), ...)
 
 githubinstall(packages, build_args = NULL, build_vignettes = TRUE,
-  uninstall = FALSE, verbose = TRUE, dependencies = c("Depends",
-  "Imports", "Suggests"), ...)
+  uninstall = FALSE, verbose = TRUE, dependencies = c("Imports",
+  "Depends", "Suggests"), ...)
 }
 \arguments{
 \item{packages}{character vector of the names of packages.}

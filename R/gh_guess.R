@@ -13,7 +13,6 @@
 #' gh_guess("Uwitter/BnomalyDetection")
 #' # [1] "twitter/AnomalyDetection"
 #' 
-#' @importFrom stringr str_c
 #' @importFrom utils adist
 #' 
 #' @export
@@ -22,7 +21,7 @@ gh_guess <- function (repo_name, keep_title = FALSE) {
   package_list <- get_package_list()
   
   if (is_full_repo_name(repo_name)) {
-    target <- str_c(package_list$author, "/", package_list$package_name)
+    target <- paste0(package_list$author, "/", package_list$package_name)
     if(keep_title) titles <- package_list$title
   } else {
     target <- unique(package_list$package_name)
@@ -36,19 +35,23 @@ gh_guess <- function (repo_name, keep_title = FALSE) {
     if(keep_title) attr(result, "title") <- titles[dist == mindist]
     result
   } else {
-    candidate_list <- lapply(result, function(package_name) {
-      authors <- get_candidates(package_name)
-      if (is.null(authors)) {
+    candidates_list <- lapply(result, function(package_name) {
+      ind <- package_list$package_name == package_name
+      if (all(!ind)) {
         NULL
       } else {
-        candidates <- str_c(authors, "/", package_name)
-        attr(candidates, "title") <- attr(authors, "title")
+        authors <- package_list$author[ind]
+        candidates <- paste0(authors, "/", package_name)
+        if (keep_title) {
+          titles <- package_list$title[ind]
+          attr(candidates, "title") <- titles
+        }
         candidates
       }
     })
-    result <- unlist(candidate_list)
+    result <- unlist(candidates_list)
     if(keep_title) {
-      titles <- Reduce(function(x, y) c(attr(x, "title"), attr(y, "title")), init = c(), candidate_list)
+      titles <- Reduce(function(x, y) c(attr(x, "title"), attr(y, "title")), init = c(), candidates_list)
       attr(result, "title") <- titles
     }
     result

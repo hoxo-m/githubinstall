@@ -78,3 +78,4 @@ gh_guess_username("hadly")
 
 - [ghit: Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit)
 - [Drat R Archive Template](https://github.com/eddelbuettel/drat)
+- [Tools to make an R developer's life easier](https://github.com/hadley/devtools)

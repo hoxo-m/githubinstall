@@ -1,9 +1,9 @@
 Package: githubinstall
 Type: Package
-Version: 0.0.0.9001
-Date: 2016-05-13
+Version: 0.0.0.9002
+Date: 2016-05-28
 Title: Easy to Install R Packages on GitHub
-Description: Easy to install R packages on GitHub.
+Description: The package provides an easy way to install packages on GitHub.
 Authors@R: c(
     person("Koji", "Makiyama", email = "hoxo.smile@gmail.com", role = c("cre", "aut")),
     person("Atsushi", "Hayakawa", role = "ctb"))

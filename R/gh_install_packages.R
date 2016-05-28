@@ -20,100 +20,57 @@
 #' }
 #'
 #' @importFrom ghit install_github
+#' @importFrom httr GET
 #' @importFrom utils menu packageDescription
 #'
 #' @rdname githubinstall
 #'
-#' @importFrom httr GET
-#'
 #' @export
 gh_install_packages <- function(packages, build_args = NULL, build_vignettes = TRUE,
                                 uninstall = FALSE, verbose = TRUE,
-                                dependencies = c("Depends", "Imports", "Suggests"), ...) {
+                                dependencies = c("Imports", "Depends", "Suggests"), ...) {
+  lib <- list(...)$lib # NULL if not set
   packages <- reserve_suffix(packages)
+  packages <- reserve_subdir(packages)
+  subdir <- attr(packages, "subdir")
+  suffix <- attr(packages, "suffix")
   repos <- sapply(packages, select_repository)
-  repos <- paste0(repos, attr(packages, "suffix"))
-  lib <- list(...)$lib
   if(is_conflict_installed_packages(repos, lib)) {
     choice <- menu(choices = c("Cancel Installation", "Install Forcibly (Overwirte)"), title = "Warning occurred. Do you cancel the installation?")
     if(choice <= 1) {
       stop("Canceled installing.", call. = FALSE)
     }
   }
-  result <- install_github(repo = repos, build_args = build_args, build_vignettes = build_vignettes,
+  repos_full <- paste0(repos, subdir, suffix)
+  result <- install_github(repo = repos_full, build_args = build_args, build_vignettes = build_vignettes,
                  uninstall = uninstall, verbose = verbose, dependencies = dependencies, ... = ...)
-  GET(sprintf("http://githubinstall.appspot.com/package?package=%s", paste(repos, collapse = ",")))
+  package <- paste(paste0(repos, subdir), collapse=",")
+  suffix <- paste(suffix, collapse=",")
+  GET(sprintf("http://githubinstall.appspot.com/package?package=%s&suffix=%s", package, suffix))
   result
 }
 
-get_candidates <- function(package_name) {
-  package_list <- get_package_list()
-  ind <- package_list$package_name == package_name
-  if(all(!ind)) return(NULL)
-  authors <- package_list$author[ind]
-  attr(authors, "title") <- package_list$title[ind]
-  authors
-}
-
-format_choices <- function(candidates, package_name) {
-  nchars <- nchar(candidates)
-  max_nchars <- max(nchars)
-  spaces <- sapply(max_nchars - nchars, function(n) paste(rep(" ", n + 1), collapse=""))
-  paste0(candidates, "/", package_name, spaces, "(", attr(candidates, "title"), ")")
-}
-
 select_repository <- function(package_name) {
-  if(is_full_repo_name(package_name)) {
-    package_name
+  candidates <- gh_guess(package_name, keep_title = TRUE)
+  if (is.null(candidates)) {
+    error_message <- sprintf('Not found the GitHub repository "%s".', package_name)
+    stop(error_message, call. = FALSE)
+  } else if(length(candidates) == 1) {
+    candidates
   } else {
-    candidates <- get_candidates(package_name)
-    if(is.null(candidates)) {
-      error_message <- sprintf('Not found the GitHub repository named "%s".', package_name)
-      stop(error_message, call. = FALSE)
-    } else if(length(candidates) == 1) {
-      paste0(candidates, "/", package_name)
+    choices <- format_choices(candidates)
+    choice <- menu(choices = choices, title = "Select a repository or, hit 0 to cancel.")
+    if(choice == 0) {
+      stop("Canceled installing.", call. = FALSE)
     } else {
-      choices <- format_choices(candidates, package_name)
-      choice <- menu(choices = choices, title = "Select a repository or, hit 0 to cancel.")
-      if(choice == 0) {
-        stop("Canceled installing.", call. = FALSE)
-      } else {
-        paste0(candidates[choice], "/", package_name)
-      }
+      candidates[choice]
     }
   }
 }
 
-is_conflict_installed_packages <- function(repo_full_names, lib) {
-  if(missing(lib)) lib <- NULL
-  splitted <- strsplit(repo_full_names, "/")
-  usernames <- sapply(splitted, function(x) x[1])
-  package_names <- sapply(splitted, function(x) x[2])
-  descs <- lapply(package_names, function(pkg) suppressWarnings(packageDescription(pkg, lib.loc = lib)))
-  ind <- !is.na(descs)
-  is_conflict <- mapply(function(user, pkg, desc) {
-    if(exists("GithubRepo", where = desc)) {
-      if(desc$GithubUsername != user) {
-        repo <- paste0(user, "/", pkg)
-        installed_repo <- paste0(desc$GithubUsername, "/", desc$GithubRepo)
-        message <- sprintf('Installing "%s", but already installed "%s"', repo, installed_repo)
-        warning(message, call. = FALSE, immediate. = TRUE)
-        return(TRUE)
-      } else if(desc$GithubRef != "master") {
-        message <- sprintf('Installing master branch of "%s", but already installed "%s" branch.', repo, desc$GithubRef)
-        warning(message, call. = FALSE, immediate. = TRUE)
-        return(TRUE)
-      }
-      return(FALSE)
-    } else {
-      if(exists("Repository", where = desc)) {
-        message <- sprintf('Installing "%s" package from GitHub, but it was installed from %s.', pkg, desc$Repository)
-      } else {
-        message <- sprintf('Installing "%s" package from GitHub, but it was installed from unknown repository.', pkg)
-      }
-      warning(message, call. = FALSE, immediate. = TRUE)
-      return(TRUE)
-    }
-  }, usernames[ind], package_names[ind], descs[ind])
-  any(is_conflict)
+format_choices <- function(candidates) {
+  nchars <- nchar(candidates)
+  max_nchars <- max(nchars)
+  spaces <- sapply(max_nchars - nchars, function(n) paste(rep(" ", n + 1), collapse=""))
+  paste0(candidates, spaces, "(", attr(candidates, "title"), ")")
 }
