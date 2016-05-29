@@ -4,7 +4,7 @@
 #' @param repo a character as a GitHub repository name
 #' 
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' gh_show_source("mutate", "dplyr")
 #' }
 #' 

@@ -15,7 +15,7 @@ gh_show_source(func, repo = NULL)
 Find source code for functions in packages on GitHub
 }
 \examples{
-\donttest{
+\dontrun{
 gh_show_source("mutate", "dplyr")
 }
 
