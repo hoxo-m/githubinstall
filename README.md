@@ -131,7 +131,7 @@ gh_guess_username("hadly")
 ## 4. Related Work
 
 - devtools: [Tools to make an R developer's life easier](https://github.com/hadley/devtools)
-- [ghit: Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit)
+- ghit: [Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit)
 - drat: [Drat R Archive Template](https://github.com/eddelbuettel/drat)
 - pacman: [A package management tools for R](https://github.com/trinker/pacman)
 - remotes: [Install R packages from GitHub, Bitbucket, git, svn repositories, URLs](https://github.com/MangoTheCat/remotes)
