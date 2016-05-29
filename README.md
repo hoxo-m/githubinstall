@@ -1,4 +1,4 @@
-# githubinstall: Easy to install R packages on GitHub
+# An Easy Way to Install R Packages on GitHub
 Koji MAKIYAMA (@hoxo_m)  
 
 
@@ -9,7 +9,45 @@ Koji MAKIYAMA (@hoxo_m)
 
 ## 1. Overview
 
-The package provides an easy way to install packages on GitHub.
+A growing number of R packages are created by various people in the world.
+A part of the cause of the growth is **devtools** package that makes it easy to develop R packages.
+The **devtools** package not only facilitates the process to develop R packages but also provides another way to distribute R packages.
+
+To distribute R packages, the CRAN is commonly used.
+You can install the packages are available on CRAN as follows.
+
+
+```r
+install.packages("dplyr")
+```
+
+The **devtools** package provides `install_github()` that enables installing packages on GitHub.
+
+
+```r
+library(devtools)
+install_github("hadley/dplyr")
+```
+
+Therefore, developers can distribute R packages that is developping on GitHub.
+For example, Twitter Inc. provides **AnomalyDetection** package on GitHub but it is not available on CRAN.[^1]
+
+[^1]:[Introducing practical and robust anomaly detection in a time series](https://blog.twitter.com/2015/introducing-practical-and-robust-anomaly-detection-in-a-time-series)
+
+The **githubinstall** package provides an easy way to install packages on GitHub.
+
+
+```r
+library(githubinstall)
+githubinstall("AnomalyDetection")
+```
+
+In this case, you will succeed to install **AnomalyDetection** package as follows.
+
+
+```r
+githubinstall("anomaly detection")
+```
 
 ## 2. Installation
 
@@ -83,15 +121,6 @@ You can guess repository names or user names.
 
 
 ```r
-gh_guess_repository("multdplyr", fullname = TRUE)
-```
-
-```
-## [1] "hadley/multidplyr"    "jeblundell/multiplyr"
-```
-
-
-```r
 gh_guess_username("hadly")
 ```
 
@@ -101,6 +130,6 @@ gh_guess_username("hadly")
 
 ## 4. Related Work
 
+- devtools: [Tools to make an R developer's life easier](https://github.com/hadley/devtools)
 - [ghit: Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit)
-- [Drat R Archive Template](https://github.com/eddelbuettel/drat)
-- [Tools to make an R developer's life easier](https://github.com/hadley/devtools)
+- drat: [Drat R Archive Template](https://github.com/eddelbuettel/drat)

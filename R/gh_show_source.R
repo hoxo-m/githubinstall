@@ -12,6 +12,7 @@
 #' }
 #' 
 #' @importFrom jsonlite fromJSON
+#' @importFrom utils browseURL
 #' 
 #' @export
 gh_show_source <- function(func, repo = NULL) {

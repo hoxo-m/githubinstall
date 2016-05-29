@@ -5,16 +5,18 @@
 \alias{githubinstall}
 \title{Install Packages from GitHub}
 \usage{
-gh_install_packages(packages, build_args = NULL, build_vignettes = TRUE,
-  uninstall = FALSE, verbose = TRUE, dependencies = c("Imports",
-  "Depends", "Suggests"), ...)
+gh_install_packages(packages, ask = TRUE, build_args = NULL,
+  build_vignettes = TRUE, uninstall = FALSE, verbose = TRUE,
+  dependencies = c("Imports", "Depends", "Suggests"), ...)
 
-githubinstall(packages, build_args = NULL, build_vignettes = TRUE,
-  uninstall = FALSE, verbose = TRUE, dependencies = c("Imports",
-  "Depends", "Suggests"), ...)
+githubinstall(packages, ask = TRUE, build_args = NULL,
+  build_vignettes = TRUE, uninstall = FALSE, verbose = TRUE,
+  dependencies = c("Imports", "Depends", "Suggests"), ...)
 }
 \arguments{
 \item{packages}{character vector of the names of packages.}
+
+\item{ask}{logical. Indicates ask to confirm before install.}
 
 \item{build_args}{character string used to control the package build, passed to \code{R CMD build}.}
 

@@ -1,6 +1,7 @@
 #' Install Packages from GitHub
 #'
 #' @param packages character vector of the names of packages.
+#' @param ask logical. Indicates ask to confirm before install.
 #' @param build_args character string used to control the package build, passed to \code{R CMD build}.
 #' @param build_vignettes logical specifying whether to build package vignettes, passed to \code{R CMD build}. Can be slow. Default is \code{TRUE}.
 #' @param uninstall logical
@@ -26,7 +27,7 @@
 #' @rdname githubinstall
 #'
 #' @export
-gh_install_packages <- function(packages, build_args = NULL, build_vignettes = TRUE,
+gh_install_packages <- function(packages,  ask = TRUE, build_args = NULL, build_vignettes = TRUE,
                                 uninstall = FALSE, verbose = TRUE,
                                 dependencies = c("Imports", "Depends", "Suggests"), ...) {
   lib <- list(...)$lib # NULL if not set
@@ -35,13 +36,24 @@ gh_install_packages <- function(packages, build_args = NULL, build_vignettes = T
   subdir <- attr(packages, "subdir")
   suffix <- attr(packages, "suffix")
   repos <- sapply(packages, select_repository)
-  if(is_conflict_installed_packages(repos, lib)) {
-    choice <- menu(choices = c("Cancel Installation", "Install Forcibly (Overwirte)"), title = "Warning occurred. Do you cancel the installation?")
+  if(uninstall == FALSE && is_conflict_installed_packages(repos, lib)) {
+    choice <- menu(choices = c("Cancel Installation", "Install Forcibly (Overwirte)"), 
+                   title = "Warning occurred. Do you cancel the installation?")
     if(choice <= 1) {
-      stop("Canceled installing.", call. = FALSE)
+      message("Canceled installing.")
+      return(invisible(NULL))
     }
   }
   repos_full <- paste0(repos, subdir, suffix)
+  if (ask) {
+    target <- paste(repos_full, collapse = "\n - ")
+    title <- sprintf("Guessed:\n - %s\nWill you install?", target)
+    choice <- menu(choices = c("Yes (Install)", "No (Cancel)"), title = title)
+    if(choice != 1) {
+      message("Canceled installing.")
+      return(invisible(NULL))
+    }
+  }
   result <- install_github(repo = repos_full, build_args = build_args, build_vignettes = build_vignettes,
                  uninstall = uninstall, verbose = verbose, dependencies = dependencies, ... = ...)
   package <- paste(paste0(repos, subdir), collapse=",")
