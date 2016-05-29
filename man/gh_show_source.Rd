@@ -7,9 +7,9 @@
 gh_show_source(func, repo = NULL)
 }
 \arguments{
-\item{func}{a function or a character as a function name}
+\item{func}{a function or a character. A function name.}
 
-\item{repo}{a character as a GitHub repository name}
+\item{repo}{a character. A GitHub repository name that must not be exactry.}
 }
 \description{
 Find source code for functions in packages on GitHub
@@ -17,6 +17,9 @@ Find source code for functions in packages on GitHub
 \examples{
 \dontrun{
 gh_show_source("mutate", "dplyr")
+
+library(dplyr)
+gh_show_source(mutate)
 }
 
 }

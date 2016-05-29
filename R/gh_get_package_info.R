@@ -11,11 +11,11 @@
 #' 
 #' @export
 gh_get_package_info <- function(authors = NULL) {
-  load_package_list_if_not_yet()
+  package_list <- get_package_list()
   if(is.null(authors)) {
-    as.data.frame(.options$package_list)
+    as.data.frame(package_list)
   } else {
-    ind <- .options$package_list$author %in% authors
-    as.data.frame(.options$package_list[ind, ])
+    ind <- package_list$author %in% authors
+    as.data.frame(package_list[ind, ])
   }
 }

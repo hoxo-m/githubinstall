@@ -7,12 +7,12 @@
 #' 
 #' @examples 
 #' \dontrun{
-#' gh_search_title("lasso")
+#' gh_search_packages("lasso")
 #' }
 #' 
 #' @export
 gh_search_packages <- function(regex, ignore.case = TRUE) {
-  load_package_list_if_not_yet()
-  ind <- grepl(regex, .options$package_list$title, ignore.case = ignore.case)
-  as.data.frame(.options$package_list[ind, ], stringsAsFactors= FALSE)
+  package_list <- get_package_list()
+  ind <- grepl(regex, package_list$title, ignore.case = ignore.case)
+  as.data.frame(package_list[ind, ], stringsAsFactors= FALSE)
 }

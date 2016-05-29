@@ -1,6 +1,6 @@
 #' Guess Github Username from a Faint Memory
 #'
-#' @param vague_name a character as GitHub username that may not be exact.
+#' @param vague_name a character. GitHub username that may not be exact.
 #' 
 #' @return a character vector of the closest usernames to input.
 #' 
@@ -18,9 +18,9 @@
 #'
 #' @export
 gh_guess_username <- function(vague_name) {
-  load_package_list_if_not_yet()
+  package_list <- get_package_list()
   vague_name <- vague_name[1]
-  authors <- unique(.options$package_list$author)
+  authors <- unique(package_list$author)
   dist <- adist(vague_name, authors)[1, ]
   mindist <- min(dist)
   authors[dist == mindist]

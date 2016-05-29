@@ -1,4 +1,6 @@
 get_package_list <- function() {
-  load_package_list_if_not_yet()
+  if(!exists("package_list", envir = .options)) {
+    gh_update_package_list()
+  }
   .options$package_list
 }

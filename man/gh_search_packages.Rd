@@ -19,7 +19,7 @@ Search Packages from Titles by Regular Expressions
 }
 \examples{
 \dontrun{
-gh_search_title("lasso")
+gh_search_packages("lasso")
 }
 
 }

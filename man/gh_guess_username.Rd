@@ -7,7 +7,7 @@
 gh_guess_username(vague_name)
 }
 \arguments{
-\item{vague_name}{a character as GitHub username that may not be exact.}
+\item{vague_name}{a character. GitHub username that may not be exact.}
 }
 \value{
 a character vector of the closest usernames to input.
