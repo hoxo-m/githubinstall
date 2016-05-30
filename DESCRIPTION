@@ -17,5 +17,7 @@ Imports:
     jsonlite,
     stringr,
     utils
+Remotes:
+    cloudyr/ghit
 RoxygenNote: 5.0.1
 Suggests: testthat
