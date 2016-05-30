@@ -6,7 +6,9 @@ Title: Easy to Install R Packages on GitHub
 Description: Provides an easy way to install packages on GitHub.
 Authors@R: c(
     person("Koji", "Makiyama", email = "hoxo.smile@gmail.com", role = c("cre", "aut")),
-    person("Atsushi", "Hayakawa", role = "ctb"))
+    person("Atsushi", "Hayakawa", role = "ctb"),
+    person("Shinya", "Uryu", role = "ctb"),
+    person("Hiroaki", "Yutani", role = "ctb"))
 URL: https://github.com/hoxo-m/githubinstall
 BugReports: https://github.com/hoxo-m/githubinstall/issues
 License: MIT + file LICENSE
