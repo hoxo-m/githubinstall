@@ -34,7 +34,7 @@ library(devtools)
 install_github("hadley/dplyr")
 ```
 
-Therefore, developers can distribute R packages that is developping on GitHub.
+Therefore, developers can distribute R packages that is developing on GitHub.
 There are some developers who have no intention to submit to CRAN.
 For example, Twitter, Inc. provides **AnomalyDetection** package on GitHub but it is not available on CRAN.[^1] You can install such packages easily by using **devtools**.
 
@@ -50,16 +50,16 @@ There is a difference what is passed between `install.packages()` and `install_g
 It means that if you want to install a package on GitHub you must remember its repository name exactly.
 
 The trouble is that the usernames of GitHub are often hard to remember.
-For example, **ggfortify** is a great package on GitHub but who created it?
+For instance, **ggfortify** is a great package on GitHub but who created it?
+What is the username? 
 The answer is [sinhrks](https://github.com/sinhrks/ggfortify).
-I think it is difficult to remember it.
+I think it is difficult to remember the name.
 
-The **githubinstall** package provides a way to install packages on GitHub by the only package names likely `isntall.packages()`.
+The **githubinstall** package provides a way to install packages on GitHub by the only package names just like `isntall.packages()`.
 
 ```{r eval=FALSE}
 library(githubinstall)
 githubinstall("AnomalyDetection")
-githubinstall("ggfortify")
 ```
 
 And furthermore, you may succeed in installing packages with vague package names.
