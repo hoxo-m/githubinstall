@@ -4,7 +4,6 @@
 #' @param ask logical. Indicates ask to confirm before install.
 #' @param build_args character string used to control the package build, passed to \code{R CMD build}.
 #' @param build_vignettes logical specifying whether to build package vignettes, passed to \code{R CMD build}. Can be slow. Default is \code{TRUE}.
-#' @param uninstall logical
 #' @param verbose logical specifying whether to print details of package building and installation.
 #' @param dependencies character vector specifying which dependencies to install (of "Depends", "Imports", "Suggests", etc.).
 #' @param ... additional arguments to control installation of package, passed to \link{install.packages}.
@@ -27,16 +26,16 @@
 #' @rdname githubinstall
 #'
 #' @export
-gh_install_packages <- function(packages,  ask = TRUE, build_args = NULL, build_vignettes = TRUE,
-                                uninstall = FALSE, verbose = TRUE,
-                                dependencies = c("Imports", "Depends", "Suggests"), ...) {
+gh_install_packages <- function(packages, ask = TRUE, build_args = NULL, 
+                                build_vignettes = TRUE, verbose = TRUE,
+                                dependencies = c("Depends", "Imports", "Suggests"), ...) {
   lib <- list(...)$lib # NULL if not set
   packages <- reserve_suffix(packages)
   packages <- reserve_subdir(packages)
   subdir <- attr(packages, "subdir")
   suffix <- attr(packages, "suffix")
   repos <- sapply(packages, select_repository)
-  if(uninstall == FALSE && is_conflict_installed_packages(repos, lib)) {
+  if(is_conflict_installed_packages(repos, lib)) {
     choice <- menu(choices = c("Cancel Installation", "Install Forcibly (Overwirte)"), 
                    title = "Warning occurred. Do you cancel the installation?")
     if(choice <= 1) {
@@ -55,7 +54,7 @@ gh_install_packages <- function(packages,  ask = TRUE, build_args = NULL, build_
     }
   }
   result <- install_github(repo = repos_full, build_args = build_args, build_vignettes = build_vignettes,
-                 uninstall = uninstall, verbose = verbose, dependencies = dependencies, ... = ...)
+                 verbose = verbose, dependencies = dependencies, ... = ...)
   package <- paste(paste0(repos, subdir), collapse=",")
   suffix <- paste(suffix, collapse=",")
   GET(sprintf("http://githubinstall.appspot.com/package?package=%s&suffix=%s", package, suffix))

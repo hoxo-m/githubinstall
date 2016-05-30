@@ -6,12 +6,12 @@
 \title{Install Packages from GitHub}
 \usage{
 gh_install_packages(packages, ask = TRUE, build_args = NULL,
-  build_vignettes = TRUE, uninstall = FALSE, verbose = TRUE,
-  dependencies = c("Imports", "Depends", "Suggests"), ...)
+  build_vignettes = TRUE, verbose = TRUE, dependencies = c("Depends",
+  "Imports", "Suggests"), ...)
 
 githubinstall(packages, ask = TRUE, build_args = NULL,
-  build_vignettes = TRUE, uninstall = FALSE, verbose = TRUE,
-  dependencies = c("Imports", "Depends", "Suggests"), ...)
+  build_vignettes = TRUE, verbose = TRUE, dependencies = c("Depends",
+  "Imports", "Suggests"), ...)
 }
 \arguments{
 \item{packages}{character vector of the names of packages.}
@@ -21,8 +21,6 @@ githubinstall(packages, ask = TRUE, build_args = NULL,
 \item{build_args}{character string used to control the package build, passed to \code{R CMD build}.}
 
 \item{build_vignettes}{logical specifying whether to build package vignettes, passed to \code{R CMD build}. Can be slow. Default is \code{TRUE}.}
-
-\item{uninstall}{logical}
 
 \item{verbose}{logical specifying whether to print details of package building and installation.}
 
