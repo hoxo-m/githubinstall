@@ -17,17 +17,17 @@ knitr::opts_chunk$set(echo = TRUE)
 ## 1. Overview
 
 A growing number of R packages are created by various people in the world.
-A part of the cause of it is the **devtools** package that makes it easy to develop R packages.
+A part of the cause of it is the **devtools** package that makes it easy to develop R packages [[1]](https://www.rstudio.com/products/rpackages/devtools/).
 The **devtools** package not only facilitates the process to develop R packages but also provides the another way to distribute R packages.
 
-To distribute R packages, the CRAN is commonly used.
+To distribute R packages, the CRAN [[2]](https://cran.r-project.org) is commonly used.
 You can install the packages are available on CRAN as follows.
 
 ```{r eval=FALSE}
 install.packages("dplyr")
 ```
 
-The **devtools** package provides `install_github()` that enables installing packages on GitHub.
+The **devtools** package provides `install_github()` that enables installing packages from GitHub.
 
 ```{r eval=FALSE}
 library(devtools)
@@ -36,36 +36,49 @@ install_github("hadley/dplyr")
 
 Therefore, developers can distribute R packages that is developing on GitHub.
 There are some developers who have no intention to submit to CRAN.
-For example, Twitter, Inc. provides **AnomalyDetection** package on GitHub but it is not available on CRAN.[^1] You can install such packages easily by using **devtools**.
+For instance, Twitter, Inc. provides **AnomalyDetection** package on GitHub but it will not be available on CRAN [[3]](https://blog.twitter.com/2015/introducing-practical-and-robust-anomaly-detection-in-a-time-series).
+You can install such packages easily using **devtools**.
 
 ```{r eval=FALSE}
 library(devtools)
 install_github("twitter/AnomalyDetection")
 ```
 
-[^1]:[Introducing practical and robust anomaly detection in a time series](https://blog.twitter.com/2015/introducing-practical-and-robust-anomaly-detection-in-a-time-series)
-
 There is a difference what is passed between `install.packages()` and `install_github()`.
 `install.packages()` takes the package names and `install_github()` needs the repositry names.
-It means that if you want to install a package on GitHub you must remember its repository name exactly.
+It means that if you want to install a package on GitHub you must remember its repository name correctly.
 
 The trouble is that the usernames of GitHub are often hard to remember.
-For instance, **ggfortify** is a great package on GitHub but who created it?
-What is the username? 
-The answer is [sinhrks](https://github.com/sinhrks/ggfortify).
-I think it is difficult to remember the name.
+Developers consider the package names so that users can understand the functionalities intuitively, however, they decide username incautiously.
+For instance, **ggfortify** is a great package on GitHub, but who created it?
+What is the username?
+The answer is *sinhrks* [[4]](https://github.com/sinhrks/ggfortify).
+I think it is difficult to remember it.
 
-The **githubinstall** package provides a way to install packages on GitHub by the only package names just like `isntall.packages()`.
+The **githubinstall** package provides a way to install packages on GitHub by only the package names just like `install.packages()`.
 
 ```{r eval=FALSE}
 library(githubinstall)
 githubinstall("AnomalyDetection")
 ```
 
-And furthermore, you may succeed in installing packages with vague package names.
+```
+Guessed:
+ - twitter/AnomalyDetection
+Will you install? 
+
+1: Yes (Install)
+2: No (Cancel)
+```
+
+`githubinstall()` suggests the GitHub repositry from package names, and asks whether you want to execute the installation.
+
+Furthermore, you may succeed in installing packages from a faint memory.
 
 ```{r eval=FALSE}
-githubinstall("anomaly detection")
+githubinstall("AnomaryDetection")
+githubinstall("AnomalyDetect")
+githubinstall("anomaly-detection")
 ```
 
 ## 2. Installation
@@ -82,6 +95,10 @@ The source code for **githubinstall** package is available on GitHub at
 - https://github.com/hoxo-m/githubinstall.
 
 ## 3. Details
+
+The **githubinstall** package has some functions 
+
+### 3.1 Install Packages from GitHub
 
 This package completes `username` automatically.
 
