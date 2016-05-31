@@ -60,7 +60,7 @@ githubinstall("AnomalyDetection")
 ```
 
 ```
-Guessed:
+Suggetion:
  - twitter/AnomalyDetection
 Will you install? 
 
@@ -96,7 +96,7 @@ The source code for **githubinstall** package is available on GitHub at
 ## 3. Details
 
 The **githubinstall** package provides several useful functions in addition to `githubinstall()`.
-To use these functions, first you must load the package as follows.
+To use these functions, first you should load the package as follows.
 
 
 ```r
@@ -105,26 +105,37 @@ library(githubinstall)
 
 ### 3.1 Install Packages from GitHub
 
-`githubinstall()` is 
+`githubinstall()` enables to install packages on GitHub by only the package names.
 
 
 ```r
 githubinstall("AnomalyDetection")
 ```
 
-Or
+```
+Suggestion:
+ - twitter/AnomalyDetection
+Will you install? 
+
+1: Yes (Install)
+2: No (Cancel)
+
+Selection: 
+```
+
+The function suggests GitHub repositories.
+If you type '1' and 'Enter', installation of the package will begin.
+
+
 
 
 ```r
 gh_install_packages("AnomalyDetection")
 ```
 
-```
-Downloading GitHub repo hadley/multidplyr@master
-Installing multidplyr
-...
-* DONE (multidplyr)
-```
+### 3.2 Suggest Repository
+
+### 3.3 
 
 You can show the list of repositories on GitHub by `username`.
 
