@@ -49,7 +49,7 @@ Developers consider the package names so that users can understand the functiona
 For instance, **ggfortify** is a great package on GitHub, but who created it?
 What is the username?
 The answer is *sinhrks* [[4]](https://github.com/sinhrks/ggfortify).
-I think it is difficult to remember it.
+It seems to be difficult to remember it.
 
 The **githubinstall** package provides a way to install packages on GitHub by only the package names just like `install.packages()`.
 
@@ -95,24 +95,28 @@ The source code for **githubinstall** package is available on GitHub at
 
 ## 3. Details
 
-This package completes `username` automatically.
+The **githubinstall** package provides several useful functions in addition to `githubinstall()`.
+To use these functions, first you must load the package as follows.
 
 
 ```r
 library(githubinstall)
 ```
 
+### 3.1 Install Packages from GitHub
+
+`githubinstall()` is 
+
 
 ```r
 githubinstall("AnomalyDetection")
-# This is same as devtools::install_github("twitter/AnomalyDetection")
 ```
 
 Or
 
 
 ```r
-gh_install_packages("AnomalyDetection", build_vignettes = F)
+gh_install_packages("AnomalyDetection")
 ```
 
 ```
