@@ -1,4 +1,4 @@
-#' Guess Github Username from a Faint Memory
+#' Suggest Github Username from a Faint Memory
 #'
 #' @param vague_name a character. GitHub username that may not be exact.
 #' 
@@ -17,7 +17,7 @@
 #' @importFrom utils adist
 #'
 #' @export
-gh_guess_username <- function(vague_name) {
+gh_suggest_username <- function(vague_name) {
   package_list <- get_package_list()
   vague_name <- vague_name[1]
   authors <- unique(package_list$author)
@@ -25,3 +25,12 @@ gh_guess_username <- function(vague_name) {
   mindist <- min(dist)
   authors[dist == mindist]
 }
+
+#' @inheritParams gh_suggest_username
+#' @rdname gh_suggest_username
+#' @export
+gh_guess_username <- function(vague_name) {
+  .Deprecated("gh_suggest_username")
+  gh_suggest_username(vague_name = vague_name)
+}
+

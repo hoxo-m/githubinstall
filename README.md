@@ -11,7 +11,7 @@ Koji MAKIYAMA (@hoxo_m)
 
 A growing number of R packages are created by various people in the world.
 A part of the cause of it is the **devtools** package that makes it easy to develop R packages [[1]](https://www.rstudio.com/products/rpackages/devtools/).
-The **devtools** package not only facilitates the process to develop R packages but also provides the another way to distribute R packages.
+The **devtools** package not only facilitates the process to develop R packages but also provides an another way to distribute R packages.
 
 To distribute R packages, the CRAN [[2]](https://cran.r-project.org) is commonly used.
 You can install the packages are available on CRAN as follows.
@@ -41,7 +41,7 @@ install_github("twitter/AnomalyDetection")
 ```
 
 There is a difference what is passed between `install.packages()` and `install_github()`.
-`install.packages()` takes the package names and `install_github()` needs the repositry names.
+`install.packages()` takes the package names and `install_github()` needs the repository names.
 It means that if you want to install a package on GitHub you must remember its repository name correctly.
 
 The trouble is that the usernames of GitHub are often hard to remember.
@@ -62,7 +62,7 @@ githubinstall("AnomalyDetection")
 ```
 Suggetion:
  - twitter/AnomalyDetection
-Will you install? 
+Do you install the package? 
 
 1: Yes (Install)
 2: No (Cancel)
@@ -125,11 +125,31 @@ Selection:
 
 The function suggests GitHub repositories.
 If you type '1' and 'enter', then installation of the package will begin.
+The suggestion is made of looking for the list of R packages on GitHub.
+The list is provided by [Gepuro Task Views](http://rpkg.gepuro.net).
 
-The suggestion is made by looking for the list of R packages on GitHub.
-The list is provided [Gepuro Task Views](http://rpkg.gepuro.net).
+If multiple candidates are found, you can select one of them.
 
 
+```r
+githubinstall("cats")
+```
+
+```
+Select a repository or, hit 0 to cancel. 
+
+1: amurali2/cats      cats
+2: danielwilhelm/cats No description or website provided.
+3: hilaryparker/cats  An R package for cat-related functions #rcatladies
+4: lolibear/cats      No description or website provided.
+5: rafalszota/cats    No description or website provided.
+6: tahir275/cats      ff
+
+Selection: 
+```
+
+All functions in **githubinstall** have common prefix `gh_`.
+`githubinstall()` is an alias of `gh_install_packages()`.
 
 
 ```r
@@ -170,6 +190,12 @@ You can guess repository names or user names.
 
 ```r
 gh_guess_username("hadly")
+```
+
+```
+## Warning: 'gh_guess_username' is deprecated.
+## Use 'gh_suggest_username' instead.
+## See help("Deprecated")
 ```
 
 ```

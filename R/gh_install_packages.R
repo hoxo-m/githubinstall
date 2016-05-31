@@ -83,5 +83,5 @@ format_choices <- function(candidates) {
   nchars <- nchar(candidates)
   max_nchars <- max(nchars)
   spaces <- sapply(max_nchars - nchars, function(n) paste(rep(" ", n + 1), collapse=""))
-  paste0(candidates, spaces, "(", attr(candidates, "title"), ")")
+  paste0(candidates, spaces, attr(candidates, "title"))
 }

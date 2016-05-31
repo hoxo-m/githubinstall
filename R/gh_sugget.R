@@ -1,4 +1,4 @@
-#' Guess Github Repository Name from a Incomplete Name
+#' Suggest Github Repository from a Incomplete Name
 #' 
 #' @param repo_name a character. A part of a repository name.
 #' @param keep_title logical. Indicates to keep the package titles as an attrbite. Default \code{FALSE}.
@@ -10,13 +10,13 @@
 #' # [1] "twitter/AnomalyDetection"
 #' gh_guess("BnomalyDetection")
 #' # [1] "twitter/AnomalyDetection"
-#' gh_guess("Uwitter/BnomalyDetection")
+#' gh_guess("uwitter/BnomalyDetection")
 #' # [1] "twitter/AnomalyDetection"
 #' 
 #' @importFrom utils adist
 #' 
 #' @export
-gh_guess <- function (repo_name, keep_title = FALSE) {
+gh_suggest <- function (repo_name, keep_title = FALSE) {
   repo_name <- repo_name[1]
   package_list <- get_package_list()
   
@@ -56,4 +56,12 @@ gh_guess <- function (repo_name, keep_title = FALSE) {
     }
     result
   }
+}
+
+#' @inheritParams gh_suggest
+#' @rdname gh_suggest
+#' @export
+gh_guess <- function(repo_name, keep_title = FALSE) {
+  .Deprecated("gh_suggest")
+  gh_suggest(repo_name = repo_name, keep_title = keep_title)
 }
