@@ -95,7 +95,7 @@ The source code for **githubinstall** package is available on GitHub at
 
 ## 3. Details
 
-The **githubinstall** package provides several useful functions in addition to `githubinstall()`.
+The **githubinstall** package provides several useful functions.
 To use these functions, first you should load the package as follows.
 
 
@@ -103,9 +103,9 @@ To use these functions, first you should load the package as follows.
 library(githubinstall)
 ```
 
-### 3.1 Install Packages from GitHub
+### 3.1. Install Packages from GitHub
 
-`githubinstall()` enables to install packages on GitHub by only the package names.
+`githubinstall()` enables to install packages on GitHub by only package names.
 
 
 ```r
@@ -115,7 +115,7 @@ githubinstall("AnomalyDetection")
 ```
 Suggestion:
  - twitter/AnomalyDetection
-Will you install? 
+Do you install the package? 
 
 1: Yes (Install)
 2: No (Cancel)
@@ -124,7 +124,10 @@ Selection:
 ```
 
 The function suggests GitHub repositories.
-If you type '1' and 'Enter', installation of the package will begin.
+If you type '1' and 'enter', then installation of the package will begin.
+
+The suggestion is made by looking for the list of R packages on GitHub.
+The list is provided [Gepuro Task Views](http://rpkg.gepuro.net).
 
 
 
@@ -133,9 +136,9 @@ If you type '1' and 'Enter', installation of the package will begin.
 gh_install_packages("AnomalyDetection")
 ```
 
-### 3.2 Suggest Repository
+### 3.2. Suggest Repository
 
-### 3.3 
+### 3.3. 
 
 You can show the list of repositories on GitHub by `username`.
 

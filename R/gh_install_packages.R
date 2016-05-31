@@ -46,7 +46,7 @@ gh_install_packages <- function(packages, ask = TRUE, build_args = NULL,
   repos_full <- paste0(repos, subdir, suffix)
   if (ask) {
     target <- paste(repos_full, collapse = "\n - ")
-    title <- sprintf("Suggestion:\n - %s\nWill you install?", target)
+    title <- sprintf("Suggestion:\n - %s\nDo you install the package%s?", target, ifelse(length(target) == 1, "", "s"))
     choice <- menu(choices = c("Yes (Install)", "No (Cancel)"), title = title)
     if(choice != 1) {
       message("Canceled installing.")
