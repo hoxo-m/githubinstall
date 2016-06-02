@@ -134,7 +134,7 @@ githubinstall("cats")
 ```
 
 ```
-Select a repository or, hit 0 to cancel. 
+Select one repository or, hit 0 to cancel. 
 
 1: amurali2/cats      cats
 2: danielwilhelm/cats No description or website provided.
@@ -167,7 +167,7 @@ head(hadleyverse)
 You can guess repository names or user names.
 
 ```{r}
-gh_guess_username("hadly")
+gh_suggest_username("hadly")
 ```
 
 ## 4. Related Work

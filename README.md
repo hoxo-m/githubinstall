@@ -136,7 +136,7 @@ githubinstall("cats")
 ```
 
 ```
-Select a repository or, hit 0 to cancel. 
+Select one repository or, hit 0 to cancel. 
 
 1: amurali2/cats      cats
 2: danielwilhelm/cats No description or website provided.
@@ -189,13 +189,7 @@ You can guess repository names or user names.
 
 
 ```r
-gh_guess_username("hadly")
-```
-
-```
-## Warning: 'gh_guess_username' is deprecated.
-## Use 'gh_suggest_username' instead.
-## See help("Deprecated")
+gh_suggest_username("hadly")
 ```
 
 ```

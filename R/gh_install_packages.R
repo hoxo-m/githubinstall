@@ -70,7 +70,7 @@ select_repository <- function(package_name) {
     candidates
   } else {
     choices <- format_choices(candidates)
-    choice <- menu(choices = choices, title = "Select a repository or, hit 0 to cancel.")
+    choice <- menu(choices = choices, title = "Select one repository or, hit 0 to cancel.")
     if(choice == 0) {
       stop("Canceled installing.", call. = FALSE)
     } else {
