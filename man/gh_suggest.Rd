@@ -21,11 +21,11 @@ candidates for the repository name.
 Suggest Github Repository from a Incomplete Name
 }
 \examples{
-gh_guess("AnomalyDetection")
+gh_suggest("AnomalyDetection")
 # [1] "twitter/AnomalyDetection"
-gh_guess("BnomalyDetection")
+gh_suggest("BnomalyDetection")
 # [1] "twitter/AnomalyDetection"
-gh_guess("uwitter/BnomalyDetection")
+gh_suggest("uwitter/BnomalyDetection")
 # [1] "twitter/AnomalyDetection"
 
 }

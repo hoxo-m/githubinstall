@@ -6,11 +6,11 @@
 #' @return candidates for the repository name.
 #' 
 #' @examples 
-#' gh_guess("AnomalyDetection")
+#' gh_suggest("AnomalyDetection")
 #' # [1] "twitter/AnomalyDetection"
-#' gh_guess("BnomalyDetection")
+#' gh_suggest("BnomalyDetection")
 #' # [1] "twitter/AnomalyDetection"
-#' gh_guess("uwitter/BnomalyDetection")
+#' gh_suggest("uwitter/BnomalyDetection")
 #' # [1] "twitter/AnomalyDetection"
 #' 
 #' @importFrom utils adist
