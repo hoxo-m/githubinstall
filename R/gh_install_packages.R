@@ -20,7 +20,6 @@
 #' }
 #'
 #' @importFrom ghit install_github
-#' @importFrom httr GET
 #' @importFrom utils menu packageDescription
 #'
 #' @rdname githubinstall
@@ -28,7 +27,7 @@
 #' @export
 gh_install_packages <- function(packages, ask = TRUE, build_args = NULL, 
                                 build_vignettes = TRUE, verbose = TRUE,
-                                dependencies = c("Depends", "Imports", "Suggests"), ...) {
+                                dependencies = c("Depends", "Imports", "LinkingTo"), ...) {
   lib <- list(...)$lib # NULL if not set
   packages <- reserve_suffix(packages)
   packages <- reserve_subdir(packages)
@@ -55,9 +54,7 @@ gh_install_packages <- function(packages, ask = TRUE, build_args = NULL,
   }
   result <- install_github(repo = repos_full, build_args = build_args, build_vignettes = build_vignettes,
                  verbose = verbose, dependencies = dependencies, ... = ...)
-  package <- paste(paste0(repos, subdir), collapse=",")
-  suffix <- paste(suffix, collapse=",")
-  GET(sprintf("http://githubinstall.appspot.com/package?package=%s&suffix=%s", package, suffix))
+  log_installed_packages(repos = paste0(repos, subdir), suffix = suffix)
   result
 }
 

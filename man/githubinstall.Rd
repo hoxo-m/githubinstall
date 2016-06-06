@@ -7,11 +7,11 @@
 \usage{
 gh_install_packages(packages, ask = TRUE, build_args = NULL,
   build_vignettes = TRUE, verbose = TRUE, dependencies = c("Depends",
-  "Imports", "Suggests"), ...)
+  "Imports", "LinkingTo"), ...)
 
 githubinstall(packages, ask = TRUE, build_args = NULL,
   build_vignettes = TRUE, verbose = TRUE, dependencies = c("Depends",
-  "Imports", "Suggests"), ...)
+  "Imports", "LinkingTo"), ...)
 }
 \arguments{
 \item{packages}{character vector of the names of packages.}
