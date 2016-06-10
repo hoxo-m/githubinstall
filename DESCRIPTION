@@ -1,6 +1,6 @@
 Package: githubinstall
 Type: Package
-Version: 0.0.0.9003
+Version: 0.0.1
 Date: 2016-06-10
 Title: An Easy Way to Install R Packages on GitHub
 Description: Provides an easy way to install packages on GitHub.
@@ -20,7 +20,10 @@ Imports:
     stringr,
     utils
 RoxygenNote: 5.0.1
-Suggests: 
+Suggests:
     testthat,
     ggplot2, 
-    lubridate
+    lubridate,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

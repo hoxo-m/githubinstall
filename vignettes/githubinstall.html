@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Koji MAKIYAMA (@hoxo_m)" />
+
+<meta name="date" content="2016-06-10" />
+
+<title>githubinstall - An Easy Way to Install R Packages on GitHub</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">githubinstall - An Easy Way to Install R Packages on GitHub</h1>
+<h4 class="author"><em>Koji MAKIYAMA (<span class="citation">@hoxo_m</span>)</em></h4>
+<h4 class="date"><em>2016-06-10</em></h4>
+
+
+
+<div id="overview" class="section level2">
+<h2>1. Overview</h2>
+<p>A growing number of R packages are created by various people in the world. A part of the cause of it is the <strong>devtools</strong> package that makes it easy to develop R packages <a href="https://www.rstudio.com/products/rpackages/devtools/">[1]</a>. The <strong>devtools</strong> package not only facilitates the process to develop R packages but also provides an another way to distribute R packages.</p>
+<p>To distribute R packages, the CRAN <a href="https://cran.r-project.org">[2]</a> is commonly used. You can install the packages are available on CRAN as follows.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</code></pre></div>
+<p>The <strong>devtools</strong> package provides <code>install_github()</code> that enables installing packages from GitHub.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
+<span class="kw">install_github</span>(<span class="st">&quot;hadley/dplyr&quot;</span>)</code></pre></div>
+<p>Therefore, developers can distribute R packages that is developing on GitHub. There are some developers who have no intention to submit to CRAN. For instance, Twitter, Inc. provides <strong>AnomalyDetection</strong> package on GitHub but it will not be available on CRAN <a href="https://blog.twitter.com/2015/introducing-practical-and-robust-anomaly-detection-in-a-time-series">[3]</a>. You can install such packages easily using <strong>devtools</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
+<span class="kw">install_github</span>(<span class="st">&quot;twitter/AnomalyDetection&quot;</span>)</code></pre></div>
+<p>There is a difference what is passed between <code>install.packages()</code> and <code>install_github()</code>. <code>install.packages()</code> takes the package names and <code>install_github()</code> needs the repository names. It means that if you want to install a package on GitHub you must remember its repository name correctly.</p>
+<p>The trouble is that the usernames of GitHub are often hard to remember. Developers consider the package names so that users can understand the functionalities intuitively, however, they decide username incautiously. For instance, <strong>ggfortify</strong> is a great package on GitHub, but who created it? What is the username? The answer is <em>sinhrks</em> <a href="https://github.com/sinhrks/ggfortify">[4]</a>. It seems to be difficult to remember it.</p>
+<p>The <strong>githubinstall</strong> package provides a way to install packages on GitHub by only the package names just like <code>install.packages()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(githubinstall)
+<span class="kw">githubinstall</span>(<span class="st">&quot;AnomalyDetection&quot;</span>)</code></pre></div>
+<pre><code>Suggetion:
+ - twitter/AnomalyDetection
+Do you install the package? 
+
+1: Yes (Install)
+2: No (Cancel)</code></pre>
+<p><code>githubinstall()</code> suggests the GitHub repositry from package names, and asks whether you want to execute the installation.</p>
+<p>Furthermore, you may succeed in installing packages from a faint memory.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">githubinstall</span>(<span class="st">&quot;AnomaryDetection&quot;</span>)
+<span class="kw">githubinstall</span>(<span class="st">&quot;AnomalyDetect&quot;</span>)
+<span class="kw">githubinstall</span>(<span class="st">&quot;anomaly-detection&quot;</span>)</code></pre></div>
+</div>
+<div id="installation" class="section level2">
+<h2>2. Installation</h2>
+<p>You can install the package from GitHub.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>) <span class="co"># if you have not installed &quot;devtools&quot; package</span>
+devtools::<span class="kw">install_github</span>(<span class="st">&quot;hoxo-m/githubinstall&quot;</span>)</code></pre></div>
+<p>The source code for <strong>githubinstall</strong> package is available on GitHub at</p>
+<ul>
+<li><a href="https://github.com/hoxo-m/githubinstall" class="uri">https://github.com/hoxo-m/githubinstall</a>.</li>
+</ul>
+</div>
+<div id="details" class="section level2">
+<h2>3. Details</h2>
+<p>The <strong>githubinstall</strong> package provides several useful functions.</p>
+<ul>
+<li><code>githubinstall()</code> or <code>gh_install_packages()</code></li>
+<li><code>gh_suggest()</code></li>
+<li><code>gh_suggest_username()</code></li>
+<li><code>gh_list_packages()</code></li>
+<li><code>gh_search_packages()</code></li>
+<li><code>gh_show_source()</code></li>
+<li><code>gh_update_package_list()</code></li>
+</ul>
+<p>The functions have common prefix <code>gh</code>. <code>githubinstall()</code> is an alias of <code>gh_install_packages()</code>.</p>
+<p>To use these functions, first you should load the package as follows.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(githubinstall)</code></pre></div>
+<div id="install-packages-from-github" class="section level3">
+<h3>3.1. Install Packages from GitHub</h3>
+<p><code>githubinstall()</code> enables to install packages on GitHub by only package names.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">githubinstall</span>(<span class="st">&quot;AnomalyDetection&quot;</span>)</code></pre></div>
+<pre><code>Suggestion:
+ - twitter/AnomalyDetection
+Do you install the package? 
+
+1: Yes (Install)
+2: No (Cancel)
+
+Selection: </code></pre>
+<p>The function suggests GitHub repositories. If you type ‘1’ and ‘enter’, then installation of the package will begin. The suggestion is made of looking for the list of R packages on GitHub. The list is provided by <a href="http://rpkg.gepuro.net">Gepuro Task Views</a>.</p>
+<p>If multiple candidates are found, you can select one of them.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">githubinstall</span>(<span class="st">&quot;cats&quot;</span>)</code></pre></div>
+<pre><code>Select one repository or, hit 0 to cancel. 
+
+1: amurali2/cats      cats
+2: danielwilhelm/cats No description or website provided.
+3: hilaryparker/cats  An R package for cat-related functions #rcatladies
+4: lolibear/cats      No description or website provided.
+5: rafalszota/cats    No description or website provided.
+6: tahir275/cats      ff
+
+Selection: </code></pre>
+<p><code>githubinstall()</code> is an alias of <code>gh_install_packages()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_install_packages</span>(<span class="st">&quot;AnomalyDetection&quot;</span>)</code></pre></div>
+</div>
+<div id="suggest-repositories" class="section level3">
+<h3>3.2. Suggest Repositories</h3>
+<p><code>githubinstall()</code> prompts you to install the suggested packages. But you may just want to know what will be suggestions.</p>
+<p><code>gh_suggest()</code> returns the suggested repository names as a vector.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_suggest</span>(<span class="st">&quot;AnomalyDetection&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;twitter/AnomalyDetection&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_suggest</span>(<span class="st">&quot;cats&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;amurali2/cats&quot;       &quot;danielwilhelm/cats&quot;  &quot;davidluizrusso/cats&quot;
+## [4] &quot;hilaryparker/cats&quot;   &quot;lolibear/cats&quot;       &quot;rafalszota/cats&quot;    
+## [7] &quot;tahir275/cats&quot;</code></pre>
+<p>In addition, <code>gh_suggest_username()</code> is useful if you want to know usernames from a faint memory.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_suggest_username</span>(<span class="st">&quot;hadly&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;hadley&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_suggest_username</span>(<span class="st">&quot;yuhui&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;yihui&quot;</code></pre>
+</div>
+<div id="list-the-packages" class="section level3">
+<h3>3.3. List the Packages</h3>
+<p><code>gh_list_packages()</code> returns the list of R package repositories on GitHub as <code>data.frame</code>.</p>
+<p>For example, if you want to get the repositories that have been created by <em>hadley</em>, run the following.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hadleyverse &lt;-<span class="st"> </span><span class="kw">gh_list_packages</span>(<span class="dt">username =</span> <span class="st">&quot;hadley&quot;</span>)
+<span class="kw">head</span>(hadleyverse)</code></pre></div>
+<pre><code>##   username package_name                                              title
+## 1   hadley   assertthat                     User friendly assertions for R
+## 2   hadley    babynames An R package contain all baby names data from the 
+## 3   hadley    bigrquery          An interface to Google's bigquery from R.
+## 4   hadley     bookdown                                              Watch
+## 5   hadley   clusterfly An R package for visualising high-dimensional clus
+## 6   hadley      decumar                           An alternative to sweave</code></pre>
+</div>
+<div id="search-packages-by-a-keyword" class="section level3">
+<h3>3.4. Search Packages by a Keyword</h3>
+<p><code>gh_search_packages()</code> returns the list of R package repositories on GitHub that the titles contains a given keyword.</p>
+<p>For example, if you want to search packages that are relevant to <em>lasso</em>, run the following.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_search_packages</span>(<span class="st">&quot;lasso&quot;</span>)</code></pre></div>
+<pre><code>##           username     package_name                                  title
+## 1  ChingChuan-Chen             milr  multiple-instance logistic regressi..
+## 2       YaohuiZeng         biglasso  Big Lasso: Extending Lasso Model Fi..
+## 3      huayingfang          CCLasso  CCLasso: Correlation Inference for ..
+## 4         mlampros FeatureSelection  Feature Selection in R using glmnet..
+## 5             pnnl        glmnetLRC  Lasso and Elastic-Net Logistic Regr..
+## 6       statsmaths         genlasso  Path algorithm for generalized lass..
+## 7       vincent-dk         logitsgl  Fit Logistic Regression with Multi-..
+## 8       vincent-dk             lsgl  Linear Multiple Output Using Sparse..
+## 9       vincent-dk             msgl  High Dimensional Multiclass Classif..
+## 10      vstanislas             GGEE  R Package for the Group Lasso Gene-..
+## 11          zdk123       BatchStARS  R package for Stability Approach to..
+## 12          zdk123           pulsar  R package for Stability Approach to..</code></pre>
+</div>
+<div id="show-the-source-code-of-functions-on-github" class="section level3">
+<h3>3.5. Show the Source Code of Functions on GitHub</h3>
+<p><code>gh_show_source()</code> looks for the source code of a given function on GitHub, and tries to open the place on Web browser.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_show_source</span>(<span class="st">&quot;mutate&quot;</span>, <span class="st">&quot;dplyr&quot;</span>)</code></pre></div>
+<p>If you have loaded the package that the function belongs to, you can input the function directly.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">gh_show_source</span>(mutate)</code></pre></div>
+<p>This function may do not work well with Safari.</p>
+</div>
+<div id="update-the-list-of-r-packages" class="section level3">
+<h3>3.6. Update the List of R Packages</h3>
+<p>The <strong>githubinstall</strong> package uses <a href="http://rpkg.gepuro.net">Gepuro Task Views</a> for getting the list of R packages on GitHub. Gepuro Task Views is crawling the GitHub and updates information every day. The package downloads the list of R packages from Gepuro Task Views each time it was loaded. Thus, you can always use the newest list of packages on a new R session.</p>
+<p>However, you may use an R session for a long time. In such case, <code>gh_update_package_list()</code> is useful.</p>
+<p><code>gh_update_package_list()</code> updates the downloaded list of the R packages explicitly.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_update_package_list</span>()</code></pre></div>
+</div>
+</div>
+<div id="related-work" class="section level2">
+<h2>4. Related Work</h2>
+<ul>
+<li>devtools: <a href="https://github.com/hadley/devtools">Tools to make an R developer’s life easier</a></li>
+<li>ghit: <a href="https://github.com/cloudyr/ghit">Lightweight GitHub Package Installer</a></li>
+<li>drat: <a href="https://github.com/eddelbuettel/drat">Drat R Archive Template</a></li>
+<li>pacman: <a href="https://github.com/trinker/pacman">A package management tools for R</a></li>
+<li>remotes: <a href="https://github.com/MangoTheCat/remotes">Install R packages from GitHub, Bitbucket, git, svn repositories, URLs</a></li>
+</ul>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
