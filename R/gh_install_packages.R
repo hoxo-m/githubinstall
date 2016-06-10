@@ -26,7 +26,7 @@
 #'
 #' @export
 gh_install_packages <- function(packages, ask = TRUE, build_args = NULL, 
-                                build_vignettes = TRUE, verbose = TRUE,
+                                build_vignettes = FALSE, verbose = TRUE,
                                 dependencies = c("Depends", "Imports", "LinkingTo"), ...) {
   lib <- list(...)$lib # NULL if not set
   packages <- reserve_suffix(packages)
