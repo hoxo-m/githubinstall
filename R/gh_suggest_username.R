@@ -25,12 +25,3 @@ gh_suggest_username <- function(vague_name) {
   mindist <- min(dist)
   authors[dist == mindist]
 }
-
-#' @inheritParams gh_suggest_username
-#' @rdname gh_suggest_username
-#' @export
-gh_guess_username <- function(vague_name) {
-  .Deprecated("gh_suggest_username")
-  gh_suggest_username(vague_name = vague_name)
-}
-

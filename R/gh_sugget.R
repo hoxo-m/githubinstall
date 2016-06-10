@@ -57,11 +57,3 @@ gh_suggest <- function (repo_name, keep_title = FALSE) {
     result
   }
 }
-
-#' @inheritParams gh_suggest
-#' @rdname gh_suggest
-#' @export
-gh_guess <- function(repo_name, keep_title = FALSE) {
-  .Deprecated("gh_suggest")
-  gh_suggest(repo_name = repo_name, keep_title = keep_title)
-}
