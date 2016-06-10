@@ -158,6 +158,51 @@ gh_install_packages("AnomalyDetection")
 
 ### 3.2. Suggest Repository
 
+`githubinstall()` prompts you to install the suggested packages.
+But you may just want to know what will be suggestions.
+
+`gh_suggest()` returns the suggested repository names as a vector.
+
+
+```r
+gh_suggest("AnomalyDetection")
+```
+
+```
+## [1] "twitter/AnomalyDetection"
+```
+
+
+```r
+gh_suggest("cats")
+```
+
+```
+## [1] "amurali2/cats"       "danielwilhelm/cats"  "davidluizrusso/cats"
+## [4] "hilaryparker/cats"   "lolibear/cats"       "rafalszota/cats"    
+## [7] "tahir275/cats"
+```
+
+In addition, `gh_suggest_username()` is useful if you want to know usernames from a faint memory.
+
+
+```r
+gh_suggest_username("haley")
+```
+
+```
+## [1] "hadley"
+```
+
+
+```r
+gh_suggest_username("yuhui")
+```
+
+```
+## [1] "yihui"
+```
+
 ### 3.3. 
 
 You can show the list of repositories on GitHub by `username`.

@@ -20,4 +20,11 @@ Imports:
     stringr,
     utils
 RoxygenNote: 5.0.1
-Suggests: testthat
+Suggests: 
+    testthat,
+    ggplot2, 
+    lubridate,
+    assertthat,
+    dplyr, 
+    zoo,
+    bsts
