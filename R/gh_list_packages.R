@@ -1,21 +1,21 @@
 #' Get Information of Packages on GitHub
 #' 
-#' @param authors a character vector as GitHub username. If you set \code{NULL} (default), it returns all packages information.
+#' @param username a character vector as GitHub username. If you set \code{NULL} (default), it returns all packages information.
 #' 
 #' @return a data.frame that has author, package name and title.
 #' 
 #' @examples 
 #' \dontrun{
-#' gh_get_package_info("hadley")
+#' gh_list_packages("hadley")
 #' }
 #' 
 #' @export
-gh_get_package_info <- function(authors = NULL) {
+gh_list_packages <- function(username = NULL) {
   package_list <- get_package_list()
-  if(is.null(authors)) {
+  if(is.null(username)) {
     as.data.frame(package_list)
   } else {
-    ind <- package_list$author %in% authors
+    ind <- package_list$username %in% username
     as.data.frame(package_list[ind, ])
   }
 }

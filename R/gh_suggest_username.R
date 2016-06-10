@@ -20,7 +20,7 @@
 gh_suggest_username <- function(vague_name) {
   package_list <- get_package_list()
   vague_name <- vague_name[1]
-  authors <- unique(package_list$author)
+  authors <- unique(package_list$username)
   dist <- adist(vague_name, authors)[1, ]
   mindist <- min(dist)
   authors[dist == mindist]

@@ -97,6 +97,18 @@ The source code for **githubinstall** package is available on GitHub at
 ## 3. Details
 
 The **githubinstall** package provides several useful functions.
+
+- `githubinstall()` or `gh_install_packages()`
+- `gh_suggest()`
+- `gh_suggest_username()`
+- `gh_list_packages()`
+- `gh_search_packages()`
+- `gh_show_source()`
+- `gh_update_package_list()`
+
+The functions have common prefix `gh`.
+`githubinstall()` is an alias of `gh_install_packages()`.
+
 To use these functions, first you should load the package as follows.
 
 ```{r}
@@ -146,14 +158,13 @@ Select one repository or, hit 0 to cancel.
 Selection: 
 ```
 
-All functions in **githubinstall** have common prefix `gh_`.
 `githubinstall()` is an alias of `gh_install_packages()`.
 
 ```{r eval=FALSE}
 gh_install_packages("AnomalyDetection")
 ```
 
-### 3.2. Suggest Repository
+### 3.2. Suggest Repositories
 
 `githubinstall()` prompts you to install the suggested packages.
 But you may just want to know what will be suggestions.
@@ -171,27 +182,63 @@ gh_suggest("cats")
 In addition, `gh_suggest_username()` is useful if you want to know usernames from a faint memory.
 
 ```{r}
-gh_suggest_username("haley")
+gh_suggest_username("hadly")
 ```
 
 ```{r}
 gh_suggest_username("yuhui")
 ```
 
-### 3.3. 
+### 3.3. List the Repositories
 
-You can show the list of repositories on GitHub by `username`.
+`gh_list_packages()` returns the list of R package repositories on GitHub as `data.frame`.
 
-```{r}
-hadleyverse <-  gh_get_package_info("hadley")
+For example, if you want to get the repositories that have been created by *hadley*, run the following.
+
+```{r eval=FALSE}
+hadleyverse <- gh_list_packages(username = "hadley")
 head(hadleyverse)
 ```
 
-You can guess repository names or user names.
-
-```{r}
-gh_suggest_username("hadly")
+```{r echo=FALSE}
+hadleyverse <- gh_list_packages(username = "hadley")
+transform(head(hadleyverse), title = substr(title, 1, 50))
 ```
+
+### 3.4. Search Packages by a Keyword
+
+`gh_search_packages()` returns the list of R package repositories on GitHub that the titles contains a keyword.
+
+For example, if you want to search packages that are relevant to *lasso*, run the following.
+
+```{r eval=FALSE}
+gh_search_packages("lasso")
+```
+
+```{r echo=FALSE}
+transform(gh_search_packages("lasso"), title = paste0(" ", substr(title, 1, 35), ".."))
+```
+
+### 3.5. Show the Source Code of Functions on GitHub
+
+`gh_show_source()` 
+
+```{r eval=FALSE}
+gh_show_source("mutate", "dplyr")
+```
+
+If you have loaded the package, you can input the function directly.
+
+```{r eval=FALSE}
+library(dplyr)
+gh_show_source(mutate)
+```
+
+This function does not work well with Safari.
+
+### 3.6. Update Package List
+
+
 
 ## 4. Related Work
 

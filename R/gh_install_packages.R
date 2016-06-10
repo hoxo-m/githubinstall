@@ -59,7 +59,7 @@ gh_install_packages <- function(packages, ask = TRUE, build_args = NULL,
 }
 
 select_repository <- function(package_name) {
-  candidates <- gh_guess(package_name, keep_title = TRUE)
+  candidates <- gh_suggest(package_name, keep_title = TRUE)
   if (is.null(candidates)) {
     error_message <- sprintf('Not found the GitHub repository "%s".', package_name)
     stop(error_message, call. = FALSE)

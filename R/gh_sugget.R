@@ -21,7 +21,7 @@ gh_suggest <- function (repo_name, keep_title = FALSE) {
   package_list <- get_package_list()
   
   if (is_full_repo_name(repo_name)) {
-    target <- paste0(package_list$author, "/", package_list$package_name)
+    target <- paste0(package_list$username, "/", package_list$package_name)
     if(keep_title) titles <- package_list$title
   } else {
     target <- unique(package_list$package_name)
@@ -40,7 +40,7 @@ gh_suggest <- function (repo_name, keep_title = FALSE) {
       if (all(!ind)) {
         NULL
       } else {
-        authors <- package_list$author[ind]
+        authors <- package_list$username[ind]
         candidates <- paste0(authors, "/", package_name)
         if (keep_title) {
           titles <- package_list$title[ind]

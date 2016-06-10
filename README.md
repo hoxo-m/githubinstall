@@ -96,6 +96,18 @@ The source code for **githubinstall** package is available on GitHub at
 ## 3. Details
 
 The **githubinstall** package provides several useful functions.
+
+- `githubinstall()` or `gh_install_packages()`
+- `gh_suggest()`
+- `gh_suggest_username()`
+- `gh_list_packages()`
+- `gh_search_packages()`
+- `gh_show_source()`
+- `gh_update_package_list()`
+
+The functions have common prefix `gh`.
+`githubinstall()` is an alias of `gh_install_packages()`.
+
 To use these functions, first you should load the package as follows.
 
 
@@ -148,7 +160,6 @@ Select one repository or, hit 0 to cancel.
 Selection: 
 ```
 
-All functions in **githubinstall** have common prefix `gh_`.
 `githubinstall()` is an alias of `gh_install_packages()`.
 
 
@@ -156,7 +167,7 @@ All functions in **githubinstall** have common prefix `gh_`.
 gh_install_packages("AnomalyDetection")
 ```
 
-### 3.2. Suggest Repository
+### 3.2. Suggest Repositories
 
 `githubinstall()` prompts you to install the suggested packages.
 But you may just want to know what will be suggestions.
@@ -187,7 +198,7 @@ In addition, `gh_suggest_username()` is useful if you want to know usernames fro
 
 
 ```r
-gh_suggest_username("haley")
+gh_suggest_username("hadly")
 ```
 
 ```
@@ -203,43 +214,79 @@ gh_suggest_username("yuhui")
 ## [1] "yihui"
 ```
 
-### 3.3. 
+### 3.3. List the Repositories
 
-You can show the list of repositories on GitHub by `username`.
+`gh_list_packages()` returns the list of R package repositories on GitHub as `data.frame`.
+
+For example, if you want to get the repositories that have been created by *hadley*, run the following.
 
 
 ```r
-hadleyverse <-  gh_get_package_info("hadley")
+hadleyverse <- gh_list_packages(username = "hadley")
 head(hadleyverse)
 ```
 
+
 ```
-##   author package_name
-## 1 hadley   assertthat
-## 2 hadley    babynames
-## 3 hadley    bigrquery
-## 4 hadley     bookdown
-## 5 hadley   clusterfly
-## 6 hadley      decumar
-##                                                                 title
-## 1                                      User friendly assertions for R
-## 2               An R package contain all baby names data from the SSA
-## 3                           An interface to Google's bigquery from R.
-## 4                                                               Watch
-## 5 An R package for visualising high-dimensional clustering algorithms
-## 6                                            An alternative to sweave
+##   username package_name                                              title
+## 1   hadley   assertthat                     User friendly assertions for R
+## 2   hadley    babynames An R package contain all baby names data from the 
+## 3   hadley    bigrquery          An interface to Google's bigquery from R.
+## 4   hadley     bookdown                                              Watch
+## 5   hadley   clusterfly An R package for visualising high-dimensional clus
+## 6   hadley      decumar                           An alternative to sweave
 ```
 
-You can guess repository names or user names.
+### 3.4. Search Packages by a Keyword
+
+`gh_search_packages()` returns the list of R package repositories on GitHub that the titles contains a keyword.
+
+For example, if you want to search packages that are relevant to *lasso*, run the following.
 
 
 ```r
-gh_suggest_username("hadly")
+gh_search_packages("lasso")
 ```
 
+
 ```
-## [1] "hadley"
+##           username     package_name                                  title
+## 1  ChingChuan-Chen             milr  multiple-instance logistic regressi..
+## 2       YaohuiZeng         biglasso  Big Lasso: Extending Lasso Model Fi..
+## 3      huayingfang          CCLasso  CCLasso: Correlation Inference for ..
+## 4         mlampros FeatureSelection  Feature Selection in R using glmnet..
+## 5             pnnl        glmnetLRC  Lasso and Elastic-Net Logistic Regr..
+## 6       statsmaths         genlasso  Path algorithm for generalized lass..
+## 7       vincent-dk         logitsgl  Fit Logistic Regression with Multi-..
+## 8       vincent-dk             lsgl  Linear Multiple Output Using Sparse..
+## 9       vincent-dk             msgl  High Dimensional Multiclass Classif..
+## 10      vstanislas             GGEE  R Package for the Group Lasso Gene-..
+## 11          zdk123       BatchStARS  R package for Stability Approach to..
+## 12          zdk123           pulsar  R package for Stability Approach to..
 ```
+
+### 3.5. Show the Source Code of Functions on GitHub
+
+`gh_show_source()` 
+
+
+```r
+gh_show_source("mutate", "dplyr")
+```
+
+If you have loaded the package, you can input the function directly.
+
+
+```r
+library(dplyr)
+gh_show_source(mutate)
+```
+
+This function does not work well with Safari.
+
+### 3.6. Update Package List
+
+
 
 ## 4. Related Work
 
