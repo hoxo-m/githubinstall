@@ -214,7 +214,7 @@ gh_suggest_username("yuhui")
 ## [1] "yihui"
 ```
 
-### 3.3. List the Repositories
+### 3.3. List the Packages
 
 `gh_list_packages()` returns the list of R package repositories on GitHub as `data.frame`.
 
@@ -267,7 +267,7 @@ gh_search_packages("lasso")
 
 ### 3.5. Show the Source Code of Functions on GitHub
 
-`gh_show_source()` 
+`gh_show_source()` looks for the source code of a function on GitHub, and tries to open the place on Web browser.
 
 
 ```r
@@ -284,9 +284,22 @@ gh_show_source(mutate)
 
 This function does not work well with Safari.
 
-### 3.6. Update Package List
+### 3.6. Update the List of R Packages
+
+The **githubinstall** package uses [Gepuro Task Views](http://rpkg.gepuro.net) for getting the list of R packages on GitHub.
+Gepuro Task Views is crawling the GitHub and updates information every day.
+The package downloads the list of R packages from Gepuro Task Views each time it was loaded.
+Thus, you can always use the newest list of packages on a new R session.
+
+However, you may use an R session for a long time.
+In such case, `gh_update_package_list()` is useful.
+
+`gh_update_package_list()` updates the downloaded list of the R packages explicitly.
 
 
+```r
+gh_update_package_list()
+```
 
 ## 4. Related Work
 

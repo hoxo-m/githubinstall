@@ -1,7 +1,8 @@
 #' Find source code for functions in packages on GitHub
 #' 
-#' @param func a function or a character. A function name.
-#' @param repo a character. A GitHub repository name that must not be exactry.
+#' @param func a function or a character string. A function name.
+#' @param repo a character string. A GitHub repository name that must not be exactry.
+#' @param browser a character string giving the name of the program to be used as the HTML browser.
 #' 
 #' @examples
 #' \dontrun{
@@ -15,7 +16,7 @@
 #' @importFrom utils browseURL
 #' 
 #' @export
-gh_show_source <- function(func, repo = NULL) {
+gh_show_source <- function(func, repo = NULL, browser = getOption("browser")) {
   if(is.character(func)) {
     func_name <- func
   } else {
@@ -44,7 +45,7 @@ gh_show_source <- function(func, repo = NULL) {
   if(found) {
     line_num <- which(grepl(paste0(func_name, "<-"), gsub("\\s", "", readLines(url))))
     url <- sprintf("https://github.com/%s/tree/master/R/%s#L%d", repo_name, basename(url), line_num)
-    browseURL(url)
+    browseURL(url, browser = browser)
   } else {
     stop("not found")
   }

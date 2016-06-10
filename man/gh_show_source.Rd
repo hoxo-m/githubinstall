@@ -4,12 +4,14 @@
 \alias{gh_show_source}
 \title{Find source code for functions in packages on GitHub}
 \usage{
-gh_show_source(func, repo = NULL)
+gh_show_source(func, repo = NULL, browser = getOption("browser"))
 }
 \arguments{
-\item{func}{a function or a character. A function name.}
+\item{func}{a function or a character string. A function name.}
 
-\item{repo}{a character. A GitHub repository name that must not be exactry.}
+\item{repo}{a character string. A GitHub repository name that must not be exactry.}
+
+\item{browser}{a character string giving the name of the program to be used as the HTML browser.}
 }
 \description{
 Find source code for functions in packages on GitHub
