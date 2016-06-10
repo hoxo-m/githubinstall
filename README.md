@@ -239,7 +239,7 @@ head(hadleyverse)
 
 ### 3.4. Search Packages by a Keyword
 
-`gh_search_packages()` returns the list of R package repositories on GitHub that the titles contains a keyword.
+`gh_search_packages()` returns the list of R package repositories on GitHub that the titles contains a given keyword.
 
 For example, if you want to search packages that are relevant to *lasso*, run the following.
 
@@ -267,14 +267,14 @@ gh_search_packages("lasso")
 
 ### 3.5. Show the Source Code of Functions on GitHub
 
-`gh_show_source()` looks for the source code of a function on GitHub, and tries to open the place on Web browser.
+`gh_show_source()` looks for the source code of a given function on GitHub, and tries to open the place on Web browser.
 
 
 ```r
 gh_show_source("mutate", "dplyr")
 ```
 
-If you have loaded the package, you can input the function directly.
+If you have loaded the package that the function belongs to, you can input the function directly.
 
 
 ```r
@@ -282,7 +282,7 @@ library(dplyr)
 gh_show_source(mutate)
 ```
 
-This function does not work well with Safari.
+This function may do not work well with Safari.
 
 ### 3.6. Update the List of R Packages
 
