@@ -58,6 +58,10 @@ hadleyverse <- gh_list_packages(username = "hadley")
 transform(head(hadleyverse), title = substr(title, 1, 50))
 
 ## ----eval=FALSE----------------------------------------------------------
+#  repos <- with(hadleyverse, paste(username, package_name, sep="/"))
+#  githubinstall(repos) # I have not tried it
+
+## ----eval=FALSE----------------------------------------------------------
 #  gh_search_packages("lasso")
 
 ## ----echo=FALSE----------------------------------------------------------

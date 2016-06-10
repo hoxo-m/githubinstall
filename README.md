@@ -237,6 +237,14 @@ head(hadleyverse)
 ## 6   hadley      decumar                           An alternative to sweave
 ```
 
+By using the result, you can install all packages created by hadley.
+
+
+```r
+repos <- with(hadleyverse, paste(username, package_name, sep="/"))
+githubinstall(repos) # I have not tried it
+```
+
 ### 3.4. Search Packages by a Keyword
 
 `gh_search_packages()` returns the list of R package repositories on GitHub that the titles contains a given keyword.

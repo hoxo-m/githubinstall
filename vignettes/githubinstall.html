@@ -184,6 +184,9 @@ Selection: </code></pre>
 ## 4   hadley     bookdown                                              Watch
 ## 5   hadley   clusterfly An R package for visualising high-dimensional clus
 ## 6   hadley      decumar                           An alternative to sweave</code></pre>
+<p>By using the result, you can install all packages created by hadley.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">repos &lt;-<span class="st"> </span><span class="kw">with</span>(hadleyverse, <span class="kw">paste</span>(username, package_name, <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>))
+<span class="kw">githubinstall</span>(repos) <span class="co"># I have not tried it</span></code></pre></div>
 </div>
 <div id="search-packages-by-a-keyword" class="section level3">
 <h3>3.4. Search Packages by a Keyword</h3>

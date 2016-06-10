@@ -205,6 +205,13 @@ hadleyverse <- gh_list_packages(username = "hadley")
 transform(head(hadleyverse), title = substr(title, 1, 50))
 ```
 
+By using the result, you can install all packages created by hadley.
+
+```{r eval=FALSE}
+repos <- with(hadleyverse, paste(username, package_name, sep="/"))
+githubinstall(repos) # I have not tried it
+```
+
 ### 3.4. Search Packages by a Keyword
 
 `gh_search_packages()` returns the list of R package repositories on GitHub that the titles contains a given keyword.
