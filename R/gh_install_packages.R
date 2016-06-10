@@ -34,21 +34,21 @@ gh_install_packages <- function(packages, ask = TRUE, build_args = NULL,
   subdir <- attr(packages, "subdir")
   suffix <- attr(packages, "suffix")
   repos <- sapply(packages, select_repository)
-  if(is_conflict_installed_packages(repos, lib)) {
-    choice <- menu(choices = c("Cancel Installation", "Install Forcibly (Overwirte)"), 
-                   title = "Warning occurred. Do you cancel the installation?")
-    if(choice <= 1) {
-      message("Canceled installing.")
-      return(invisible(NULL))
-    }
-  }
   repos_full <- paste0(repos, subdir, suffix)
   if (ask) {
     target <- paste(repos_full, collapse = "\n - ")
     title <- sprintf("Suggestion:\n - %s\nDo you install the package%s?", target, ifelse(length(target) == 1, "", "s"))
     choice <- menu(choices = c("Yes (Install)", "No (Cancel)"), title = title)
     if(choice != 1) {
-      message("Canceled installing.")
+      message("Canceled the installation.")
+      return(invisible(NULL))
+    }
+  }
+  if(is_conflict_installed_packages(repos, lib)) {
+    choice <- menu(choices = c("Install Forcibly (Overwirte)", "Cancel the Installation"), 
+                   title = "Warning occurred. Do you install the package forcibly?")
+    if(choice != 1) {
+      message("Canceled the installation.")
       return(invisible(NULL))
     }
   }
