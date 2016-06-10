@@ -6,11 +6,11 @@
 \title{Install Packages from GitHub}
 \usage{
 gh_install_packages(packages, ask = TRUE, build_args = NULL,
-  build_vignettes = TRUE, verbose = TRUE, dependencies = c("Depends",
+  build_vignettes = FALSE, verbose = TRUE, dependencies = c("Depends",
   "Imports", "LinkingTo"), ...)
 
 githubinstall(packages, ask = TRUE, build_args = NULL,
-  build_vignettes = TRUE, verbose = TRUE, dependencies = c("Depends",
+  build_vignettes = FALSE, verbose = TRUE, dependencies = c("Depends",
   "Imports", "LinkingTo"), ...)
 }
 \arguments{
@@ -20,7 +20,7 @@ githubinstall(packages, ask = TRUE, build_args = NULL,
 
 \item{build_args}{character string used to control the package build, passed to \code{R CMD build}.}
 
-\item{build_vignettes}{logical specifying whether to build package vignettes, passed to \code{R CMD build}. Can be slow. Default is \code{TRUE}.}
+\item{build_vignettes}{logical specifying whether to build package vignettes, passed to \code{R CMD build}. Can be slow. Default is \code{FALSE}.}
 
 \item{verbose}{logical specifying whether to print details of package building and installation.}
 

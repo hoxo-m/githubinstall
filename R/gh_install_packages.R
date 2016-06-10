@@ -3,7 +3,7 @@
 #' @param packages character vector of the names of packages.
 #' @param ask logical. Indicates ask to confirm before install.
 #' @param build_args character string used to control the package build, passed to \code{R CMD build}.
-#' @param build_vignettes logical specifying whether to build package vignettes, passed to \code{R CMD build}. Can be slow. Default is \code{TRUE}.
+#' @param build_vignettes logical specifying whether to build package vignettes, passed to \code{R CMD build}. Can be slow. Default is \code{FALSE}.
 #' @param verbose logical specifying whether to print details of package building and installation.
 #' @param dependencies character vector specifying which dependencies to install (of "Depends", "Imports", "Suggests", etc.).
 #' @param ... additional arguments to control installation of package, passed to \link{install.packages}.
