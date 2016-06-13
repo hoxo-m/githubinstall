@@ -82,11 +82,10 @@ githubinstall("anomaly-detection")
 
 ## 2. Installation
 
-You can install the package from GitHub.
+You can install the **githubinstall** package from CRAN.
 
 ```{r eval=FALSE}
-install.packages("devtools") # if you have not installed "devtools" package
-devtools::install_github("hoxo-m/githubinstall")
+install.packages("githubinstall")
 ```
 
 The source code for **githubinstall** package is available on GitHub at

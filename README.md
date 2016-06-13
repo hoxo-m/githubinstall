@@ -5,6 +5,7 @@ Koji MAKIYAMA (@hoxo_m)
 
 [![Travis-CI Build Status](https://travis-ci.org/hoxo-m/githubinstall.svg?branch=master)](https://travis-ci.org/hoxo-m/githubinstall)
 [![CRAN Version](http://www.r-pkg.org/badges/version/githubinstall)](http://cran.rstudio.com/web/packages/githubinstall)
+[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/githubinstall)](http://cranlogs.r-pkg.org/badges/githubinstall)
 [![Coverage Status](https://coveralls.io/repos/github/hoxo-m/githubinstall/badge.svg?branch=master)](https://coveralls.io/github/hoxo-m/githubinstall?branch=master)
 
 ## 1. Overview
@@ -81,7 +82,14 @@ githubinstall("anomaly-detection")
 
 ## 2. Installation
 
-You can install the package from GitHub.
+You can install the **githubinstall** package from CRAN.
+
+
+```r
+install.packages("githubinstall")
+```
+
+You can also install the package from GitHub.
 
 
 ```r

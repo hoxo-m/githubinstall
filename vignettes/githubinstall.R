@@ -22,8 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #  githubinstall("anomaly-detection")
 
 ## ----eval=FALSE----------------------------------------------------------
-#  install.packages("devtools") # if you have not installed "devtools" package
-#  devtools::install_github("hoxo-m/githubinstall")
+#  install.packages("githubinstall")
 
 ## ------------------------------------------------------------------------
 library(githubinstall)
