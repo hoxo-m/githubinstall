@@ -12,7 +12,7 @@
 
 <meta name="author" content="Koji MAKIYAMA (@hoxo_m)" />
 
-<meta name="date" content="2016-06-13" />
+<meta name="date" content="2016-06-14" />
 
 <title>githubinstall - An Easy Way to Install R Packages on GitHub</title>
 
@@ -70,23 +70,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">githubinstall - An Easy Way to Install R Packages on GitHub</h1>
 <h4 class="author"><em>Koji MAKIYAMA (<span class="citation">@hoxo_m</span>)</em></h4>
-<h4 class="date"><em>2016-06-13</em></h4>
+<h4 class="date"><em>2016-06-14</em></h4>
 
 
 
 <div id="overview" class="section level2">
 <h2>1. Overview</h2>
 <p>A growing number of R packages are created by various people in the world. A part of the cause of it is the <strong>devtools</strong> package that makes it easy to develop R packages <a href="https://www.rstudio.com/products/rpackages/devtools/">[1]</a>. The <strong>devtools</strong> package not only facilitates the process to develop R packages but also provides an another way to distribute R packages.</p>
-<p>To distribute R packages, the CRAN <a href="https://cran.r-project.org">[2]</a> is commonly used. You can install the packages are available on CRAN as follows.</p>
+<p>When developers publish the R packages, the CRAN <a href="https://cran.r-project.org">[2]</a> is commonly used. You can install the packages that are available on CRAN using <code>install.package()</code>. For example, you can install <strong>dplyr</strong> package as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</code></pre></div>
 <p>The <strong>devtools</strong> package provides <code>install_github()</code> that enables installing packages from GitHub.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
 <span class="kw">install_github</span>(<span class="st">&quot;hadley/dplyr&quot;</span>)</code></pre></div>
-<p>Therefore, developers can distribute R packages that is developing on GitHub. There are some developers who have no intention to submit to CRAN. For instance, Twitter, Inc. provides <strong>AnomalyDetection</strong> package on GitHub but it will not be available on CRAN <a href="https://blog.twitter.com/2015/introducing-practical-and-robust-anomaly-detection-in-a-time-series">[3]</a>. You can install such packages easily using <strong>devtools</strong>.</p>
+<p>Therefore, developers can distribute R packages that is developing on GitHub. In addition, there are some developers that they have no intention to submit to CRAN. For instance, Twitter, Inc. provides <strong>AnomalyDetection</strong> package on GitHub but it will not be available on CRAN <a href="https://blog.twitter.com/2015/introducing-practical-and-robust-anomaly-detection-in-a-time-series">[3]</a>. You can install such packages easily using <strong>devtools</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
 <span class="kw">install_github</span>(<span class="st">&quot;twitter/AnomalyDetection&quot;</span>)</code></pre></div>
-<p>There is a difference what is passed between <code>install.packages()</code> and <code>install_github()</code>. <code>install.packages()</code> takes the package names and <code>install_github()</code> needs the repository names. It means that if you want to install a package on GitHub you must remember its repository name correctly.</p>
-<p>The trouble is that the usernames of GitHub are often hard to remember. Developers consider the package names so that users can understand the functionalities intuitively, however, they decide username incautiously. For instance, <strong>ggfortify</strong> is a great package on GitHub, but who created it? What is the username? The answer is <em>sinhrks</em> <a href="https://github.com/sinhrks/ggfortify">[4]</a>. It seems to be difficult to remember it.</p>
+<p>There is a difference between <code>install.packages()</code> and <code>install_github()</code> in the required argument. <code>install.packages()</code> takes package names, while <code>install_github()</code> needs repository names. It means that when you want to install a package on GitHub you must remember its repository name correctly.</p>
+<p>The trouble is that the usernames of GitHub are often hard to remember. Developers consider the package names so that users can understand the functionalities intuitively. However, they often decide username incautiously. For instance, <strong>ggfortify</strong> is a great package on GitHub, but who created it? What is the username? The answer is <em>sinhrks</em> <a href="https://github.com/sinhrks/ggfortify">[4]</a>. It seems to be difficult to remember it.</p>
 <p>The <strong>githubinstall</strong> package provides a way to install packages on GitHub by only the package names just like <code>install.packages()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(githubinstall)
 <span class="kw">githubinstall</span>(<span class="st">&quot;AnomalyDetection&quot;</span>)</code></pre></div>
@@ -96,8 +96,8 @@ Do you install the package?
 
 1: Yes (Install)
 2: No (Cancel)</code></pre>
-<p><code>githubinstall()</code> suggests the GitHub repositry from package names, and asks whether you want to execute the installation.</p>
-<p>Furthermore, you may succeed in installing packages from a faint memory.</p>
+<p><code>githubinstall()</code> suggests the GitHub repository from package names, and asks whether you want to execute the installation.</p>
+<p>Furthermore, you may succeed in installing packages from a faint memory because our package automatically correct its spelling by fuzzy string search.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">githubinstall</span>(<span class="st">&quot;AnomaryDetection&quot;</span>)
 <span class="kw">githubinstall</span>(<span class="st">&quot;AnomalyDetect&quot;</span>)
 <span class="kw">githubinstall</span>(<span class="st">&quot;anomaly-detection&quot;</span>)</code></pre></div>
@@ -124,7 +124,7 @@ Do you install the package?
 <li><code>gh_update_package_list()</code></li>
 </ul>
 <p>The functions have common prefix <code>gh</code>. <code>githubinstall()</code> is an alias of <code>gh_install_packages()</code>.</p>
-<p>To use these functions, first you should load the package as follows.</p>
+<p>To use these functions, first, you should load the package as follows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(githubinstall)</code></pre></div>
 <div id="install-packages-from-github" class="section level3">
 <h3>3.1. Install Packages from GitHub</h3>

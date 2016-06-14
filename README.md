@@ -14,8 +14,9 @@ A growing number of R packages are created by various people in the world.
 A part of the cause of it is the **devtools** package that makes it easy to develop R packages [[1]](https://www.rstudio.com/products/rpackages/devtools/).
 The **devtools** package not only facilitates the process to develop R packages but also provides an another way to distribute R packages.
 
-To distribute R packages, the CRAN [[2]](https://cran.r-project.org) is commonly used.
-You can install the packages are available on CRAN as follows.
+When developers publish the R packages, the CRAN [[2]](https://cran.r-project.org) is commonly used.
+You can install the packages that are available on CRAN using `install.package()`.
+For example, you can install **dplyr** package as follows:
 
 
 ```r
@@ -30,8 +31,8 @@ library(devtools)
 install_github("hadley/dplyr")
 ```
 
-Therefore, developers can distribute R packages that is developing on GitHub.
-There are some developers who have no intention to submit to CRAN.
+Therefore, developers can distribute R packages that are developing on GitHub.
+In addition, there are some developers that they have no intention to submit to CRAN.
 For instance, Twitter, Inc. provides **AnomalyDetection** package on GitHub but it will not be available on CRAN [[3]](https://blog.twitter.com/2015/introducing-practical-and-robust-anomaly-detection-in-a-time-series).
 You can install such packages easily using **devtools**.
 
@@ -41,12 +42,13 @@ library(devtools)
 install_github("twitter/AnomalyDetection")
 ```
 
-There is a difference what is passed between `install.packages()` and `install_github()`.
-`install.packages()` takes the package names and `install_github()` needs the repository names.
-It means that if you want to install a package on GitHub you must remember its repository name correctly.
+There is a difference between `install.packages()` and `install_github()` in the required argument.
+`install.packages()` takes package names, while `install_github()` needs repository names.
+It means that when you want to install a package on GitHub you must remember its repository name correctly.
 
 The trouble is that the usernames of GitHub are often hard to remember.
-Developers consider the package names so that users can understand the functionalities intuitively, however, they decide username incautiously.
+Developers consider the package names so that users can understand the functionalities intuitively.
+However, they often decide username incautiously.
 For instance, **ggfortify** is a great package on GitHub, but who created it?
 What is the username?
 The answer is *sinhrks* [[4]](https://github.com/sinhrks/ggfortify).
@@ -69,9 +71,9 @@ Do you install the package?
 2: No (Cancel)
 ```
 
-`githubinstall()` suggests the GitHub repositry from package names, and asks whether you want to execute the installation.
+`githubinstall()` suggests the GitHub repository from package names, and asks whether you want to execute the installation.
 
-Furthermore, you may succeed in installing packages from a faint memory.
+Furthermore, you may succeed in installing packages from a faint memory because our package automatically correct its spelling by fuzzy string search.
 
 
 ```r
@@ -116,7 +118,7 @@ The **githubinstall** package provides several useful functions.
 The functions have common prefix `gh`.
 `githubinstall()` is an alias of `gh_install_packages()`.
 
-To use these functions, first you should load the package as follows.
+To use these functions, first, you should load the package as follows.
 
 
 ```r
