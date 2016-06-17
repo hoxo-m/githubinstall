@@ -20,8 +20,12 @@
 gh_suggest_username <- function(vague_name) {
   package_list <- get_package_list()
   vague_name <- vague_name[1]
-  authors <- unique(package_list$username)
-  dist <- adist(vague_name, authors)[1, ]
-  mindist <- min(dist)
-  authors[dist == mindist]
+  if(vague_name %in% c("yutani", "abura", "oil")){
+    "yutannihilation"
+  } else{
+    authors <- unique(package_list$username)
+    dist <- adist(vague_name, authors)[1, ]
+    mindist <- min(dist)
+    authors[dist == mindist]
+  }
 }
