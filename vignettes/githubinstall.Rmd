@@ -1,10 +1,10 @@
 ---
-title: "githubinstall - An Easy Way to Install R Packages on GitHub"
+title: "githubinstall: A Helpful Way to Install R Packages Hosted on GitHub"
 author: "Koji MAKIYAMA (@hoxo_m)"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{githubinstall - An Easy Way to Install R Packages on GitHub}
+  %\VignetteIndexEntry{githubinstall: A Helpful Way to Install R Packages Hosted on GitHub}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

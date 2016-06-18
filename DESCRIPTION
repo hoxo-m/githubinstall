@@ -1,13 +1,14 @@
 Package: githubinstall
 Type: Package
-Version: 0.0.1.9000
-Title: An Easy Way to Install R Packages on GitHub
-Description: Provides an easy way to install packages on GitHub.
+Version: 0.0.1.9001
+Title: A Helpful Way to Install R Packages Hosted on GitHub
+Description: Provides an helpful way to install packages hosted on GitHub.
 Authors@R: c(
     person("Koji", "Makiyama", email = "hoxo.smile@gmail.com", role = c("cre", "aut")),
     person("Atsushi", "Hayakawa", role = "ctb"),
     person("Shinya", "Uryu", role = "ctb"),
-    person("Hiroaki", "Yutani", role = "ctb"))
+    person("Hiroaki", "Yutani", role = "ctb"),
+    person("Nagi", "Teramo", role = "ctr"))
 URL: https://github.com/hoxo-m/githubinstall
 BugReports: https://github.com/hoxo-m/githubinstall/issues
 License: MIT + file LICENSE

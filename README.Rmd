@@ -1,5 +1,5 @@
 ---
-title: "An Easy Way to Install R Packages on GitHub"
+title: "A Helpful Way to Install R Packages Hosted on GitHub"
 author: Koji MAKIYAMA (@hoxo_m)
 output: 
   html_document:

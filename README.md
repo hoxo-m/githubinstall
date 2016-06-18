@@ -1,4 +1,4 @@
-# An Easy Way to Install R Packages on GitHub
+# A Helpful Way to Install R Packages Hosted on GitHub
 Koji MAKIYAMA (@hoxo_m)  
 
 
