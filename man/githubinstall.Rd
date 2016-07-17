@@ -5,31 +5,38 @@
 \alias{githubinstall}
 \title{Install Packages from GitHub}
 \usage{
-gh_install_packages(packages, ask = TRUE, build_args = NULL,
-  build_vignettes = FALSE, verbose = TRUE, dependencies = c("Depends",
-  "Imports", "LinkingTo"), ...)
+gh_install_packages(packages, ask = TRUE, ref = "master",
+  build_vignettes = FALSE, dependencies = NA, verbose = TRUE,
+  quiet = !verbose, ...)
 
-githubinstall(packages, ask = TRUE, build_args = NULL,
-  build_vignettes = FALSE, verbose = TRUE, dependencies = c("Depends",
-  "Imports", "LinkingTo"), ...)
+githubinstall(packages, ask = TRUE, ref = "master",
+  build_vignettes = FALSE, dependencies = NA, verbose = TRUE,
+  quiet = !verbose, ...)
 }
 \arguments{
-\item{packages}{character vector of the names of packages.}
+\item{packages}{character vector of the names of the packages.
+You can specify \code{ref} argument (see below) using \code{package_name[@ref|#pull]}.
+If both are specified, the values in repo take precedence.}
 
 \item{ask}{logical. Indicates ask to confirm before install.}
 
-\item{build_args}{character string used to control the package build, passed to \code{R CMD build}.}
+\item{ref}{character vector. Desired git reference. 
+Could be a commit, tag, or branch name, or a call to \code{\link{github_pull}}. 
+Defaults to "master".}
 
-\item{build_vignettes}{logical specifying whether to build package vignettes, passed to \code{R CMD build}. Can be slow. Default is \code{FALSE}.}
+\item{build_vignettes}{logical. If \code{TRUE}, will build vignettes.}
 
-\item{verbose}{logical specifying whether to print details of package building and installation.}
+\item{dependencies}{logical. Indicating to also install uninstalled packages which the packages depends on/links to/suggests. 
+See argument dependencies of \code{\link{install.packages}}.}
 
-\item{dependencies}{character vector specifying which dependencies to install (of "Depends", "Imports", "Suggests", etc.).}
+\item{verbose}{logical. Indicating to print details of package building and installation. Dfault is \code{TRUE}.}
 
-\item{...}{additional arguments to control installation of package, passed to \link{install.packages}.}
+\item{quiet}{logical. Not \code{verbose}.}
+
+\item{...}{additional arguments to control installation of package, passed to \code{\link{install_github}}.}
 }
 \value{
-A named character vector of versions of R packages installed.
+TRUE if success.
 }
 \description{
 Install Packages from GitHub
@@ -39,8 +46,8 @@ Install Packages from GitHub
 }
 \examples{
 \dontrun{
-githubinstall("AnomalyDetection")
 gh_install_packages("AnomalyDetection")
+githubinstall("AnomalyDetection")
 }
 
 }

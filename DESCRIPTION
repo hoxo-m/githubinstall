@@ -1,6 +1,6 @@
 Package: githubinstall
 Type: Package
-Version: 0.0.1.9001
+Version: 0.0.1.9002
 Title: A Helpful Way to Install R Packages Hosted on GitHub
 Description: Provides an helpful way to install packages hosted on GitHub.
 Authors@R: c(
@@ -13,8 +13,9 @@ URL: https://github.com/hoxo-m/githubinstall
 BugReports: https://github.com/hoxo-m/githubinstall/issues
 License: MIT + file LICENSE
 Imports:
+    curl,
     data.table,
-    ghit,
+    devtools,
     httr,
     jsonlite,
     stringr,

@@ -1,61 +1,96 @@
 #' Install Packages from GitHub
 #'
-#' @param packages character vector of the names of packages.
+#' @param packages character vector of the names of the packages.
+#'        You can specify \code{ref} argument (see below) using \code{package_name[@ref|#pull]}.
+#'        If both are specified, the values in repo take precedence.
 #' @param ask logical. Indicates ask to confirm before install.
-#' @param build_args character string used to control the package build, passed to \code{R CMD build}.
-#' @param build_vignettes logical specifying whether to build package vignettes, passed to \code{R CMD build}. Can be slow. Default is \code{FALSE}.
-#' @param verbose logical specifying whether to print details of package building and installation.
-#' @param dependencies character vector specifying which dependencies to install (of "Depends", "Imports", "Suggests", etc.).
-#' @param ... additional arguments to control installation of package, passed to \link{install.packages}.
+#' @param ref character vector. Desired git reference. 
+#'        Could be a commit, tag, or branch name, or a call to \code{\link{github_pull}}. 
+#'        Defaults to "master".
+#' @param build_vignettes logical. If \code{TRUE}, will build vignettes.
+#' @param dependencies logical. Indicating to also install uninstalled packages which the packages depends on/links to/suggests. 
+#'        See argument dependencies of \code{\link{install.packages}}.
+#' @param verbose logical. Indicating to print details of package building and installation. Dfault is \code{TRUE}.
+#' @param quiet logical. Not \code{verbose}.
+#' @param ... additional arguments to control installation of package, passed to \code{\link{install_github}}.
 #'
-#' @return A named character vector of versions of R packages installed.
+#' @return TRUE if success.
 #'
 #' @details 
 #' \code{githubinstall()} is an alias of \code{gh_install_packages()}.
 #'
 #' @examples
 #' \dontrun{
-#' githubinstall("AnomalyDetection")
 #' gh_install_packages("AnomalyDetection")
+#' githubinstall("AnomalyDetection")
 #' }
 #'
-#' @importFrom ghit install_github
+#' @importFrom devtools install_github
 #' @importFrom utils menu packageDescription
 #'
 #' @rdname githubinstall
 #'
 #' @export
-gh_install_packages <- function(packages, ask = TRUE, build_args = NULL, 
-                                build_vignettes = FALSE, verbose = TRUE,
-                                dependencies = c("Depends", "Imports", "LinkingTo"), ...) {
+gh_install_packages <- function(packages, ask = TRUE, ref = "master", 
+                                build_vignettes = FALSE, dependencies = NA,
+                                verbose = TRUE, quiet = !verbose, ...) {
+  # Adjust arguments
   lib <- list(...)$lib # NULL if not set
-  packages <- reserve_suffix(packages)
-  packages <- reserve_subdir(packages)
-  subdir <- attr(packages, "subdir")
-  suffix <- attr(packages, "suffix")
+  dependencies <- select_dependencies(ask, build_vignettes, dependencies, quiet)
+  pac_ref <- separate_reference(packages, ref)
+  packages <- pac_ref$packages
+  references <- pac_ref$references
+
+  # 
   repos <- sapply(packages, select_repository)
-  repos_full <- paste0(repos, subdir, suffix)
+
   if (ask) {
-    target <- paste(repos_full, collapse = "\n - ")
-    title <- sprintf("Suggestion:\n - %s\nDo you install the package%s?", target, ifelse(length(target) == 1, "", "s"))
-    choice <- menu(choices = c("Yes (Install)", "No (Cancel)"), title = title)
-    if(choice != 1) {
-      message("Canceled the installation.")
-      return(invisible(NULL))
+    target <- paste(repos, attr(repos, "title"), collapse = "\n - ")
+    msg <- sprintf("Suggestion:\n - %s", target)
+    message(msg)
+    prompt <- sprintf("Do you want to install the package%s (Y/n)?  ", ifelse(length(repos) == 1, "", "s"))
+    answer <- substr(readline(prompt), 1L, 1L)
+    if (!(answer %in% c("", "y", "Y"))) {
+      cat("cancelled by user\n")
+      return(invisible())
     }
   }
-  if(is_conflict_installed_packages(repos, lib)) {
-    choice <- menu(choices = c("Install Forcibly (Overwirte)", "Cancel the Installation"), 
-                   title = "Warning occurred. Do you install the package forcibly?")
-    if(choice != 1) {
-      message("Canceled the installation.")
-      return(invisible(NULL))
+  # if(is_conflict_installed_packages(repos, lib)) {
+  #   
+  #   choice <- menu(choices = c("Install Forcibly (Overwirte)", "Cancel the Installation"), 
+  #                  title = "Warning occurred. Do you install the package forcibly?")
+  #   if(choice != 1) {
+  #     message("Canceled the installation.")
+  #     return(invisible(NULL))
+  #   }
+  # }
+  for (i in seq_along(repos)) {
+    repo <- repos[i]
+    ref <- references[i]
+    install_github(repo = repo, ref = ref, quiet = quiet, 
+                   dependencies = dependencies, build_vignettes = build_vignettes, ... = ...)
+    log_installed_packages(repos = repo, ref = ref)
+  }
+  invisible(TRUE)
+}
+
+select_dependencies <- function(ask, build_vignettes, dependencies, quiet) {
+  if (build_vignettes && is.na(dependencies)) {
+    msg <- "We recommend to specify the 'dependencies' argument when you build vignettes."
+    if (ask) {
+      message(msg)
+      answer <- readline("Do you want to use our recommended dependencies (y/N)?")
+      if (answer %in% c("", "y"))
+        return(TRUE)
+    } else {
+      if (!quiet) {
+        message(msg)
+        message("It will be set to our recommended dependencies.")
+      }
+      return(TRUE)
     }
   }
-  result <- install_github(repo = repos_full, build_args = build_args, build_vignettes = build_vignettes,
-                 verbose = verbose, dependencies = dependencies, ... = ...)
-  log_installed_packages(repos = paste0(repos, subdir), suffix = suffix)
-  result
+  dependencies
 }
 
 select_repository <- function(package_name) {
