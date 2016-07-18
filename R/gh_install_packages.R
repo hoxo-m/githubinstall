@@ -26,7 +26,6 @@
 #' }
 #'
 #' @importFrom devtools install_github
-#' @importFrom utils menu packageDescription
 #'
 #' @rdname githubinstall
 #'
@@ -41,29 +40,39 @@ gh_install_packages <- function(packages, ask = TRUE, ref = "master",
   packages <- pac_ref$packages
   references <- pac_ref$references
 
-  # 
-  repos <- sapply(packages, select_repository)
-
+  # Suggest repositories
+  repos <- lapply(packages, select_repository)
+  titles <- vapply(repos, attr, character(1), "title")
+  repos <- unlist(repos)
+  attr(repos, "title") <- titles
+  
+  # Confirm to install
   if (ask) {
-    target <- paste(repos, attr(repos, "title"), collapse = "\n - ")
+    if (length(repos) == 1) {
+      target <- paste0(repos, "  (", titles, ")", collapse = "\n - ")
+    } else {
+      target <- paste0(format_choices(repos), collapse = "\n - ")
+    }
     msg <- sprintf("Suggestion:\n - %s", target)
     message(msg)
     prompt <- sprintf("Do you want to install the package%s (Y/n)?  ", ifelse(length(repos) == 1, "", "s"))
     answer <- substr(readline(prompt), 1L, 1L)
     if (!(answer %in% c("", "y", "Y"))) {
-      cat("cancelled by user\n")
-      return(invisible())
+      message("cancelled by user\n")
+      stop_without_message()
     }
   }
-  # if(is_conflict_installed_packages(repos, lib)) {
-  #   
-  #   choice <- menu(choices = c("Install Forcibly (Overwirte)", "Cancel the Installation"), 
-  #                  title = "Warning occurred. Do you install the package forcibly?")
-  #   if(choice != 1) {
-  #     message("Canceled the installation.")
-  #     return(invisible(NULL))
-  #   }
-  # }
+  
+  # Check conflict
+  repos <- remove_conflict_repos(repos, lib, quiet, ask)
+  if (length(repos) == 0) {
+    message("cancelled by user\n")
+    stop_without_message()
+  }
+  
+  # Install
+  lib_paths <- .libPaths()
+  .libPaths(c(lib, lib_paths))
   for (i in seq_along(repos)) {
     repo <- repos[i]
     ref <- references[i]
@@ -71,28 +80,29 @@ gh_install_packages <- function(packages, ask = TRUE, ref = "master",
                    dependencies = dependencies, build_vignettes = build_vignettes, ... = ...)
     log_installed_packages(repos = repo, ref = ref)
   }
+  .libPaths(lib_paths)
   invisible(TRUE)
 }
 
 select_dependencies <- function(ask, build_vignettes, dependencies, quiet) {
   if (build_vignettes && is.na(dependencies)) {
     msg <- "We recommend to specify the 'dependencies' argument when you build vignettes."
-    if (ask) {
+    if (!quiet) {
       message(msg)
-      answer <- readline("Do you want to use our recommended dependencies (y/N)?")
-      if (answer %in% c("", "y"))
-        return(TRUE)
-    } else {
-      if (!quiet) {
-        message(msg)
+      if (ask) {
+        answer <- readline("Do you want to use our recommended dependencies (Y/n)?")
+        if (answer %in% c("", "y", "Y"))
+          return(TRUE)
+      } else {
         message("It will be set to our recommended dependencies.")
+        return(TRUE)
       }
-      return(TRUE)
     }
   }
   dependencies
 }
 
+#' @importFrom utils menu
 select_repository <- function(package_name) {
   candidates <- gh_suggest(package_name, keep_title = TRUE)
   if (is.null(candidates)) {
