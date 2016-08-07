@@ -199,9 +199,9 @@ gh_suggest("cats")
 ```
 
 ```
-## [1] "amurali2/cats"       "danielwilhelm/cats"  "davidluizrusso/cats"
-## [4] "hilaryparker/cats"   "lolibear/cats"       "rafalszota/cats"    
-## [7] "tahir275/cats"
+## [1] "amurali2/cats"         "danielwilhelm/cats"    "davidluizrusso/cats"  
+## [4] "hilaryparker/cats"     "jonathanelee1993/cats" "lloydlow/cats"        
+## [7] "lolibear/cats"         "rafalszota/cats"       "tahir275/cats"
 ```
 
 In addition, `gh_suggest_username()` is useful if you want to know usernames from a faint memory.
@@ -280,7 +280,6 @@ gh_search_packages("lasso")
 ## 9       vincent-dk             msgl  High Dimensional Multiclass Classif..
 ## 10      vstanislas             GGEE  R Package for the Group Lasso Gene-..
 ## 11          zdk123       BatchStARS  R package for Stability Approach to..
-## 12          zdk123           pulsar  R package for Stability Approach to..
 ```
 
 ### 3.5. Show the Source Code of Functions on GitHub
