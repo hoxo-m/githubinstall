@@ -50,5 +50,6 @@ gh_install_packages("AnomalyDetection")
 githubinstall("AnomalyDetection")
 }
 
+
 }
 

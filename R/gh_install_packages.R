@@ -25,7 +25,6 @@
 #' githubinstall("AnomalyDetection")
 #' }
 #'
-#'
 #' @rdname githubinstall
 #'
 #' @export
@@ -34,10 +33,10 @@ gh_install_packages <- function(packages, ask = TRUE, ref = "master",
                                 verbose = TRUE, quiet = !verbose, ...) {
   # Adjust arguments
   lib <- list(...)$lib # NULL if not set
-  dependencies <- select_dependencies(ask, build_vignettes, dependencies, quiet)
-  pac_ref <- separate_reference(packages, ref)
-  packages <- pac_ref$packages
-  references <- pac_ref$references
+  dependencies <- recommend_dependencies(ask, build_vignettes, dependencies, quiet)
+  pac_and_ref <- separate_reference(packages, ref)
+  packages <- pac_and_ref$packages
+  references <- pac_and_ref$references
 
   # Suggest repositories
   repos <- lapply(packages, select_repository)
@@ -85,33 +84,13 @@ gh_install_packages <- function(packages, ask = TRUE, ref = "master",
   }
 }
 
-#' @importFrom devtools install_github
-install_package <- function() {
-  result <- install_github(repo = repo, ref = ref, quiet = quiet, 
-                           dependencies = dependencies, 
-                           build_vignettes = build_vignettes, ... = ...)
+install_package <- function(repo, ref, quiet, dependencies, build_vignettes, ...) {
+  result <- devtools::install_github(repo = repo, ref = ref, quiet = quiet, 
+                                     dependencies = dependencies, 
+                                     build_vignettes = build_vignettes, ... = ...)
   log_installed_packages(repos = repo, ref = ref)
   result
 }
-
-select_dependencies <- function(ask, build_vignettes, dependencies, quiet) {
-  if (build_vignettes && is.na(dependencies)) {
-    msg <- "We recommend to specify the 'dependencies' argument when 'build_vignettes' is TRUE."
-    if (!quiet) {
-      message(msg)
-      if (ask) {
-        answer <- readline("Do you want to use our recommended dependencies (Y/n)?")
-        if (answer %in% c("", "y", "Y"))
-          return(TRUE)
-      } else {
-        message("It will be set to our recommended dependencies.")
-        return(TRUE)
-      }
-    }
-  }
-  dependencies
-}
-
 
 #' @importFrom devtools github_pull
 #' @importFrom stringr str_replace str_sub
