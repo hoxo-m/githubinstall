@@ -25,7 +25,6 @@
 #' githubinstall("AnomalyDetection")
 #' }
 #'
-#' @importFrom devtools install_github
 #'
 #' @rdname githubinstall
 #'
@@ -73,10 +72,9 @@ gh_install_packages <- function(packages, ask = TRUE, ref = "master",
   for (i in seq_along(repos)) {
     repo <- repos[i]
     ref <- references[i]
-    results[[i]] <- install_github(repo = repo, ref = ref, quiet = quiet, 
-                             dependencies = dependencies, 
-                             build_vignettes = build_vignettes, ... = ...)
-    log_installed_packages(repos = repo, ref = ref)
+    results[[i]] <- install_package(repo = repo, ref = ref, quiet = quiet, 
+                                    dependencies = dependencies, 
+                                    build_vignettes = build_vignettes, ... = ...)
   }
   .libPaths(lib_paths)
   names(results) <- repos
@@ -85,6 +83,15 @@ gh_install_packages <- function(packages, ask = TRUE, ref = "master",
   } else {
     invisible(results)
   }
+}
+
+#' @importFrom devtools install_github
+install_package <- function() {
+  result <- install_github(repo = repo, ref = ref, quiet = quiet, 
+                           dependencies = dependencies, 
+                           build_vignettes = build_vignettes, ... = ...)
+  log_installed_packages(repos = repo, ref = ref)
+  result
 }
 
 select_dependencies <- function(ask, build_vignettes, dependencies, quiet) {
