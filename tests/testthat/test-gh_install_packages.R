@@ -1,31 +1,23 @@
 context("Install packages")
 
-tmp <- file.path(tempdir(), "tmplib")
-suppressWarnings(dir.create(tmp))
+install_github_mock <- function(...) {
+  list(...)
+}
 
 test_that("Install a single package", {
   repo <- "AnomalyDetection"
-
-  act <- suppressWarnings(gh_install_packages(repo, ask = FALSE, lib = tmp, force = TRUE))
-
-  expect_true(act)
-  remove.packages("AnomalyDetection", lib = tmp)
+  with_mock(
+    `devtools::install_github` = install_github_mock, 
+    act <- gh_install_packages(repo, ask = FALSE)
+  )
+  expect_equal(act$repo, "twitter/AnomalyDetection")
 })
 
-test_that("Install two packages", {
+test_that("Install two package", {
   repo <- c("AnomalyDetection", "toybayesopt")
-
-  act <- suppressWarnings(gh_install_packages(repo, ask = FALSE, lib = tmp, force = TRUE))
-  expect_true(act)
-  remove.packages("AnomalyDetection", lib = tmp)
-  remove.packages("toybayesopt", lib = tmp)
+  with_mock(
+    `devtools::install_github` = install_github_mock, 
+    act <- gh_install_packages(repo, ask = FALSE)
+  )
+  expect_equal(length(act), 2)
 })
-
-# cleanup
-if ("AnomalyDetection" %in% installed.packages(lib.loc = tmp)[, "Package"]) {
-  remove.packages("AnomalyDetection", lib = tmp)
-}
-if ("toybayesopt" %in% installed.packages(lib.loc = tmp)[, "Package"]) {
-  remove.packages("toybayesopt", lib = tmp)
-}
-unlink(tmp)

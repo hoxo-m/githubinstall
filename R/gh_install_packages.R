@@ -69,20 +69,27 @@ gh_install_packages <- function(packages, ask = TRUE, ref = "master",
   # Install
   lib_paths <- .libPaths()
   .libPaths(c(lib, lib_paths))
+  results <- vector("list", length(repos))
   for (i in seq_along(repos)) {
     repo <- repos[i]
     ref <- references[i]
-    install_github(repo = repo, ref = ref, quiet = quiet, 
-                   dependencies = dependencies, build_vignettes = build_vignettes, ... = ...)
+    results[[i]] <- install_github(repo = repo, ref = ref, quiet = quiet, 
+                             dependencies = dependencies, 
+                             build_vignettes = build_vignettes, ... = ...)
     log_installed_packages(repos = repo, ref = ref)
   }
   .libPaths(lib_paths)
-  invisible(TRUE)
+  names(results) <- repos
+  if(length(results) == 1) {
+    invisible(results[[1]])
+  } else {
+    invisible(results)
+  }
 }
 
 select_dependencies <- function(ask, build_vignettes, dependencies, quiet) {
   if (build_vignettes && is.na(dependencies)) {
-    msg <- "We recommend to specify the 'dependencies' argument when you build vignettes."
+    msg <- "We recommend to specify the 'dependencies' argument when 'build_vignettes' is TRUE."
     if (!quiet) {
       message(msg)
       if (ask) {
