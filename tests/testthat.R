@@ -1,4 +1,4 @@
 library(testthat)
 library(githubinstall)
 
-test_check("githubinstall",  filter = "[^(gh_install_packages)]")
+test_check("githubinstall",  filter = "[^(really_install)]")
