@@ -84,31 +84,13 @@ gh_install_packages <- function(packages, ask = TRUE, ref = "master",
   }
 }
 
+#' @importFrom devtools install_github
 install_package <- function(repo, ref, quiet, dependencies, build_vignettes, ...) {
-  result <- devtools::install_github(repo = repo, ref = ref, quiet = quiet, 
-                                     dependencies = dependencies, 
-                                     build_vignettes = build_vignettes, ... = ...)
+  result <- install_github(repo = repo, ref = ref, quiet = quiet, 
+                           dependencies = dependencies, 
+                           build_vignettes = build_vignettes, ... = ...)
   log_installed_packages(repos = repo, ref = ref)
   result
-}
-
-#' @importFrom utils menu
-select_repository <- function(package_name) {
-  candidates <- gh_suggest(package_name, keep_title = TRUE)
-  if (is.null(candidates)) {
-    error_message <- sprintf('Not found the GitHub repository "%s".', package_name)
-    stop(error_message, call. = FALSE)
-  } else if(length(candidates) == 1) {
-    candidates
-  } else {
-    choices <- format_choices(candidates)
-    choice <- menu(choices = choices, title = "Select one repository or, hit 0 to cancel.")
-    if(choice == 0) {
-      stop("Canceled installing.", call. = FALSE)
-    } else {
-      candidates[choice]
-    }
-  }
 }
 
 format_choices <- function(candidates) {
