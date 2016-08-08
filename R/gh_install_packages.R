@@ -34,9 +34,9 @@ gh_install_packages <- function(packages, ask = TRUE, ref = "master",
   # Adjust arguments
   lib <- list(...)$lib # NULL if not set
   dependencies <- recommend_dependencies(ask, build_vignettes, dependencies, quiet)
-  pac_and_ref <- separate_reference(packages, ref)
+  pac_and_ref <- separate_into_package_and_reference(packages, ref)
   packages <- pac_and_ref$packages
-  references <- pac_and_ref$references
+  reference_list <- pac_and_ref$reference_list
 
   # Suggest repositories
   repos <- lapply(packages, select_repository)
@@ -70,7 +70,7 @@ gh_install_packages <- function(packages, ask = TRUE, ref = "master",
   results <- vector("list", length(repos))
   for (i in seq_along(repos)) {
     repo <- repos[i]
-    ref <- references[i]
+    ref <- reference_list[[i]]
     results[[i]] <- install_package(repo = repo, ref = ref, quiet = quiet, 
                                     dependencies = dependencies, 
                                     build_vignettes = build_vignettes, ... = ...)
@@ -90,42 +90,6 @@ install_package <- function(repo, ref, quiet, dependencies, build_vignettes, ...
                                      build_vignettes = build_vignettes, ... = ...)
   log_installed_packages(repos = repo, ref = ref)
   result
-}
-
-#' @importFrom devtools github_pull
-#' @importFrom stringr str_replace str_sub
-separate_reference <- function(packages, ref) {
-  commit_pattern <- "@.+$"
-  pull_request_pattern <- "#.+$"
-  branch_pattern <- "\\[.+\\]$"
-  
-  commit <- vapply(packages, extract_reference, character(1), commit_pattern)
-  pull_request <- vapply(packages, extract_reference, character(1), pull_request_pattern)
-  branch <- vapply(packages, extract_reference, character(1), branch_pattern)
-  
-  commit <- str_sub(commit, 2)
-  pull_request <- github_pull(str_sub(pull_request, 2))
-  branch <- str_sub(branch, 2, -2)
-  
-  if (length(ref) == 1)
-    ref <- rep(ref, length(packages))
-  
-  references <- commit
-  references[is.na(references)] <- pull_request[is.na(references)]
-  references[is.na(references)] <- branch[is.na(references)]
-  references[is.na(references)] <- ref[is.na(references)]
-  
-  packages <- str_replace(packages, references, "")
-  list(packages = packages, references = references)
-}
-
-#' @importFrom stringr str_detect str_extract
-extract_reference <- function(x, pattern) {
-  if (str_detect(x, pattern)) {
-    str_extract(x, pattern)
-  } else {
-    NA_character_
-  }
 }
 
 #' @importFrom utils menu
