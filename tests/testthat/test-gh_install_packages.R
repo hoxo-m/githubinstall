@@ -1,4 +1,4 @@
-context("Install packages")
+context("gh_install_packages")
 
 install_package_mock <- function(...) {
   list(...)
