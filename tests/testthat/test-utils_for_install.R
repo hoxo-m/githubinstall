@@ -112,3 +112,37 @@ test_that("extract_reference: ref", {
   
   expect_equal(act, "@commit_id")
 })
+
+# select_repository -------------------------------------------------------
+
+test_that("select_repository: single candidate", {
+  package_name <- "AnomalyDetection"
+  
+  act <- select_repository(package_name = package_name)
+
+  expect_equal(as.character(act), "twitter/AnomalyDetection")
+  expect_false(is.null(attr(act, "title")))
+})
+
+test_that("select_repository: multi candidates", {
+  package_name <- "cats"
+  
+  with_mock(
+    `utils::menu` = function(...) 1,
+    act <- select_repository(package_name = package_name)
+  )
+  
+  expect_equal(strsplit(act, "/")[[1]][2], "cats")
+  expect_false(is.null(attr(act, "title")))
+})
+
+test_that("select_repository: cancel", {
+  package_name <- "cats"
+  
+  with_mock(
+    `utils::menu` = function(...) 0,
+    expect_error(
+      select_repository(package_name = package_name)
+    )
+  )
+})
