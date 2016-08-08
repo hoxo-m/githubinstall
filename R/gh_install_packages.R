@@ -93,12 +93,6 @@ install_package <- function(repo, ref, quiet, dependencies, build_vignettes, ...
   result
 }
 
-format_choices <- function(candidates) {
-  nchars <- nchar(candidates)
-  max_nchars <- max(nchars)
-  spaces <- sapply(max_nchars - nchars, function(n) paste(rep(" ", n + 1), collapse=""))
-  paste0(candidates, spaces, " ", attr(candidates, "title"))
-}
 
 #' @importFrom utils packageDescription
 remove_conflict_repos <- function(repos, lib, quiet, ask) {

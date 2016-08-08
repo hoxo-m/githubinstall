@@ -73,21 +73,39 @@ extract_reference <- function(x, pattern) {
   }
 }
 
+#' Suggest candidates from "package_name" and make user selected one of them.
+#' Note "package_name" can be full repository name.
+#' 
+#' @param package_name a character string.
+#' 
+#' @return candidate with title
+#' 
 #' @importFrom utils menu
 select_repository <- function(package_name) {
   candidates <- gh_suggest(package_name, keep_title = TRUE)
   if (is.null(candidates)) {
+    # Never occurs!
     error_message <- sprintf('Not found the GitHub repository "%s".', package_name)
     stop(error_message, call. = FALSE)
-  } else if(length(candidates) == 1) {
+  } else if (length(candidates) == 1) {
     candidates
   } else {
     choices <- format_choices(candidates)
     choice <- menu(choices = choices, title = "Select one repository or, hit 0 to cancel.")
     if(choice == 0) {
-      stop("Canceled installing.", call. = FALSE)
+      message("Canceled installing.")
+      stop_without_message()
     } else {
-      candidates[choice]
+      result <- candidates[choice]
+      attr(result, "title") <- attr(candidates, "title")[choice]
+      result
     }
   }
+}
+
+format_choices <- function(candidates) {
+  nchars <- nchar(candidates)
+  max_nchars <- max(nchars)
+  spaces <- sapply(max_nchars - nchars, function(n) paste(rep(" ", n + 1), collapse=""))
+  paste0(candidates, spaces, " ", attr(candidates, "title"))
 }
