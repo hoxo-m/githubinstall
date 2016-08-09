@@ -41,3 +41,4 @@ test_that("Install: ask yes", {
   )
   expect_equal(act$repo, "twitter/AnomalyDetection")
 })
+
