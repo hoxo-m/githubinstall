@@ -98,7 +98,6 @@ install_package <- function(repo, ref, quiet, dependencies, build_vignettes, lib
   result
 }
 
-#' @inheritParams gh_install_packages
 #' @rdname gh_install_packages
 #' @export
 githubinstall <- gh_install_packages
