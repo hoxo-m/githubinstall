@@ -11,7 +11,9 @@
 #' @param dependencies logical. Indicating to also install uninstalled packages which the packages depends on/links to/suggests. 
 #'        See argument dependencies of \code{\link{install.packages}}.
 #' @param verbose logical. Indicating to print details of package building and installation. Dfault is \code{TRUE}.
-#' @param quiet logical. Not \code{verbose}.
+#' @param quiet logical. Not \code{verbose}. 
+#' @param lib character vector giving the library directories where to install the packages. 
+#'        Recycled as needed. Defaults to the first element of \code{\link{.libPaths}()}.
 #' @param ... additional arguments to control installation of package, passed to \code{\link{install_github}}.
 #'
 #' @return TRUE if success.
@@ -30,9 +32,10 @@
 #' @export
 gh_install_packages <- function(packages, ask = TRUE, ref = "master", 
                                 build_vignettes = FALSE, dependencies = NA,
-                                verbose = TRUE, quiet = !verbose, ...) {
+                                verbose = TRUE, quiet = !verbose, lib = NULL, ...) {
   # Adjust arguments
-  lib <- list(...)$lib # NULL if not set
+  if (length(lib) == 1)
+    lib <- rep(lib, length(packages))
   dependencies <- recommend_dependencies(ask, build_vignettes, dependencies, quiet)
   pac_and_ref <- separate_into_package_and_reference(packages, ref)
   packages <- pac_and_ref$packages
@@ -65,17 +68,16 @@ gh_install_packages <- function(packages, ask = TRUE, ref = "master",
   }
   
   # Install
-  lib_paths <- .libPaths()
-  .libPaths(c(lib, lib_paths))
   results <- vector("list", length(repos))
   for (i in seq_along(repos)) {
     repo <- repos[i]
     ref <- reference_list[[i]]
+    lib.loc <- lib[i]
     results[[i]] <- install_package(repo = repo, ref = ref, quiet = quiet, 
                                     dependencies = dependencies, 
-                                    build_vignettes = build_vignettes, ... = ...)
+                                    build_vignettes = build_vignettes, 
+                                    lib = lib.loc, ... = ...)
   }
-  .libPaths(lib_paths)
   names(results) <- repos
   if(length(results) == 1) {
     invisible(results[[1]])
@@ -85,56 +87,13 @@ gh_install_packages <- function(packages, ask = TRUE, ref = "master",
 }
 
 #' @importFrom devtools install_github
-install_package <- function(repo, ref, quiet, dependencies, build_vignettes, ...) {
+install_package <- function(repo, ref, quiet, dependencies, build_vignettes, lib, ...) {
+  lib_paths <- .libPaths()
+  .libPaths(c(lib, lib_paths))
   result <- install_github(repo = repo, ref = ref, quiet = quiet, 
                            dependencies = dependencies, 
                            build_vignettes = build_vignettes, ... = ...)
+  .libPaths(lib_paths)
   log_installed_packages(repos = repo, ref = ref)
   result
-}
-
-
-#' @importFrom utils packageDescription
-remove_conflict_repos <- function(repos, lib, quiet, ask) {
-  ignored_inds <- c()
-  
-  splitted <- strsplit(repos, "/")
-  usernames <- sapply(splitted, function(x) x[1])
-  package_names <- sapply(splitted, function(x) x[2])
-  descs <- lapply(package_names, function(pkg) suppressWarnings(packageDescription(pkg, lib.loc = lib)))
-  inds <- which(!is.na(descs))
-  
-  for (i in inds) {
-    message <- NULL
-    username <- usernames[i]
-    package_name <- package_names[i]
-    desc <- descs[[i]]
-    if(exists("GithubRepo", where = desc)) {
-      repo <- repos[i]
-      if (username != desc$GithubUsername) {
-        installed_repo <- paste0(desc$GithubUsername, "/", desc$GithubRepo)
-        message <- sprintf('Installing "%s", but already installed "%s".', repo, installed_repo)
-      }
-    } else  {
-      package_repository <- ifelse(exists("Repository", where = desc), desc$Repository, "unknown repository")
-      message <- sprintf('Installing "%s" package from GitHub, but already installed from %s.', package_name, package_repository)
-    }
-    if (!quiet & !is.null(message)) {
-      message(message)
-      if (ask) {
-        prompt <- "Do you want to overwrite the package (Y/n)?  "
-        answer <- substr(readline(prompt), 1L, 1L)
-        if (!(answer %in% c("", "y", "Y"))) {
-          ignored_inds <- c(ignored_inds, i)
-        }
-      } else {
-        message("It will be overwriten.")
-      }
-    }
-  }
-  if (is.null(ignored_inds)) {
-    repos
-  } else {
-    repos[-ignored_inds]
-  }
 }

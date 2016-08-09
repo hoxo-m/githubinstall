@@ -109,3 +109,69 @@ format_choices <- function(candidates) {
   spaces <- sapply(max_nchars - nchars, function(n) paste(rep(" ", n + 1), collapse=""))
   paste0(candidates, spaces, " ", attr(candidates, "title"))
 }
+
+#' We want to detect the two conflict cases as fllows:
+#'  1. The package is already installed from a repository like CRAN that is not GitHub.
+#'  2. The package is already installed from GtiHub but the username differs.
+#' In the above cases, we ask whether to overwrite it and remove from "repo" if the answer is no.
+#' 
+#' If "quiet" is TRUE, we overwrite all packages forcibly and silently.
+#' Else if "quiet" is FALSE and "ask" is TRUE, we ask whether to overwrite it. (Default)
+#' Else if "quiet" is FALSE and "ask" is FALSE, we message to overwrite it and do it.
+#' 
+#' @param repos charactor vector.
+#' @param lib character vector.
+#' @param quiet logical.
+#' @param ask logical.
+#' 
+#' @importFrom utils packageDescription
+remove_conflict_repos <- function(repos, lib, quiet, ask) {
+  if (quiet) return(repos) # overwrite all packages silently
+  
+  splitted <- strsplit(repos, "/")
+  usernames <- sapply(splitted, function(x) x[1])
+  package_names <- sapply(splitted, function(x) x[2])
+  descs <- vector("list", length(package_names))
+  for (i in seq_along(package_names)) {
+    pkg <- package_names[i]
+    lib.loc <- lib[i]
+    descs[[i]] <- suppressWarnings(packageDescription(pkg, lib.loc = lib.loc))
+  }
+  inds <- which(!is.na(descs)) # desc is NA if the pacakge is not installed
+  
+  ignored_inds <- c()
+  # for only installed packages
+  for (i in inds) {
+    message <- NULL
+    username <- usernames[i]
+    package_name <- package_names[i]
+    desc <- descs[[i]]
+    if(exists("GithubRepo", where = desc)) {
+      repo <- repos[i]
+      if (username != desc$GithubUsername) {
+        installed_repo <- paste0(desc$GithubUsername, "/", desc$GithubRepo)
+        message <- sprintf('Installing "%s", but already installed "%s".', repo, installed_repo)
+      }
+    } else  {
+      package_repository <- ifelse(exists("Repository", where = desc), desc$Repository, "unknown repository")
+      message <- sprintf('Installing "%s" package from GitHub, but already installed from %s.', package_name, package_repository)
+    }
+    if (!is.null(message)) {
+      message(message)
+      if (ask) {
+        prompt <- "Are you sure to overwrite the package (Y/n)?  "
+        answer <- substr(readline(prompt), 1L, 1L)
+        if (!(answer %in% c("", "y", "Y"))) {
+          ignored_inds <- c(ignored_inds, i)
+        }
+      } else {
+        message("It will be overwriten.")
+      }
+    }
+  }
+  if (is.null(ignored_inds)) {
+    repos
+  } else {
+    repos[-ignored_inds]
+  }
+}

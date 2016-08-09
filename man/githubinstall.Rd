@@ -7,11 +7,11 @@
 \usage{
 gh_install_packages(packages, ask = TRUE, ref = "master",
   build_vignettes = FALSE, dependencies = NA, verbose = TRUE,
-  quiet = !verbose, ...)
+  quiet = !verbose, lib = NULL, ...)
 
 githubinstall(packages, ask = TRUE, ref = "master",
   build_vignettes = FALSE, dependencies = NA, verbose = TRUE,
-  quiet = !verbose, ...)
+  quiet = !verbose, lib = NULL, ...)
 }
 \arguments{
 \item{packages}{character vector of the names of the packages.
@@ -32,6 +32,9 @@ See argument dependencies of \code{\link{install.packages}}.}
 \item{verbose}{logical. Indicating to print details of package building and installation. Dfault is \code{TRUE}.}
 
 \item{quiet}{logical. Not \code{verbose}.}
+
+\item{lib}{character vector giving the library directories where to install the packages. 
+Recycled as needed. Defaults to the first element of \code{\link{.libPaths}()}.}
 
 \item{...}{additional arguments to control installation of package, passed to \code{\link{install_github}}.}
 }
