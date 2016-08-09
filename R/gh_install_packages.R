@@ -97,3 +97,8 @@ install_package <- function(repo, ref, quiet, dependencies, build_vignettes, lib
   log_installed_packages(repos = repo, ref = ref)
   result
 }
+
+#' @inheritParams gh_install_packages
+#' @rdname githubinstall
+#' @export
+githubinstall <- gh_install_packages
