@@ -14,8 +14,8 @@ A growing number of R packages are created by various people in the world.
 A part of the cause of it is the **devtools** package that makes it easy to develop R packages [[1]](https://www.rstudio.com/products/rpackages/devtools/).
 The **devtools** package not only facilitates the process to develop R packages but also provides an another way to distribute R packages.
 
-When developers publish the R packages, the CRAN [[2]](https://cran.r-project.org) is commonly used.
-You can install the packages that are available on CRAN using `install.package()`.
+When developers publish R packages that created by them, the CRAN [[2]](https://cran.r-project.org) is commonly used.
+You can install packages that are available on CRAN using `install.package()`.
 For example, you can install **dplyr** package as follows:
 
 
@@ -33,7 +33,7 @@ install_github("hadley/dplyr")
 
 Therefore, developers can distribute R packages that are developing on GitHub.
 In addition, there are some developers that they have no intention to submit to CRAN.
-For instance, Twitter, Inc. provides **AnomalyDetection** package on GitHub but it will not be available on CRAN [[3]](https://blog.twitter.com/2015/introducing-practical-and-robust-anomaly-detection-in-a-time-series).
+For instance, Twitter, Inc. provides **AnomalyDetection** package on GitHub but they won't submit to CRAN [[3]](https://blog.twitter.com/2015/introducing-practical-and-robust-anomaly-detection-in-a-time-series).
 You can install such packages easily using **devtools**.
 
 
@@ -47,14 +47,14 @@ There is a difference between `install.packages()` and `install_github()` in the
 It means that when you want to install a package on GitHub you must remember its repository name correctly.
 
 The trouble is that the usernames of GitHub are often hard to remember.
-Developers consider the package names so that users can understand the functionalities intuitively.
+Developers consider their package names so that users can understand their functionalities intuitively.
 However, they often decide username incautiously.
 For instance, **ggfortify** is a great package on GitHub, but who created it?
-What is the username?
+What is its username?
 The answer is *sinhrks* [[4]](https://github.com/sinhrks/ggfortify).
 It seems to be difficult to remember it.
 
-The **githubinstall** package provides a way to install packages on GitHub by only the package names just like `install.packages()`.
+The **githubinstall** package provides a way to install packages on GitHub by only their package names just like `install.packages()`.
 
 
 ```r
@@ -63,17 +63,14 @@ githubinstall("AnomalyDetection")
 ```
 
 ```
-Suggetion:
- - twitter/AnomalyDetection
-Do you install the package? 
-
-1: Yes (Install)
-2: No (Cancel)
+Suggestion:
+ - twitter/AnomalyDetection  Anomaly Detection with R
+Do you want to install the package (Y/n)?  
 ```
 
-`githubinstall()` suggests the GitHub repository from package names, and asks whether you want to execute the installation.
+`githubinstall()` suggests GitHub repositories from input package names and asks whether you really install it.
 
-Furthermore, you may succeed in installing packages from a faint memory because our package automatically correct its spelling by fuzzy string search.
+Furthermore, you may succeed in installing packages from a faint memory because our package automatically corrects its spelling by fuzzy string search.
 
 
 ```r
@@ -107,7 +104,7 @@ The source code for **githubinstall** package is available on GitHub at
 
 The **githubinstall** package provides several useful functions.
 
-- `githubinstall()` or `gh_install_packages()`
+- `gh_install_packages()` or `githubinstall()`
 - `gh_suggest()`
 - `gh_suggest_username()`
 - `gh_list_packages()`
@@ -127,38 +124,33 @@ library(githubinstall)
 
 ### 3.1. Install Packages from GitHub
 
-`githubinstall()` enables to install packages on GitHub by only package names.
+`gh_install_packages()` enables to install packages on GitHub by only package names.
 
 
 ```r
-githubinstall("AnomalyDetection")
+gh_install_packages("AnomalyDetection")
 ```
 
 ```
 Suggestion:
- - twitter/AnomalyDetection
-Do you install the package? 
-
-1: Yes (Install)
-2: No (Cancel)
-
-Selection: 
+ - twitter/AnomalyDetection  Anomaly Detection with R
+Do you want to install the package (Y/n)?  
 ```
 
 The function suggests GitHub repositories.
-If you type '1' and 'enter', then installation of the package will begin.
-The suggestion is made of looking for the list of R packages on GitHub.
+If you type 'Y' or 'y' and press 'Enter' (the default is 'Y'), then installation of the package will begin.
+The suggestion is made of looking for a list of R packages on GitHub.
 The list is provided by [Gepuro Task Views](http://rpkg.gepuro.net).
 
 If multiple candidates are found, you can select one of them.
 
 
 ```r
-githubinstall("cats")
+gh_install_packages("cats")
 ```
 
 ```
-Select one repository or, hit 0 to cancel. 
+Select a number or, hit 0 to cancel. 
 
 1: amurali2/cats      cats
 2: danielwilhelm/cats No description or website provided.
@@ -174,12 +166,12 @@ Selection:
 
 
 ```r
-gh_install_packages("AnomalyDetection")
+githubinstall("AnomalyDetection")
 ```
 
 ### 3.2. Suggest Repositories
 
-`githubinstall()` prompts you to install the suggested packages.
+`gh_install_packages()` prompts you to install the suggested packages.
 But you may just want to know what will be suggestions.
 
 `gh_suggest()` returns the suggested repository names as a vector.
@@ -204,7 +196,7 @@ gh_suggest("cats")
 ## [7] "lolibear/cats"         "rafalszota/cats"       "tahir275/cats"
 ```
 
-In addition, `gh_suggest_username()` is useful if you want to know usernames from a faint memory.
+In addition, `gh_suggest_username()` is useful when you want to know usernames from a faint memory.
 
 
 ```r
@@ -226,7 +218,7 @@ gh_suggest_username("yuhui")
 
 ### 3.3. List the Packages
 
-`gh_list_packages()` returns the list of R package repositories on GitHub as `data.frame`.
+`gh_list_packages()` returns a list of R package repositories on GitHub as `data.frame`.
 
 For example, if you want to get the repositories that have been created by *hadley*, run the following.
 
@@ -257,7 +249,7 @@ githubinstall(repos) # I have not tried it
 
 ### 3.4. Search Packages by a Keyword
 
-`gh_search_packages()` returns the list of R package repositories on GitHub that the titles contains a given keyword.
+`gh_search_packages()` returns a list of R package repositories on GitHub that their titles contain a given keyword.
 
 For example, if you want to search packages that are relevant to *lasso*, run the following.
 
@@ -284,11 +276,11 @@ gh_search_packages("lasso")
 
 ### 3.5. Show the Source Code of Functions on GitHub
 
-`gh_show_source()` looks for the source code of a given function on GitHub, and tries to open the place on Web browser.
+`gh_show_source()` looks for a source code on GitHub for a given function and tries to open the place on your Web browser.
 
 
 ```r
-gh_show_source("mutate", "dplyr")
+gh_show_source("mutate", repo = "dplyr")
 ```
 
 If you have loaded the package that the function belongs to, you can input the function directly.
