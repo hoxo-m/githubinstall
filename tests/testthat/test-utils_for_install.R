@@ -146,3 +146,120 @@ test_that("select_repository: cancel", {
     )
   )
 })
+
+# remove_conflict_repos ---------------------------------------------------
+
+test_that("remove_conflict_repos: quiet == TRUE", {
+  repos <- LETTERS
+  lib = NULL
+  quiet = TRUE
+  ask = TRUE
+  
+  act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
+  
+  expect_equal(act, repos)
+})
+
+test_that("remove_conflict_repos: no installed", {
+  repos <- paste0(letters, LETTERS, sep="/")
+  lib = NULL
+  quiet = FALSE
+  ask = TRUE
+  
+  with_mock(
+    `utils::packageDescription` = function(pkg, ...) NA,
+    act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
+  ) 
+  
+  expect_equal(act, repos)
+})
+
+test_that("remove_conflict_repos: not conflict", {
+  repos <- "johndoe/test"
+  lib = NULL
+  quiet = FALSE
+  ask = TRUE
+
+  with_mock(
+    `utils::packageDescription` = function(pkg, ...) list(Package = pkg, GithubRepo = pkg, GithubUsername = "johndoe"),
+    `base::readline` = stop,
+    act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
+  ) 
+  
+  expect_equal(act, repos)
+})
+
+test_that("remove_conflict_repos: conflict GitHub, ask yes", {
+  repos <- "johndoe/test"
+  lib = NULL
+  quiet = FALSE
+  ask = TRUE
+  
+  with_mock(
+    `utils::packageDescription` = function(pkg, ...) list(Package = pkg, GithubRepo = pkg, GithubUsername = "ANOther"),
+    `base::readline` = function(...) "y",
+    act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
+  ) 
+  
+  expect_equal(act, repos)
+})
+
+test_that("remove_conflict_repos: conflict GitHub, ask no", {
+  repos <- "johndoe/test"
+  lib = NULL
+  quiet = FALSE
+  ask = TRUE
+  
+  with_mock(
+    `utils::packageDescription` = function(pkg, ...) list(Package = pkg, GithubRepo = pkg, GithubUsername = "ANOther"),
+    `base::readline` = function(...) "n",
+    act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
+  ) 
+  
+  expect_equal(length(act), 0)
+})
+
+test_that("remove_conflict_repos: conflict CRAN, ask yes", {
+  repos <- "johndoe/test"
+  lib = NULL
+  quiet = FALSE
+  ask = TRUE
+  
+  with_mock(
+    `utils::packageDescription` = function(pkg, ...) list(Package = pkg, Repository = "CRAN"),
+    `base::readline` = function(...) "y",
+    act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
+  ) 
+  
+  expect_equal(act, repos)
+})
+
+test_that("remove_conflict_repos: conflict CRAN, ask no", {
+  repos <- "johndoe/test"
+  lib = NULL
+  quiet = FALSE
+  ask = TRUE
+  
+  with_mock(
+    `utils::packageDescription` = function(pkg, ...) list(Package = pkg, Repository = "CRAN"),
+    `base::readline` = function(...) "n",
+    act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
+  ) 
+  
+  expect_equal(length(act), 0)
+})
+
+test_that("remove_conflict_repos: conflict, ask == FALSE", {
+  repos <- "johndoe/test"
+  lib = NULL
+  quiet = FALSE
+  ask = FALSE
+  
+  with_mock(
+    `utils::packageDescription` = function(pkg, ...) list(Package = pkg, Repository = "CRAN"),
+    `base::readline` = stop,
+    expect_message(
+      remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
+    )
+  ) 
+})

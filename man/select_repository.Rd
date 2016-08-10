@@ -2,19 +2,17 @@
 % Please edit documentation in R/utils_for_install.R
 \name{select_repository}
 \alias{select_repository}
-\title{Suggest candidates from "package_name" and make user selected one of them.
-Note "package_name" can be full repository name.}
+\title{Suggest candidates from "package_name" and make user selected one of them.}
 \usage{
 select_repository(package_name)
 }
 \arguments{
-\item{package_name}{a character string.}
+\item{package_name}{a character string. A package name or full GitHub repository name.}
 }
 \value{
 candidate with title
 }
 \description{
 Suggest candidates from "package_name" and make user selected one of them.
-Note "package_name" can be full repository name.
 }
 
