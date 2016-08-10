@@ -74,9 +74,8 @@ extract_reference <- function(x, pattern) {
 }
 
 #' Suggest candidates from "package_name" and make user selected one of them.
-#' Note "package_name" can be full repository name.
 #' 
-#' @param package_name a character string.
+#' @param package_name a character string. A package name or full GitHub repository name.
 #' 
 #' @return candidate with title
 #' 
@@ -111,7 +110,7 @@ format_choices <- function(candidates) {
 }
 
 #' We want to detect the two conflict cases as fllows:
-#'  1. The package is already installed from a repository like CRAN that is not GitHub.
+#'  1. The package is already installed from some repository like CRAN that is not GitHub.
 #'  2. The package is already installed from GtiHub but the username differs.
 #' In the above cases, we ask whether to overwrite it and remove from "repo" if the answer is no.
 #' 
@@ -119,8 +118,8 @@ format_choices <- function(candidates) {
 #' Else if "quiet" is FALSE and "ask" is TRUE, we ask whether to overwrite it. (Default)
 #' Else if "quiet" is FALSE and "ask" is FALSE, we message to overwrite it and do it.
 #' 
-#' @param repos charactor vector.
-#' @param lib character vector.
+#' @param repos charactor vector of full GitHub repository names.
+#' @param lib character vector or NULL.
 #' @param quiet logical.
 #' @param ask logical.
 #' 

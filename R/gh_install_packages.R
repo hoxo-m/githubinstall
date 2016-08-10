@@ -86,6 +86,10 @@ gh_install_packages <- function(packages, ask = TRUE, ref = "master",
   }
 }
 
+#' @rdname gh_install_packages
+#' @export
+githubinstall <- gh_install_packages
+
 #' @importFrom devtools install_github
 install_package <- function(repo, ref, quiet, dependencies, build_vignettes, lib, ...) {
   lib_paths <- .libPaths()
@@ -97,7 +101,3 @@ install_package <- function(repo, ref, quiet, dependencies, build_vignettes, lib
   log_installed_packages(repos = repo, ref = ref)
   result
 }
-
-#' @rdname gh_install_packages
-#' @export
-githubinstall <- gh_install_packages

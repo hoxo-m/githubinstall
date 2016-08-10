@@ -3,16 +3,16 @@
 \name{remove_conflict_repos}
 \alias{remove_conflict_repos}
 \title{We want to detect the two conflict cases as fllows:
- 1. The package is already installed from a repository like CRAN that is not GitHub.
+ 1. The package is already installed from some repository like CRAN that is not GitHub.
  2. The package is already installed from GtiHub but the username differs.
 In the above cases, we ask whether to overwrite it and remove from "repo" if the answer is no.}
 \usage{
 remove_conflict_repos(repos, lib, quiet, ask)
 }
 \arguments{
-\item{repos}{charactor vector.}
+\item{repos}{charactor vector of full GitHub repository names.}
 
-\item{lib}{character vector.}
+\item{lib}{character vector or NULL.}
 
 \item{quiet}{logical.}
 
