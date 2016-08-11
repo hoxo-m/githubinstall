@@ -1,13 +1,21 @@
 ---
 title: "A Helpful Way to Install R Packages Hosted on GitHub"
 author: Koji MAKIYAMA (@hoxo_m)
-output: 
+output:
   html_document:
     keep_md: true
+  md_document:
+    variant: markdown_github
 ---
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
 ```
 
 [![Travis-CI Build Status](https://travis-ci.org/hoxo-m/githubinstall.svg?branch=master)](https://travis-ci.org/hoxo-m/githubinstall)
