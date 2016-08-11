@@ -169,6 +169,50 @@ Selection:
 githubinstall("AnomalyDetection")
 ```
 
+#### 3.1.1. Specify Git References (Branch, Tag, Commit and Pull Request)
+
+**A new feature has added.**
+
+You can install packages with specifying Git references (branch, tag, commit and pull request).
+
+Developers are divided in policy to manage R packages on GitHub.
+If a package is going to be developed in "develop" branch, you may want to install the package from the branch.
+
+`gh_install_packages()` has `ref` argument to specify Git references. 
+For instance, you can install **awaptools** from the ["develop" branch](https://github.com/swish-climate-impact-assessment/awaptools/tree/develop) as follows:
+
+
+```r
+gh_install_packages("awaptools", ref = "develop")
+```
+
+You may sometimes encounter failing to install packages because its repository HEAD is broken.
+In such case, you can specify a tag or commit to `ref`.
+In almost cases, tags are added on an unbroken commit.
+For instance, you can install **densratio** from the ["v0.0.3" tag](https://github.com/hoxo-m/densratio/releases/tag/v0.0.3) as follows:
+
+
+```r
+gh_install_packages("densratio", ref = "v0.0.3")
+```
+
+If you can find no such tags, the previous commit may be not broken.
+For instance, you can install **densratio** from the ["e8233e6" commit](https://github.com/hoxo-m/densratio/commit/e8233e651dbef2b34a8c9c2e4432594a13ea8de7) as follows:
+
+
+```r
+gh_install_packages("densratio", ref = "e8233e6")
+```
+
+Finally, you may find a patch for fixing bugs as a pull request.
+In such case, you can specify pull requests to `ref` using `github_pull()`.
+For instance, you can install **dplyr** from the [pull request #2058](https://github.com/hadley/dplyr/pull/2058) as follows:
+
+
+```r
+gh_install_packages("dplyr", ref = github_pull("#2058"))
+```
+
 ### 3.2. Suggest Repositories
 
 `gh_install_packages()` prompts you to install the suggested packages.

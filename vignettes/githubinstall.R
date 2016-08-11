@@ -24,17 +24,33 @@ knitr::opts_chunk$set(echo = TRUE)
 ## ----eval=FALSE----------------------------------------------------------
 #  install.packages("githubinstall")
 
+## ----eval=FALSE----------------------------------------------------------
+#  install.packages("devtools") # if you have not installed "devtools" package
+#  devtools::install_github("hoxo-m/githubinstall")
+
 ## ------------------------------------------------------------------------
 library(githubinstall)
+
+## ----eval=FALSE----------------------------------------------------------
+#  gh_install_packages("AnomalyDetection")
+
+## ----eval=FALSE----------------------------------------------------------
+#  gh_install_packages("cats")
 
 ## ----eval=FALSE----------------------------------------------------------
 #  githubinstall("AnomalyDetection")
 
 ## ----eval=FALSE----------------------------------------------------------
-#  githubinstall("cats")
+#  gh_install_packages("awaptools", ref = "develop")
 
 ## ----eval=FALSE----------------------------------------------------------
-#  gh_install_packages("AnomalyDetection")
+#  gh_install_packages("densratio", ref = "v0.0.3")
+
+## ----eval=FALSE----------------------------------------------------------
+#  gh_install_packages("densratio", ref = "e8233e6")
+
+## ----eval=FALSE----------------------------------------------------------
+#  gh_install_packages("dplyr", ref = github_pull("#2058"))
 
 ## ------------------------------------------------------------------------
 gh_suggest("AnomalyDetection")
@@ -67,7 +83,7 @@ transform(head(hadleyverse), title = substr(title, 1, 50))
 transform(gh_search_packages("lasso"), title = paste0(" ", substr(title, 1, 35), ".."))
 
 ## ----eval=FALSE----------------------------------------------------------
-#  gh_show_source("mutate", "dplyr")
+#  gh_show_source("mutate", repo = "dplyr")
 
 ## ----eval=FALSE----------------------------------------------------------
 #  library(dplyr)
