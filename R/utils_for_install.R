@@ -90,7 +90,7 @@ select_repository <- function(package_name) {
     candidates
   } else {
     choices <- format_choices(candidates)
-    choice <- menu(choices = choices, title = "Select one repository or, hit 0 to cancel.")
+    choice <- menu(choices = choices, title = "Select a number or, hit 0 to cancel.")
     if(choice == 0) {
       message("cancelled by user\n")
       stop_without_message()
@@ -158,13 +158,13 @@ remove_conflict_repos <- function(repos, lib, quiet, ask) {
     if (!is.null(message)) {
       message(message)
       if (ask) {
-        prompt <- "Are you sure to overwrite the package (Y/n)?  "
+        prompt <- "Are you sure the package is overwritten (Y/n)?  "
         answer <- substr(readline(prompt), 1L, 1L)
         if (!(answer %in% c("", "y", "Y"))) {
           ignored_inds <- c(ignored_inds, i)
         }
       } else {
-        message("It will be overwriten.")
+        message("It will be overwritten.")
       }
     }
   }

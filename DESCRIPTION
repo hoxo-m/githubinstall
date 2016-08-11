@@ -25,7 +25,6 @@ Suggests:
     testthat,
     ggplot2, 
     lubridate,
-    GPfit,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
