@@ -98,6 +98,6 @@ install_package <- function(repo, ref, quiet, dependencies, build_vignettes, lib
                            dependencies = dependencies, 
                            build_vignettes = build_vignettes, ... = ...)
   .libPaths(lib_paths)
-  log_installed_packages(repos = repo, ref = ref)
+  log_installed_packages(repo = repo, ref = ref)
   result
 }
