@@ -1,7 +1,7 @@
 #' @importFrom httr GET
 log_installed_packages <- function(repo, ref) {
   if (class(ref) == "github_pull")
-    ref <- paste0("#", ref)
+    ref <- paste0("%23", ref)
   if (is_available_network()) {
     tryCatch({
       GET(sprintf("http://githubinstall.appspot.com/package?package=%s&suffix=%s", repo, ref))
