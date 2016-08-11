@@ -1,12 +1,10 @@
 #' @importFrom httr GET
-log_installed_packages <- function(repos, ref) {
-  package <- paste(repos, collapse=",")
-  is_pull_request <- vapply(ref, class, character(1)) == "github_pull"
-  ref[is_pull_request] <- paste0("#", ref[is_pull_request])
-  ref <- paste(ref, collapse=",")
+log_installed_packages <- function(repo, ref) {
+  if (class(ref) == "github_pull")
+    ref <- paste0("#", ref)
   if (is_available_network()) {
     tryCatch({
-      GET(sprintf("http://githubinstall.appspot.com/package?package=%s&suffix=%s", package, ref))
+      GET(sprintf("http://githubinstall.appspot.com/package?package=%s&suffix=%s", repo, ref))
     }, error = function(e) {
       # do nothing
     })
