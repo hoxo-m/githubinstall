@@ -160,7 +160,7 @@ Selection: </code></pre>
 <p>If you can find no such tags, the previous commit may be not broken. For instance, you can install <strong>densratio</strong> from the <a href="https://github.com/hoxo-m/densratio/commit/e8233e651dbef2b34a8c9c2e4432594a13ea8de7">“e8233e6” commit</a> as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_install_packages</span>(<span class="st">&quot;densratio&quot;</span>, <span class="dt">ref =</span> <span class="st">&quot;e8233e6&quot;</span>)</code></pre></div>
 <p>Finally, you may find a patch for fixing bugs as a pull request. In such case, you can specify pull requests to <code>ref</code> using <code>github_pull()</code>. For instance, you can install <strong>dplyr</strong> from the <a href="https://github.com/hadley/dplyr/pull/2058">pull request #2058</a> as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_install_packages</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="dt">ref =</span> <span class="kw">github_pull</span>(<span class="st">&quot;#2058&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_install_packages</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="dt">ref =</span> <span class="kw">github_pull</span>(<span class="st">&quot;2058&quot;</span>))</code></pre></div>
 </div>
 </div>
 <div id="suggest-repositories" class="section level3">

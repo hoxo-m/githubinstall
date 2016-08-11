@@ -12,7 +12,7 @@ separate_into_package_and_reference(packages, original_ref)
 \arguments{
 \item{packages}{"repo" argument.}
 
-\item{original_ref}{"ref argument.}
+\item{original_ref}{"ref" argument.}
 }
 \description{
 The "repo" argument allows to contain "ref" as 

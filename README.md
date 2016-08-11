@@ -210,7 +210,7 @@ For instance, you can install **dplyr** from the [pull request #2058](https://gi
 
 
 ```r
-gh_install_packages("dplyr", ref = github_pull("#2058"))
+gh_install_packages("dplyr", ref = github_pull("2058"))
 ```
 
 ### 3.2. Suggest Repositories

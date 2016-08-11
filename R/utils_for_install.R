@@ -29,7 +29,7 @@ recommend_dependencies <- function(ask, build_vignettes, dependencies, quiet) {
 #' If "repo" contains "ref" and "ref" argument is specified, the values in "repo" take precedence.
 #' 
 #' @param packages "repo" argument.
-#' @param original_ref "ref argument.
+#' @param original_ref "ref" argument.
 #' 
 #' @importFrom devtools github_pull
 #' @importFrom stringr fixed str_replace str_sub
@@ -56,11 +56,17 @@ separate_into_package_and_reference <- function(packages, original_ref) {
   branch <- str_sub(branch, 2, -2)
   references[is.na(references)] <- branch[is.na(references)]
   # original_ref
-  if (length(original_ref) == 1)
+  is_pull <- sapply(original_ref, function(x) class(x) == "github_pull")
+  if (length(original_ref) == 1) {
+    if (class(original_ref) == "github_pull") {
+      is_pull <- rep(TRUE, length(packages))
+    }
     original_ref <- rep(original_ref, length(packages))
+  }
   references[is.na(references)] <- original_ref[is.na(references)]
   
   reference_list <- lapply(references, function(r) if(str_sub(r, 1, 1) == "#") github_pull(str_sub(r, 2)) else r)
+  reference_list[is_pull] <- lapply(reference_list[is_pull], function(r) github_pull(r))
   list(packages = packages, reference_list = reference_list)
 }
 
