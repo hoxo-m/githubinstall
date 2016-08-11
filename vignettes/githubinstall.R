@@ -50,7 +50,7 @@ library(githubinstall)
 #  gh_install_packages("densratio", ref = "e8233e6")
 
 ## ----eval=FALSE----------------------------------------------------------
-#  gh_install_packages("dplyr", ref = github_pull("#2058"))
+#  gh_install_packages("dplyr", ref = github_pull("2058"))
 
 ## ------------------------------------------------------------------------
 gh_suggest("AnomalyDetection")

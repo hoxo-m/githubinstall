@@ -1,6 +1,6 @@
 Package: githubinstall
 Type: Package
-Version: 0.0.1.9003
+Version: 0.0.1.9004
 Title: A Helpful Way to Install R Packages Hosted on GitHub
 Description: Provides an helpful way to install packages hosted on GitHub.
 Authors@R: c(

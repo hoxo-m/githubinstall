@@ -18,3 +18,10 @@ if ("AnomalyDetection" %in% installed.packages(lib.loc = tmp)[, "Package"]) {
 }
 
 unlink(tmp)
+
+# Do not run
+# gh_install_packages("densratio@v0.0.3")
+# gh_install_packages("densratio@e8233e6")
+# gh_install_packages("densratio#2")
+# gh_install_packages("densratio", ref = github_pull("2"))
+# gh_install_packages("dplyr#2058")
