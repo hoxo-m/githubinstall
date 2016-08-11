@@ -1,6 +1,8 @@
 # A Helpful Way to Install R Packages Hosted on GitHub
 Koji MAKIYAMA (@hoxo_m)  
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 
 
 [![Travis-CI Build Status](https://travis-ci.org/hoxo-m/githubinstall.svg?branch=master)](https://travis-ci.org/hoxo-m/githubinstall)
@@ -223,21 +225,15 @@ But you may just want to know what will be suggestions.
 
 ```r
 gh_suggest("AnomalyDetection")
-```
-
-```
-## [1] "twitter/AnomalyDetection"
+#> [1] "twitter/AnomalyDetection"
 ```
 
 
 ```r
 gh_suggest("cats")
-```
-
-```
-## [1] "amurali2/cats"         "danielwilhelm/cats"    "davidluizrusso/cats"  
-## [4] "hilaryparker/cats"     "jonathanelee1993/cats" "lloydlow/cats"        
-## [7] "lolibear/cats"         "rafalszota/cats"       "tahir275/cats"
+#> [1] "amurali2/cats"         "danielwilhelm/cats"    "davidluizrusso/cats"  
+#> [4] "hilaryparker/cats"     "jonathanelee1993/cats" "lloydlow/cats"        
+#> [7] "lolibear/cats"         "rafalszota/cats"       "tahir275/cats"
 ```
 
 In addition, `gh_suggest_username()` is useful when you want to know usernames from a faint memory.
@@ -245,19 +241,13 @@ In addition, `gh_suggest_username()` is useful when you want to know usernames f
 
 ```r
 gh_suggest_username("hadly")
-```
-
-```
-## [1] "hadley"
+#> [1] "hadley"
 ```
 
 
 ```r
 gh_suggest_username("yuhui")
-```
-
-```
-## [1] "yihui"
+#> [1] "yihui"
 ```
 
 ### 3.3. List the Packages
@@ -274,13 +264,13 @@ head(hadleyverse)
 
 
 ```
-##   username package_name                                              title
-## 1   hadley   assertthat                     User friendly assertions for R
-## 2   hadley    babynames An R package contain all baby names data from the 
-## 3   hadley    bigrquery          An interface to Google's bigquery from R.
-## 4   hadley     bookdown                                              Watch
-## 5   hadley   clusterfly An R package for visualising high-dimensional clus
-## 6   hadley      decumar                           An alternative to sweave
+#>   username package_name                                              title
+#> 1   hadley   assertthat                     User friendly assertions for R
+#> 2   hadley    babynames An R package contain all baby names data from the 
+#> 3   hadley    bigrquery          An interface to Google's bigquery from R.
+#> 4   hadley     bookdown                                              Watch
+#> 5   hadley   clusterfly An R package for visualising high-dimensional clus
+#> 6   hadley      decumar                           An alternative to sweave
 ```
 
 By using the result, you can install all packages created by hadley.
@@ -304,18 +294,18 @@ gh_search_packages("lasso")
 
 
 ```
-##           username     package_name                                  title
-## 1  ChingChuan-Chen             milr  multiple-instance logistic regressi..
-## 2       YaohuiZeng         biglasso  Big Lasso: Extending Lasso Model Fi..
-## 3      huayingfang          CCLasso  CCLasso: Correlation Inference for ..
-## 4         mlampros FeatureSelection  Feature Selection in R using glmnet..
-## 5             pnnl        glmnetLRC  Lasso and Elastic-Net Logistic Regr..
-## 6       statsmaths         genlasso  Path algorithm for generalized lass..
-## 7       vincent-dk         logitsgl  Fit Logistic Regression with Multi-..
-## 8       vincent-dk             lsgl  Linear Multiple Output Using Sparse..
-## 9       vincent-dk             msgl  High Dimensional Multiclass Classif..
-## 10      vstanislas             GGEE  R Package for the Group Lasso Gene-..
-## 11          zdk123       BatchStARS  R package for Stability Approach to..
+#>           username     package_name                                  title
+#> 1  ChingChuan-Chen             milr  multiple-instance logistic regressi..
+#> 2       YaohuiZeng         biglasso  Big Lasso: Extending Lasso Model Fi..
+#> 3      huayingfang          CCLasso  CCLasso: Correlation Inference for ..
+#> 4         mlampros FeatureSelection  Feature Selection in R using glmnet..
+#> 5             pnnl        glmnetLRC  Lasso and Elastic-Net Logistic Regr..
+#> 6       statsmaths         genlasso  Path algorithm for generalized lass..
+#> 7       vincent-dk         logitsgl  Fit Logistic Regression with Multi-..
+#> 8       vincent-dk             lsgl  Linear Multiple Output Using Sparse..
+#> 9       vincent-dk             msgl  High Dimensional Multiclass Classif..
+#> 10      vstanislas             GGEE  R Package for the Group Lasso Gene-..
+#> 11          zdk123       BatchStARS  R package for Stability Approach to..
 ```
 
 ### 3.5. Show the Source Code of Functions on GitHub
