@@ -198,7 +198,7 @@ For instance, you can install **densratio** from the ["v0.0.3" tag](https://gith
 gh_install_packages("densratio", ref = "v0.0.3")
 ```
 
-If you can find no such tags, the previous commit may be not broken.
+Even if you cannot find such tags, you can install packages from any commit that is not broken.
 For instance, you can install **densratio** from the ["e8233e6" commit](https://github.com/hoxo-m/densratio/commit/e8233e651dbef2b34a8c9c2e4432594a13ea8de7) as follows:
 
 
@@ -231,9 +231,11 @@ gh_suggest("AnomalyDetection")
 
 ```r
 gh_suggest("cats")
-#> [1] "amurali2/cats"         "danielwilhelm/cats"    "davidluizrusso/cats"  
-#> [4] "hilaryparker/cats"     "jonathanelee1993/cats" "lloydlow/cats"        
-#> [7] "lolibear/cats"         "rafalszota/cats"       "tahir275/cats"
+#>  [1] "amurali2/cats"         "danielwilhelm/cats"   
+#>  [3] "davidluizrusso/cats"   "hilaryparker/cats"    
+#>  [5] "jonathanelee1993/cats" "lloydlow/cats"        
+#>  [7] "lolibear/cats"         "oliviergimenez/cats"  
+#>  [9] "rafalszota/cats"       "tahir275/cats"
 ```
 
 In addition, `gh_suggest_username()` is useful when you want to know usernames from a faint memory.
@@ -346,8 +348,8 @@ gh_update_package_list()
 
 ## 4. Related Work
 
-- devtools: [Tools to make an R developer's life easier](https://github.com/hadley/devtools)
-- ghit: [Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit)
-- drat: [Drat R Archive Template](https://github.com/eddelbuettel/drat)
-- pacman: [A package management tools for R](https://github.com/trinker/pacman)
-- remotes: [Install R packages from GitHub, Bitbucket, git, svn repositories, URLs](https://github.com/MangoTheCat/remotes)
+- devtools: [Tools to make an R developer's life easier](https://github.com/hadley/devtools) [![CRAN Version](http://www.r-pkg.org/badges/version/devtools)](http://cran.rstudio.com/web/packages/devtools) 
+- ghit: [Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit) [![CRAN Version](http://www.r-pkg.org/badges/version/ghit)](http://cran.rstudio.com/web/packages/ghit)
+- drat: [Drat R Archive Template](https://github.com/eddelbuettel/drat) [![CRAN Version](http://www.r-pkg.org/badges/version/drat)](http://cran.rstudio.com/web/packages/drat)
+- pacman: [A package management tools for R](https://github.com/trinker/pacman) [![CRAN Version](http://www.r-pkg.org/badges/version/pacman)](http://cran.rstudio.com/web/packages/pacman)
+- remotes: [Install R packages from GitHub, Bitbucket, git, svn repositories, URLs](https://github.com/MangoTheCat/remotes) [![CRAN Version](http://www.r-pkg.org/badges/version/remotes)](http://cran.rstudio.com/web/remotes)
