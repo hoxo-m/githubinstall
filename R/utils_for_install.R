@@ -164,7 +164,7 @@ remove_conflict_repos <- function(repos, lib, quiet, ask) {
     if (!is.null(message)) {
       message(message)
       if (ask) {
-        prompt <- "Are you sure the package is overwritten (Y/n)?  "
+        prompt <- "This package is already installed. Are you sure you want to overwrite it (Y/n)?  "
         answer <- substr(readline(prompt), 1L, 1L)
         if (!(answer %in% c("", "y", "Y"))) {
           ignored_inds <- c(ignored_inds, i)
