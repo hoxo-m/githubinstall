@@ -11,6 +11,8 @@ r:
 
 r_github_packages:
   - jimhester/covr
+  - hadley/pkgdown
 
 after_success:
   - Rscript -e 'covr::coveralls()'
+  - Rscript -e 'pkgdown::build_site()'
