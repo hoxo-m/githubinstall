@@ -32,7 +32,6 @@ recommend_dependencies <- function(ask, build_vignettes, dependencies, quiet) {
 #' @param original_ref "ref" argument.
 #' 
 #' @importFrom devtools github_pull
-#' @importFrom stringr fixed str_replace str_sub
 separate_into_package_and_reference <- function(packages, original_ref) {
   reference_pattern <- "@.+$"
   pull_request_pattern <- "#.+$"
@@ -44,16 +43,16 @@ separate_into_package_and_reference <- function(packages, original_ref) {
   
   # reference
   exists <- !is.na(reference)
-  packages[exists] <- str_replace(packages[exists], reference[exists], "")
-  references <- str_sub(reference, 2)
+  packages[exists] <- my_str_replace(packages[exists], reference[exists], "", fixed = TRUE)
+  references <- my_str_sub(reference, 2)
   # pull request
   exists <- !is.na(pull_request)
-  packages[exists] <- str_replace(packages[exists], pull_request[exists], "")
+  packages[exists] <- my_str_replace(packages[exists], pull_request[exists], "", fixed = TRUE)
   references[is.na(references)] <- pull_request[is.na(references)]
   # branch
   exists <- !is.na(branch)
-  packages[exists] <- str_replace(packages[exists], fixed(branch[exists]), "")
-  branch <- str_sub(branch, 2, -2)
+  packages[exists] <- my_str_replace(packages[exists], branch[exists], "", fixed = TRUE)
+  branch <- my_str_sub(branch, 2, -2)
   references[is.na(references)] <- branch[is.na(references)]
   # original_ref
   is_pull <- sapply(original_ref, function(x) class(x) == "github_pull")
@@ -65,18 +64,24 @@ separate_into_package_and_reference <- function(packages, original_ref) {
   }
   references[is.na(references)] <- original_ref[is.na(references)]
   
-  reference_list <- lapply(references, function(r) if(str_sub(r, 1, 1) == "#") github_pull(str_sub(r, 2)) else r)
+  reference_list <- lapply(references, treat_github_pull)
   reference_list[is_pull] <- lapply(reference_list[is_pull], function(r) github_pull(r))
   list(packages = packages, reference_list = reference_list)
 }
 
-#' @importFrom stringr str_detect str_extract
 extract_reference <- function(x, pattern) {
-  if (str_detect(x, pattern)) {
-    str_extract(x, pattern)
+  if (grepl(pattern, x)) {
+    regmatches(x, regexpr(pattern, x))
   } else {
     NA_character_
   }
+}
+
+treat_github_pull <- function(ref) {
+  if(my_str_sub(ref, 1, 1) == "#") {
+    ref <- github_pull(my_str_sub(ref, 2)) 
+  }
+  ref
 }
 
 #' Suggest candidates from "package_name" and make user selected one of them.
