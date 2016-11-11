@@ -12,7 +12,7 @@
 
 <meta name="author" content="Koji MAKIYAMA (@hoxo_m)" />
 
-<meta name="date" content="2016-08-11" />
+<meta name="date" content="2016-11-12" />
 
 <title>A Helpful Way to Install R Packages Hosted on GitHub</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">A Helpful Way to Install R Packages Hosted on GitHub</h1>
 <h4 class="author"><em>Koji MAKIYAMA (<span class="citation">@hoxo_m</span>)</em></h4>
-<h4 class="date"><em>2016-08-11</em></h4>
+<h4 class="date"><em>2016-11-12</em></h4>
 
 
 
@@ -82,10 +82,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The <strong>devtools</strong> package provides <code>install_github()</code> that enables installing packages from GitHub.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
 <span class="kw">install_github</span>(<span class="st">&quot;hadley/dplyr&quot;</span>)</code></pre></div>
-<p>Therefore, developers can distribute R packages that are developing on GitHub. In addition, there are some developers that they have no intention to submit to CRAN. For instance, Twitter, Inc. provides <strong>AnomalyDetection</strong> package on GitHub but they won’t submit to CRAN <a href="https://blog.twitter.com/2015/introducing-practical-and-robust-anomaly-detection-in-a-time-series">[3]</a>. You can install such packages easily using <strong>devtools</strong>.</p>
+<p>Therefore, developers can distribute R packages that are developing on GitHub. Besides, there are some developers that they have no intention to submit to CRAN. For instance, Twitter, Inc. provides <strong>AnomalyDetection</strong> package on GitHub, but they won’t submit to CRAN <a href="https://blog.twitter.com/2015/introducing-practical-and-robust-anomaly-detection-in-a-time-series">[3]</a>. You can install such packages easily using <strong>devtools</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
 <span class="kw">install_github</span>(<span class="st">&quot;twitter/AnomalyDetection&quot;</span>)</code></pre></div>
-<p>There is a difference between <code>install.packages()</code> and <code>install_github()</code> in the required argument. <code>install.packages()</code> takes package names, while <code>install_github()</code> needs repository names. It means that when you want to install a package on GitHub you must remember its repository name correctly.</p>
+<p>There is a difference between <code>install.packages()</code> and <code>install_github()</code> in the required argument. <code>install.packages()</code> takes package names, while <code>install_github()</code> needs repository names. It means that when you want to install a package on GitHub, you must remember its repository name correctly.</p>
 <p>The trouble is that the usernames of GitHub are often hard to remember. Developers consider their package names so that users can understand their functionalities intuitively. However, they often decide username incautiously. For instance, <strong>ggfortify</strong> is a great package on GitHub, but who created it? What is its username? The answer is <em>sinhrks</em> <a href="https://github.com/sinhrks/ggfortify">[4]</a>. It seems to be difficult to remember it.</p>
 <p>The <strong>githubinstall</strong> package provides a way to install packages on GitHub by only their package names just like <code>install.packages()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(githubinstall)
@@ -93,7 +93,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>Suggestion:
  - twitter/AnomalyDetection  Anomaly Detection with R
 Do you want to install the package (Y/n)?  </code></pre>
-<p><code>githubinstall()</code> suggests GitHub repositories from input package names and asks whether you really install it.</p>
+<p><code>githubinstall()</code> suggests GitHub repositories from input package names and asks whether you install it.</p>
 <p>Furthermore, you may succeed in installing packages from a faint memory because our package automatically corrects its spelling by fuzzy string search.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">githubinstall</span>(<span class="st">&quot;AnomaryDetection&quot;</span>)
 <span class="kw">githubinstall</span>(<span class="st">&quot;AnomalyDetect&quot;</span>)
@@ -170,10 +170,12 @@ Selection: </code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_suggest</span>(<span class="st">&quot;AnomalyDetection&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;twitter/AnomalyDetection&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_suggest</span>(<span class="st">&quot;cats&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;amurali2/cats&quot;         &quot;danielwilhelm/cats&quot;    &quot;davidluizrusso/cats&quot;  
-## [4] &quot;hilaryparker/cats&quot;     &quot;jonathanelee1993/cats&quot; &quot;lloydlow/cats&quot;        
-## [7] &quot;lolibear/cats&quot;         &quot;rafalszota/cats&quot;       &quot;tahir275/cats&quot;</code></pre>
-<p>In addition, <code>gh_suggest_username()</code> is useful when you want to know usernames from a faint memory.</p>
+<pre><code>##  [1] &quot;amurali2/cats&quot;         &quot;danielwilhelm/cats&quot;   
+##  [3] &quot;davidluizrusso/cats&quot;   &quot;hilaryparker/cats&quot;    
+##  [5] &quot;jonathanelee1993/cats&quot; &quot;lloydlow/cats&quot;        
+##  [7] &quot;lolibear/cats&quot;         &quot;oliviergimenez/cats&quot;  
+##  [9] &quot;rafalszota/cats&quot;       &quot;tahir275/cats&quot;</code></pre>
+<p>Also, <code>gh_suggest_username()</code> is useful when you want to know usernames from a faint memory.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_suggest_username</span>(<span class="st">&quot;hadly&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;hadley&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_suggest_username</span>(<span class="st">&quot;yuhui&quot;</span>)</code></pre></div>
@@ -203,16 +205,17 @@ Selection: </code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gh_search_packages</span>(<span class="st">&quot;lasso&quot;</span>)</code></pre></div>
 <pre><code>##           username     package_name                                  title
 ## 1  ChingChuan-Chen             milr  multiple-instance logistic regressi..
-## 2       YaohuiZeng         biglasso  Big Lasso: Extending Lasso Model Fi..
-## 3      huayingfang          CCLasso  CCLasso: Correlation Inference for ..
-## 4         mlampros FeatureSelection  Feature Selection in R using glmnet..
-## 5             pnnl        glmnetLRC  Lasso and Elastic-Net Logistic Regr..
-## 6       statsmaths         genlasso  Path algorithm for generalized lass..
-## 7       vincent-dk         logitsgl  Fit Logistic Regression with Multi-..
-## 8       vincent-dk             lsgl  Linear Multiple Output Using Sparse..
-## 9       vincent-dk             msgl  High Dimensional Multiclass Classif..
-## 10      vstanislas             GGEE  R Package for the Group Lasso Gene-..
-## 11          zdk123       BatchStARS  R package for Stability Approach to..</code></pre>
+## 2        ManuSetty            SeqGL  SeqGL is a group lasso based algori..
+## 3       YaohuiZeng         biglasso  Big Lasso: Extending Lasso Model Fi..
+## 4      huayingfang          CCLasso  CCLasso: Correlation Inference for ..
+## 5         mlampros FeatureSelection  Feature Selection in R using glmnet..
+## 6             pnnl        glmnetLRC  Lasso and Elastic-Net Logistic Regr..
+## 7       statsmaths         genlasso  Path algorithm for generalized lass..
+## 8       vincent-dk         logitsgl  Fit Logistic Regression with Multi-..
+## 9       vincent-dk             lsgl  Linear Multiple Output Using Sparse..
+## 10      vincent-dk             msgl  High Dimensional Multiclass Classif..
+## 11      vstanislas             GGEE  R Package for the Group Lasso Gene-..
+## 12          zdk123       BatchStARS  R package for Stability Approach to..</code></pre>
 </div>
 <div id="show-the-source-code-of-functions-on-github" class="section level3">
 <h3>3.5. Show the Source Code of Functions on GitHub</h3>
