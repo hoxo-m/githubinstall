@@ -1,3 +1,10 @@
+# githubinstall 0.2.0
+
+## Improvements
+
+- The package does not depend on **stringr** package. (#25)
+- Fixes some points about English (#21, @nuno-agostinho) (#22, @teramonagi)
+
 # githubinstall 0.1.0
 
 ## New features
