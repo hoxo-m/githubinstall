@@ -298,16 +298,17 @@ gh_search_packages("lasso")
 ```
 #>           username     package_name                                  title
 #> 1  ChingChuan-Chen             milr  multiple-instance logistic regressi..
-#> 2       YaohuiZeng         biglasso  Big Lasso: Extending Lasso Model Fi..
-#> 3      huayingfang          CCLasso  CCLasso: Correlation Inference for ..
-#> 4         mlampros FeatureSelection  Feature Selection in R using glmnet..
-#> 5             pnnl        glmnetLRC  Lasso and Elastic-Net Logistic Regr..
-#> 6       statsmaths         genlasso  Path algorithm for generalized lass..
-#> 7       vincent-dk         logitsgl  Fit Logistic Regression with Multi-..
-#> 8       vincent-dk             lsgl  Linear Multiple Output Using Sparse..
-#> 9       vincent-dk             msgl  High Dimensional Multiclass Classif..
-#> 10      vstanislas             GGEE  R Package for the Group Lasso Gene-..
-#> 11          zdk123       BatchStARS  R package for Stability Approach to..
+#> 2        ManuSetty            SeqGL  SeqGL is a group lasso based algori..
+#> 3       YaohuiZeng         biglasso  Big Lasso: Extending Lasso Model Fi..
+#> 4      huayingfang          CCLasso  CCLasso: Correlation Inference for ..
+#> 5         mlampros FeatureSelection  Feature Selection in R using glmnet..
+#> 6             pnnl        glmnetLRC  Lasso and Elastic-Net Logistic Regr..
+#> 7       statsmaths         genlasso  Path algorithm for generalized lass..
+#> 8       vincent-dk         logitsgl  Fit Logistic Regression with Multi-..
+#> 9       vincent-dk             lsgl  Linear Multiple Output Using Sparse..
+#> 10      vincent-dk             msgl  High Dimensional Multiclass Classif..
+#> 11      vstanislas             GGEE  R Package for the Group Lasso Gene-..
+#> 12          zdk123       BatchStARS  R package for Stability Approach to..
 ```
 
 ### 3.5. Show the Source Code of Functions on GitHub

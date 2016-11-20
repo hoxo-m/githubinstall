@@ -35,8 +35,8 @@ install_github("hadley/dplyr")
 ```
 
 Therefore, developers can distribute R packages that are developing on GitHub.
-In addition, there are some developers that they have no intention to submit to CRAN.
-For instance, Twitter, Inc. provides **AnomalyDetection** package on GitHub but they won't submit to CRAN [[3]](https://blog.twitter.com/2015/introducing-practical-and-robust-anomaly-detection-in-a-time-series).
+Besides, there are some developers that they have no intention to submit to CRAN.
+For instance, Twitter, Inc. provides **AnomalyDetection** package on GitHub, but they won't submit to CRAN [[3]](https://blog.twitter.com/2015/introducing-practical-and-robust-anomaly-detection-in-a-time-series).
 You can install such packages easily using **devtools**.
 
 ```{r eval=FALSE}
@@ -46,7 +46,7 @@ install_github("twitter/AnomalyDetection")
 
 There is a difference between `install.packages()` and `install_github()` in the required argument.
 `install.packages()` takes package names, while `install_github()` needs repository names.
-It means that when you want to install a package on GitHub you must remember its repository name correctly.
+It means that when you want to install a package on GitHub, you must remember its repository name correctly.
 
 The trouble is that the usernames of GitHub are often hard to remember.
 Developers consider their package names so that users can understand their functionalities intuitively.
@@ -69,7 +69,7 @@ Suggestion:
 Do you want to install the package (Y/n)?  
 ```
 
-`githubinstall()` suggests GitHub repositories from input package names and asks whether you really install it.
+`githubinstall()` suggests GitHub repositories from input package names and asks whether you install it.
 
 Furthermore, you may succeed in installing packages from a faint memory because our package automatically corrects its spelling by fuzzy string search.
 
@@ -218,7 +218,7 @@ gh_suggest("AnomalyDetection")
 gh_suggest("cats")
 ```
 
-In addition, `gh_suggest_username()` is useful when you want to know usernames from a faint memory.
+Also, `gh_suggest_username()` is useful when you want to know usernames from a faint memory.
 
 ```{r}
 gh_suggest_username("hadly")
