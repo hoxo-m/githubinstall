@@ -6,7 +6,7 @@ Koji MAKIYAMA (@hoxo_m)
 
 
 [![Travis-CI Build Status](https://travis-ci.org/hoxo-m/githubinstall.svg?branch=master)](https://travis-ci.org/hoxo-m/githubinstall)
-[![CRAN Version](http://www.r-pkg.org/badges/version/githubinstall)](http://cran.rstudio.com/web/packages/githubinstall)
+[![CRAN Version](http://www.r-pkg.org/badges/version/githubinstall)](https://cran.r-project.org/package=githubinstall)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/githubinstall)](http://cranlogs.r-pkg.org/badges/githubinstall)
 [![Coverage Status](https://coveralls.io/repos/github/hoxo-m/githubinstall/badge.svg?branch=master)](https://coveralls.io/github/hoxo-m/githubinstall?branch=master)
 
@@ -349,8 +349,8 @@ gh_update_package_list()
 
 ## 4. Related Work
 
-- devtools: [Tools to make an R developer's life easier](https://github.com/hadley/devtools) [![CRAN Version](http://www.r-pkg.org/badges/version/devtools)](http://cran.rstudio.com/web/packages/devtools) 
-- ghit: [Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit) [![CRAN Version](http://www.r-pkg.org/badges/version/ghit)](http://cran.rstudio.com/web/packages/ghit)
-- drat: [Drat R Archive Template](https://github.com/eddelbuettel/drat) [![CRAN Version](http://www.r-pkg.org/badges/version/drat)](http://cran.rstudio.com/web/packages/drat)
-- pacman: [A package management tools for R](https://github.com/trinker/pacman) [![CRAN Version](http://www.r-pkg.org/badges/version/pacman)](http://cran.rstudio.com/web/packages/pacman)
-- remotes: [Install R packages from GitHub, Bitbucket, git, svn repositories, URLs](https://github.com/MangoTheCat/remotes) [![CRAN Version](http://www.r-pkg.org/badges/version/remotes)](http://cran.rstudio.com/web/remotes)
+- devtools: [Tools to make an R developer's life easier](https://github.com/hadley/devtools) [![CRAN Version](http://www.r-pkg.org/badges/version/devtools)](https://cran.r-project.org/package=devtools) 
+- ghit: [Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit) [![CRAN Version](http://www.r-pkg.org/badges/version/ghit)](https://cran.r-project.org/package=ghit)
+- drat: [Drat R Archive Template](https://github.com/eddelbuettel/drat) [![CRAN Version](http://www.r-pkg.org/badges/version/drat)](https://cran.r-project.org/package=drat)
+- pacman: [A package management tools for R](https://github.com/trinker/pacman) [![CRAN Version](http://www.r-pkg.org/badges/version/pacman)](https://cran.r-project.org/package=pacman)
+- remotes: [Install R packages from GitHub, Bitbucket, git, svn repositories, URLs](https://github.com/MangoTheCat/remotes) [![CRAN Version](http://www.r-pkg.org/badges/version/remotes)](https://cran.r-project.org/package=remotes)
