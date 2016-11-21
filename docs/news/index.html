@@ -6,11 +6,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news. githubinstall</title>
+<title>All news • githubinstall</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
-
 <!-- Bootstrap -->
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -22,6 +21,7 @@
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
@@ -34,10 +34,9 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container template-news">
       <header>
-      
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -50,9 +49,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">Home</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -62,6 +58,7 @@
   <a href="../news/index.html">News</a>
 </li>
       </ul>
+      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hoxo-m/githubinstall">
@@ -73,40 +70,63 @@
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
+
       
       </header>
 
       <div class="row">
+
   <div class="col-md-9">
-    <div id="githubinstall-0.1.0" class="section level1">
-<h1>githubinstall 0.1.0</h1>
+    <div class="page-header">
+      <h1>Change log <small>All releases</small></h1>
+    </div>
+
+    <div class="contents">
+    <div id="githubinstall-0-2-0" class="section level1">
+<h1 class="hasAnchor">
+<a href="#githubinstall-0-2-0" class="anchor"> </a>githubinstall 0.2.0</h1>
+<div id="improvements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#improvements" class="anchor"> </a>Improvements</h2>
+<ul><li>The package does not depend on <strong>stringr</strong> package. (#25)</li>
+<li>Fixes some points about English (#21, @nuno-agostinho) (#22, @teramonagi)</li>
+</ul></div>
+</div>
+    <div id="githubinstall-0-1-0" class="section level1">
+<h1 class="hasAnchor">
+<a href="#githubinstall-0-1-0" class="anchor"> </a>githubinstall 0.1.0</h1>
 <div id="new-features" class="section level2">
-<h2>New features</h2>
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"> </a>New features</h2>
 <ul><li>
 <code>gh_install_package()</code> gains <code>ref</code> argument to specify Git references (#6).</li>
 <li>
 <code><a href="../reference/gh_suggest_username.html">gh_suggest_username()</a></code> returns <code>"yutannihilation"</code> by passing <code>"yutani"</code> etc (#3, @teramonagi).</li>
 </ul></div>
-<div id="improvements" class="section level2">
-<h2>Improvements</h2>
+<div id="improvements-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#improvements-1" class="anchor"> </a>Improvements</h2>
 <ul><li>
 <code>gh_install_package()</code> changes from asking number (1: Yes, 2: No) to asking [Y/n]. (#5)</li>
 </ul></div>
 <div id="bug-fixes" class="section level2">
-<h2>Bug fixes</h2>
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"> </a>Bug fixes</h2>
 <ul><li>
 <code>gh_install_package()</code> records GitHub to the package description (#4).</li>
 <li>
 <code>gh_install_package()</code> overwite packages if it already installed (#6).</li>
 </ul></div>
 </div>
+    </div>
   </div>
 
-  <div class="col-md-3 hidden-xs">
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#githubinstall-0.1.0">0.1.0</a></li>
+        <li><a href="#githubinstall-0-2-0">0.2.0</a></li>
+        <li><a href="#githubinstall-0-1-0">0.1.0</a></li>
       </ul>
     </div>
   </div>
@@ -114,7 +134,14 @@
 </div>
 
       <footer>
-      <p>Built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>. Styled with <a href="http://getbootstrap.com">Bootstrap 3</a>.</p>
+      <div class="copyright">
+  <p>Developed by Koji Makiyama.</p>
+</div>
+
+<div class="pkgdown">
+  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+</div>
+
       </footer>
    </div>
 
