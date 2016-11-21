@@ -8,7 +8,7 @@ Authors@R: c(
     person("Atsushi", "Hayakawa", role = "ctb"),
     person("Shinya", "Uryu", role = "ctb"),
     person("Hiroaki", "Yutani", role = "ctb"),
-    person("Nagi", "Teramo", role = "ctb")),
+    person("Nagi", "Teramo", role = "ctb"),
     person("Kazuhiro", "Maeda", role = "ctb"))
 URL: https://github.com/hoxo-m/githubinstall
 BugReports: https://github.com/hoxo-m/githubinstall/issues
