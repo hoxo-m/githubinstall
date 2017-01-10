@@ -8,6 +8,6 @@ gh_update_package_list <- function() {
   package_list <- fread(download_url, sep="\t", header = FALSE, stringsAsFactors = FALSE,
                         colClasses = c("character", "character", "character"), 
                         col.names = c("username", "package_name", "title"),
-                        showProgress = FALSE)
+                        showProgress = FALSE, na.strings=NULL)
   assign("package_list", package_list, envir = .options)
 }
