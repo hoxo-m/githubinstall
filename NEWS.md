@@ -1,4 +1,10 @@
-# githubinstall 0.2.0
+# githubinstall 0.2.1.9001
+
+## Bug fix
+
+- Fixes crashing with repositories named NA. (#32)
+
+# githubinstall 0.2.1
 
 ## Improvements
 
