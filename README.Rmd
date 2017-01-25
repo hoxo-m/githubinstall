@@ -310,6 +310,7 @@ gh_update_package_list()
 
 ## 4. Related Work
 
+- berryFunctions: [Function Collection Related to Plotting and Hydrology](https://github.com/brry/berryFunctions) [![CRAN Version](http://www.r-pkg.org/badges/version/berryFunctions)](https://cran.r-project.org/package=berryFunctions) 
 - devtools: [Tools to make an R developer's life easier](https://github.com/hadley/devtools) [![CRAN Version](http://www.r-pkg.org/badges/version/devtools)](https://cran.r-project.org/package=devtools) 
 - ghit: [Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit) [![CRAN Version](http://www.r-pkg.org/badges/version/ghit)](https://cran.r-project.org/package=ghit)
 - drat: [Drat R Archive Template](https://github.com/eddelbuettel/drat) [![CRAN Version](http://www.r-pkg.org/badges/version/drat)](https://cran.r-project.org/package=drat)
