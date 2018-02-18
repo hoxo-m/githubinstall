@@ -54,4 +54,3 @@ githubinstall("AnomalyDetection")
 }
 
 }
-

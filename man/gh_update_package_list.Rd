@@ -9,4 +9,3 @@ gh_update_package_list()
 \description{
 Update the List of Packages on GitHub.
 }
-

@@ -15,4 +15,3 @@ candidate with title
 \description{
 Suggest candidates from "package_name" and make user selected one of them.
 }
-

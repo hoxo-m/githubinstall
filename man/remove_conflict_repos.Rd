@@ -23,4 +23,3 @@ If "quiet" is TRUE, we overwrite all packages forcibly and silently.
 Else if "quiet" is FALSE and "ask" is TRUE, we ask whether to overwrite it. (Default)
 Else if "quiet" is FALSE and "ask" is FALSE, we message to overwrite it and do it.
 }
-

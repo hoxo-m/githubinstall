@@ -21,4 +21,3 @@ gh_list_packages("hadley")
 }
 
 }
-
