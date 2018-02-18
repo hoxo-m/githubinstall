@@ -1,6 +1,6 @@
 Package: githubinstall
 Type: Package
-Version: 0.2.1.9001
+Version: 0.2.1.9002
 Title: A Helpful Way to Install R Packages Hosted on GitHub
 Description: Provides an helpful way to install packages hosted on GitHub.
 Authors@R: c(
@@ -19,8 +19,10 @@ Imports:
     devtools,
     httr,
     jsonlite,
+    mockery,
     utils
 RoxygenNote: 5.0.1
+Encoding: UTF-8
 Suggests:
     testthat,
     ggplot2, 

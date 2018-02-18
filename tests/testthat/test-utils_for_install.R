@@ -46,11 +46,10 @@ test_that("recommend_dependencies: ask = TRUE", {
   quiet <- FALSE
   
   is_passed_mock <- FALSE
-  with_mock(
-    `base::readline` = function(...) { is_passed_mock <<- TRUE; "y" },
-    act <- recommend_dependencies(ask = ask, build_vignettes = build_vignettes, 
-                                  dependencies = dependencies, quiet = quiet)
-  )
+  mockery::stub(recommend_dependencies, "readline", function(...) { is_passed_mock <<- TRUE; "y" })
+  act <- recommend_dependencies(ask = ask, build_vignettes = build_vignettes, 
+                                dependencies = dependencies, quiet = quiet)
+  
   expect_true(is_passed_mock)
   expect_equal(act, TRUE)
 })
@@ -127,10 +126,8 @@ test_that("select_repository: single candidate", {
 test_that("select_repository: multi candidates", {
   package_name <- "cats"
   
-  with_mock(
-    `utils::menu` = function(...) 1,
-    act <- select_repository(package_name = package_name)
-  )
+  mockery::stub(select_repository, "menu", 1)
+  act <- select_repository(package_name = package_name)
   
   expect_equal(strsplit(act, "/")[[1]][2], "cats")
   expect_false(is.null(attr(act, "title")))
@@ -139,11 +136,9 @@ test_that("select_repository: multi candidates", {
 test_that("select_repository: cancel", {
   package_name <- "cats"
   
-  with_mock(
-    `utils::menu` = function(...) 0,
-    expect_error(
-      select_repository(package_name = package_name)
-    )
+  mockery::stub(select_repository, "menu", 0)
+  expect_error(
+    select_repository(package_name = package_name)
   )
 })
 
@@ -166,10 +161,8 @@ test_that("remove_conflict_repos: no installed", {
   quiet = FALSE
   ask = TRUE
   
-  with_mock(
-    `utils::packageDescription` = function(pkg, ...) NA,
-    act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
-  ) 
+  mockery::stub(remove_conflict_repos, "packageDescription", NA)
+  act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
   
   expect_equal(act, repos)
 })
@@ -180,11 +173,10 @@ test_that("remove_conflict_repos: not conflict", {
   quiet = FALSE
   ask = TRUE
 
-  with_mock(
-    `utils::packageDescription` = function(pkg, ...) list(Package = pkg, GithubRepo = pkg, GithubUsername = "johndoe"),
-    `base::readline` = stop,
-    act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
-  ) 
+  mockery::stub(remove_conflict_repos, "packageDescription", 
+                function(pkg, ...) list(Package = pkg, GithubRepo = pkg, GithubUsername = "johndoe"))
+  mockery::stub(remove_conflict_repos, "readline", stop)
+  act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
   
   expect_equal(act, repos)
 })
@@ -195,11 +187,10 @@ test_that("remove_conflict_repos: conflict GitHub, ask yes", {
   quiet = FALSE
   ask = TRUE
   
-  with_mock(
-    `utils::packageDescription` = function(pkg, ...) list(Package = pkg, GithubRepo = pkg, GithubUsername = "ANOther"),
-    `base::readline` = function(...) "y",
-    act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
-  ) 
+  mockery::stub(remove_conflict_repos, "packageDescription", 
+                function(pkg, ...) list(Package = pkg, GithubRepo = pkg, GithubUsername = "ANOther"))
+  mockery::stub(remove_conflict_repos, "readline", "y")
+  act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
   
   expect_equal(act, repos)
 })
@@ -210,11 +201,10 @@ test_that("remove_conflict_repos: conflict GitHub, ask no", {
   quiet = FALSE
   ask = TRUE
   
-  with_mock(
-    `utils::packageDescription` = function(pkg, ...) list(Package = pkg, GithubRepo = pkg, GithubUsername = "ANOther"),
-    `base::readline` = function(...) "n",
-    act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
-  ) 
+  mockery::stub(remove_conflict_repos, "packageDescription", 
+                function(pkg, ...) list(Package = pkg, GithubRepo = pkg, GithubUsername = "ANOther"))
+  mockery::stub(remove_conflict_repos, "readline", "n")
+  act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
   
   expect_equal(length(act), 0)
 })
@@ -225,11 +215,10 @@ test_that("remove_conflict_repos: conflict CRAN, ask yes", {
   quiet = FALSE
   ask = TRUE
   
-  with_mock(
-    `utils::packageDescription` = function(pkg, ...) list(Package = pkg, Repository = "CRAN"),
-    `base::readline` = function(...) "y",
-    act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
-  ) 
+  mockery::stub(remove_conflict_repos, "packageDescription", 
+                function(pkg, ...) list(Package = pkg, Repository = "CRAN"))
+  mockery::stub(remove_conflict_repos, "readline", "y")
+  act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
   
   expect_equal(act, repos)
 })
@@ -240,11 +229,10 @@ test_that("remove_conflict_repos: conflict CRAN, ask no", {
   quiet = FALSE
   ask = TRUE
   
-  with_mock(
-    `utils::packageDescription` = function(pkg, ...) list(Package = pkg, Repository = "CRAN"),
-    `base::readline` = function(...) "n",
-    act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
-  ) 
+  mockery::stub(remove_conflict_repos, "packageDescription", 
+                function(pkg, ...) list(Package = pkg, Repository = "CRAN"))
+  mockery::stub(remove_conflict_repos, "readline", "n")
+  act <- remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
   
   expect_equal(length(act), 0)
 })
@@ -255,11 +243,10 @@ test_that("remove_conflict_repos: conflict, ask == FALSE", {
   quiet = FALSE
   ask = FALSE
   
-  with_mock(
-    `utils::packageDescription` = function(pkg, ...) list(Package = pkg, Repository = "CRAN"),
-    `base::readline` = stop,
-    expect_message(
-      remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
-    )
-  ) 
+  mockery::stub(remove_conflict_repos, "packageDescription", 
+                function(pkg, ...) list(Package = pkg, Repository = "CRAN"))
+  mockery::stub(remove_conflict_repos, "readline", stop)
+  expect_message(
+    remove_conflict_repos(repos = repos, lib = lib, quiet = quiet, ask = ask)
+  )
 })
