@@ -1,3 +1,6 @@
+“A Helpful Way to Install R Packages Hosted on GitHub”
+======================================================
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Travis-CI Build
 Status](https://travis-ci.org/hoxo-m/githubinstall.svg?branch=master)](https://travis-ci.org/hoxo-m/githubinstall)
@@ -28,8 +31,8 @@ githubinstall("PackageName")
 The package also provides some helpful functions for R packages hosted
 on GitHub.
 
-1. Overview
------------
+1 Overview
+----------
 
 Various people in the world create a growing number of R packages. A
 part of the cause of it is the **devtools** package that makes it easy
@@ -106,8 +109,8 @@ githubinstall("AnomalyDetect")
 githubinstall("anomaly-detection")
 ```
 
-2. Installation
----------------
+2 Installation
+--------------
 
 You can install the **githubinstall** package from CRAN.
 
@@ -126,8 +129,8 @@ The source code for **githubinstall** package is available on GitHub at
 
 -   <https://github.com/hoxo-m/githubinstall>.
 
-3. Details
-----------
+3 Details
+---------
 
 The **githubinstall** package provides several useful functions.
 
@@ -148,7 +151,7 @@ To use these functions, first, you should load the package as follows.
 library(githubinstall)
 ```
 
-### 3.1. Install Packages from GitHub
+### 3.1 Install Packages from GitHub
 
 `gh_install_packages()` enables to install packages on GitHub by only
 package names.
@@ -190,7 +193,7 @@ gh_install_packages("cats")
 githubinstall("AnomalyDetection")
 ```
 
-#### 3.1.1. Specify Git References (Branch, Tag, Commit and Pull Request)
+#### 3.1.1 Specify Git References (Branch, Tag, Commit and Pull Request)
 
 You can install packages by specifying Git references (branch, tag,
 commit and pull request).
@@ -238,7 +241,7 @@ instance, you can install **dplyr** from the [pull request
 gh_install_packages("dplyr", ref = github_pull("3274"))
 ```
 
-### 3.2. Suggest Repositories
+### 3.2 Suggest Repositories
 
 `gh_install_packages()` prompts you to install the suggested packages.
 But you may just want to know what will be suggestions.
@@ -278,7 +281,7 @@ gh_suggest_username("yuhui")
 #> [1] "yihui"
 ```
 
-### 3.3. List the Packages
+### 3.3 List the Packages
 
 `gh_list_packages()` returns a list of R package repositories on GitHub
 as `data.frame`.
@@ -306,7 +309,7 @@ repos <- with(hadleyverse, paste(username, package_name, sep="/"))
 githubinstall(repos) # I have not tried it
 ```
 
-### 3.4. Search Packages by a Keyword
+### 3.4 Search Packages by a Keyword
 
 `gh_search_packages()` returns a list of R package repositories on
 GitHub that their titles contain a given keyword.
@@ -327,7 +330,7 @@ head(lasso_packages)
     #> 5 PNNL-Comp-Mass-Spec    glmnetGLR  The primary goal was to build a clas..
     #> 6        PingYangChen         milr  multiple-instance logistic regressio..
 
-### 3.5. Show the Source Code of Functions on GitHub
+### 3.5 Show the Source Code of Functions on GitHub
 
 `gh_show_source()` looks for a source code on GitHub for a given
 function and tries to open the place on your Web browser.
@@ -346,7 +349,7 @@ gh_show_source(mutate)
 
 This function may do not work well with Safari.
 
-### 3.6. Update the List of R Packages
+### 3.6 Update the List of R Packages
 
 The **githubinstall** package uses [Gepuro Task
 Views](http://rpkg.gepuro.net) for getting the list of R packages on
@@ -365,8 +368,8 @@ explicitly.
 gh_update_package_list()
 ```
 
-4. Related Work
----------------
+4 Related Work
+--------------
 
 -   remotes: [Install R packages from GitHub, Bitbucket, git, svn
     repositories, URLs](https://github.com/MangoTheCat/remotes) [![CRAN
