@@ -1,4 +1,4 @@
-# githubinstall 0.2.1.9001
+# githubinstall 0.2.2
 
 ## Bug fix
 
