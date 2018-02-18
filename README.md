@@ -1,14 +1,39 @@
-# A Helpful Way to Install R Packages Hosted on GitHub
-Koji MAKIYAMA (@hoxo_m)  
+---
+title: "A Helpful Way to Install R Packages Hosted on GitHub"
+author: Koji MAKIYAMA (@hoxo_m)
+output:
+  html_document:
+    keep_md: true
+  md_document:
+    variant: markdown_github
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 
 
 [![Travis-CI Build Status](https://travis-ci.org/hoxo-m/githubinstall.svg?branch=master)](https://travis-ci.org/hoxo-m/githubinstall)
-[![CRAN Version](http://www.r-pkg.org/badges/version/githubinstall)](https://cran.r-project.org/package=githubinstall)
+[![CRAN Version](http://www.r-pkg.org/badges/version-ago/githubinstall)](https://cran.r-project.org/package=githubinstall)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/githubinstall)](http://cranlogs.r-pkg.org/badges/githubinstall)
 [![Coverage Status](https://coveralls.io/repos/github/hoxo-m/githubinstall/badge.svg?branch=master)](https://coveralls.io/github/hoxo-m/githubinstall?branch=master)
+
+## Abstract
+
+The **githubinstall** package provides a function `githubinstall` to install R packages hosted on GitHub without developer's name. 
+
+
+```r
+githubinstall("PackageName")
+```
+
+There is the `install_github` function in the **devtools** package and the **remotes** package. But they request developer's name.
+
+
+```r
+install_github("DeveloperName/PackageName")
+```
+
+The **githubinstall** package also provides some helpful functions for R packages hosted on GitHub.
 
 ## 1. Overview
 
@@ -231,11 +256,17 @@ gh_suggest("AnomalyDetection")
 
 ```r
 gh_suggest("cats")
-#>  [1] "amurali2/cats"         "danielwilhelm/cats"   
-#>  [3] "davidluizrusso/cats"   "hilaryparker/cats"    
-#>  [5] "jonathanelee1993/cats" "lloydlow/cats"        
-#>  [7] "lolibear/cats"         "oliviergimenez/cats"  
-#>  [9] "rafalszota/cats"       "tahir275/cats"
+#>  [1] "Kkm5/cats"             "amurali2/cats"        
+#>  [3] "briglx/cats"           "danielwilhelm/cats"   
+#>  [5] "davidluizrusso/cats"   "fadiphi/cats"         
+#>  [7] "germayneng/cats"       "hilaryparker/cats"    
+#>  [9] "jonathanelee1993/cats" "lloydlow/cats"        
+#> [11] "lolibear/cats"         "mfabla/cats"          
+#> [13] "nkatiyar/cats"         "oliviergimenez/cats"  
+#> [15] "piyush-kgp/cats"       "rafalszota/cats"      
+#> [17] "riteekteek/cats"       "sunstat/cats"         
+#> [19] "tahir275/cats"         "thackl/cats"          
+#> [21] "tomis9/cats"           "verreet/cats"
 ```
 
 Also, `gh_suggest_username()` is useful when you want to know usernames from a faint memory.
@@ -267,12 +298,12 @@ head(hadleyverse)
 
 ```
 #>   username package_name                                              title
-#> 1   hadley   assertthat                     User friendly assertions for R
-#> 2   hadley    babynames An R package contain all baby names data from the 
-#> 3   hadley    bigrquery          An interface to Google's bigquery from R.
-#> 4   hadley     bookdown                                              Watch
-#> 5   hadley   clusterfly An R package for visualising high-dimensional clus
-#> 6   hadley      decumar                           An alternative to sweave
+#> 1   hadley RcppDateTime                                                   
+#> 2   hadley           S3  Helpers for Programming with the S3 Object System
+#> 3   hadley   assertthat                     User friendly assertions for R
+#> 4   hadley    babynames An R package contain all baby names data from the 
+#> 5   hadley        bench                            Bechmarking tools for R
+#> 6   hadley    bigrquery          An interface to Google's bigquery from R.
 ```
 
 By using the result, you can install all packages created by hadley.
@@ -296,19 +327,46 @@ gh_search_packages("lasso")
 
 
 ```
-#>           username     package_name                                  title
-#> 1  ChingChuan-Chen             milr  multiple-instance logistic regressi..
-#> 2        ManuSetty            SeqGL  SeqGL is a group lasso based algori..
-#> 3       YaohuiZeng         biglasso  Big Lasso: Extending Lasso Model Fi..
-#> 4      huayingfang          CCLasso  CCLasso: Correlation Inference for ..
-#> 5         mlampros FeatureSelection  Feature Selection in R using glmnet..
-#> 6             pnnl        glmnetLRC  Lasso and Elastic-Net Logistic Regr..
-#> 7       statsmaths         genlasso  Path algorithm for generalized lass..
-#> 8       vincent-dk         logitsgl  Fit Logistic Regression with Multi-..
-#> 9       vincent-dk             lsgl  Linear Multiple Output Using Sparse..
-#> 10      vincent-dk             msgl  High Dimensional Multiclass Classif..
-#> 11      vstanislas             GGEE  R Package for the Group Lasso Gene-..
-#> 12          zdk123       BatchStARS  R package for Stability Approach to..
+#>               username            package_name                       title
+#> 1               CY-dev               sparseSVM  Solution Paths of Sparse..
+#> 2      ChingChuan-Chen                    milr  multiple-instance logist..
+#> 3               FrankD                   fuser  Fused lasso for high-dim..
+#> 4            ManuSetty                   SeqGL  SeqGL is a group lasso b..
+#> 5  PNNL-Comp-Mass-Spec               glmnetGLR  The primary goal was to ..
+#> 6         PingYangChen                    milr  multiple-instance logist..
+#> 7             TaddyLab                   gamlr    Gamma lasso regression..
+#> 8      ToshihiroIguchi              elasticnet  Elastic Net, Lasso and R..
+#> 9           YaohuiZeng                  bigSVM  Solution Paths of Sparse..
+#> 10          YaohuiZeng                biglasso  biglasso: Extending Lass..
+#> 11            Zelazny7                 rulefit  Fit Lasso model to binar..
+#> 12             annafil FFCRegressionImputation  Several predictive appro..
+#> 13            antiphon                  glbinc  Grouped Lasso (and maybe..
+#> 14                anuf             lassoSparkR  A R package that impleme..
+#> 15            benkeser                 halplus  Nonparametric regression..
+#> 16             emeryyi                 gglasso  Automatically exported f..
+#> 17            esmucler                 mmlasso  R Package to calculate t..
+#> 18         gabriellajg            ClussCluster  This package implements ..
+#> 19         huayingfang                 CCLasso  CCLasso: Correlation Inf..
+#> 20              jakmes               onlineVAR  R package to adaptively ..
+#> 21              jcbeer                    fsgl  R package with functions..
+#> 22            jeffwong                  glmnet  R package glmnet for est..
+#> 23          katokohaku          AlternateLasso  R package for Lasso feat..
+#> 24           maryclare                  powopt  Little R package for per..
+#> 25            mlampros        FeatureSelection  Feature Selection in R u..
+#> 26                pnnl               glmnetLRC  Lasso and Elastic-Net Lo..
+#> 27      rauschenberger                 palasso   Pairwise-adaptive lasso..
+#> 28           road2stat                    OHPL  Ordered Homogeneity Purs..
+#> 29           road2stat                    ohpl  Ordered Homogeneity Purs..
+#> 30      shadowmoon1988                  SLASSO  Sequential Lasso R Packa..
+#> 31          statsmaths                genlasso  Path algorithm for gener..
+#> 32              tshmak                lassosum  LASSO for GWAS with summ..
+#> 33          vincent-dk                    msgl  High Dimensional Multicl..
+#> 34          vincent-dk                   rcsgl  regression via sparse gr..
+#> 35          vincent-dk                sglOptim  Fast Generic Solver for ..
+#> 36          vstanislas                    GGEE  R Package for the Group ..
+#> 37            wrbrooks                adalasso  Adaptive lasso for logis..
+#> 38            wrbrooks                   adapt  Adaptive lasso for linea..
+#> 39              zdk123              BatchStARS  R package for Stability ..
 ```
 
 ### 3.5. Show the Source Code of Functions on GitHub
@@ -349,9 +407,8 @@ gh_update_package_list()
 
 ## 4. Related Work
 
-- berryFunctions: [Function Collection Related to Plotting and Hydrology](https://github.com/brry/berryFunctions) [![CRAN Version](http://www.r-pkg.org/badges/version/berryFunctions)](https://cran.r-project.org/package=berryFunctions) 
-- devtools: [Tools to make an R developer's life easier](https://github.com/hadley/devtools) [![CRAN Version](http://www.r-pkg.org/badges/version/devtools)](https://cran.r-project.org/package=devtools) 
-- ghit: [Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit) [![CRAN Version](http://www.r-pkg.org/badges/version/ghit)](https://cran.r-project.org/package=ghit)
-- drat: [Drat R Archive Template](https://github.com/eddelbuettel/drat) [![CRAN Version](http://www.r-pkg.org/badges/version/drat)](https://cran.r-project.org/package=drat)
-- pacman: [A package management tools for R](https://github.com/trinker/pacman) [![CRAN Version](http://www.r-pkg.org/badges/version/pacman)](https://cran.r-project.org/package=pacman)
-- remotes: [Install R packages from GitHub, Bitbucket, git, svn repositories, URLs](https://github.com/MangoTheCat/remotes) [![CRAN Version](http://www.r-pkg.org/badges/version/remotes)](https://cran.r-project.org/package=remotes)
+- remotes: [Install R packages from GitHub, Bitbucket, git, svn repositories, URLs](https://github.com/MangoTheCat/remotes) [![CRAN Version](http://www.r-pkg.org/badges/version-ago/remotes)](https://cran.r-project.org/package=remotes)
+- ghit: [Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit) [![CRAN Version](http://www.r-pkg.org/badges/version-ago/ghit)](https://cran.r-project.org/package=ghit)
+- pacman: [A package management tools for R](https://github.com/trinker/pacman) [![CRAN Version](http://www.r-pkg.org/badges/version-ago/pacman)](https://cran.r-project.org/package=pacman)
+- drat: [Drat R Archive Template](https://github.com/eddelbuettel/drat) [![CRAN Version](http://www.r-pkg.org/badges/version-ago/drat)](https://cran.r-project.org/package=drat)
+- devtools: [Tools to make an R developer's life easier](https://github.com/hadley/devtools) [![CRAN Version](http://www.r-pkg.org/badges/version-ago/devtools)](https://cran.r-project.org/package=devtools) 

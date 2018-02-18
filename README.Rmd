@@ -19,9 +19,25 @@ knitr::opts_chunk$set(
 ```
 
 [![Travis-CI Build Status](https://travis-ci.org/hoxo-m/githubinstall.svg?branch=master)](https://travis-ci.org/hoxo-m/githubinstall)
-[![CRAN Version](http://www.r-pkg.org/badges/version/githubinstall)](https://cran.r-project.org/package=githubinstall)
+[![CRAN Version](http://www.r-pkg.org/badges/version-ago/githubinstall)](https://cran.r-project.org/package=githubinstall)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/githubinstall)](http://cranlogs.r-pkg.org/badges/githubinstall)
 [![Coverage Status](https://coveralls.io/repos/github/hoxo-m/githubinstall/badge.svg?branch=master)](https://coveralls.io/github/hoxo-m/githubinstall?branch=master)
+
+## Abstract
+
+The **githubinstall** package provides a function `githubinstall` to install R packages hosted on GitHub without developer's name. 
+
+```{r eval=FALSE}
+githubinstall("PackageName")
+```
+
+There is the `install_github` function in the **devtools** package and the **remotes** package. But they request developer's name.
+
+```{r eval=FALSE}
+install_github("DeveloperName/PackageName")
+```
+
+The **githubinstall** package also provides some helpful functions for R packages hosted on GitHub.
 
 ## 1. Overview
 
@@ -272,7 +288,7 @@ gh_search_packages("lasso")
 ```
 
 ```{r echo=FALSE}
-transform(gh_search_packages("lasso"), title = paste0(" ", substr(title, 1, 35), ".."))
+transform(gh_search_packages("lasso"), title = paste0(" ", substr(title, 1, 24), ".."))
 ```
 
 ### 3.5. Show the Source Code of Functions on GitHub
@@ -310,9 +326,8 @@ gh_update_package_list()
 
 ## 4. Related Work
 
-- berryFunctions: [Function Collection Related to Plotting and Hydrology](https://github.com/brry/berryFunctions) [![CRAN Version](http://www.r-pkg.org/badges/version/berryFunctions)](https://cran.r-project.org/package=berryFunctions) 
-- devtools: [Tools to make an R developer's life easier](https://github.com/hadley/devtools) [![CRAN Version](http://www.r-pkg.org/badges/version/devtools)](https://cran.r-project.org/package=devtools) 
-- ghit: [Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit) [![CRAN Version](http://www.r-pkg.org/badges/version/ghit)](https://cran.r-project.org/package=ghit)
-- drat: [Drat R Archive Template](https://github.com/eddelbuettel/drat) [![CRAN Version](http://www.r-pkg.org/badges/version/drat)](https://cran.r-project.org/package=drat)
-- pacman: [A package management tools for R](https://github.com/trinker/pacman) [![CRAN Version](http://www.r-pkg.org/badges/version/pacman)](https://cran.r-project.org/package=pacman)
-- remotes: [Install R packages from GitHub, Bitbucket, git, svn repositories, URLs](https://github.com/MangoTheCat/remotes) [![CRAN Version](http://www.r-pkg.org/badges/version/remotes)](https://cran.r-project.org/package=remotes)
+- remotes: [Install R packages from GitHub, Bitbucket, git, svn repositories, URLs](https://github.com/MangoTheCat/remotes) [![CRAN Version](http://www.r-pkg.org/badges/version-ago/remotes)](https://cran.r-project.org/package=remotes)
+- ghit: [Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit) [![CRAN Version](http://www.r-pkg.org/badges/version-ago/ghit)](https://cran.r-project.org/package=ghit)
+- pacman: [A package management tools for R](https://github.com/trinker/pacman) [![CRAN Version](http://www.r-pkg.org/badges/version-ago/pacman)](https://cran.r-project.org/package=pacman)
+- drat: [Drat R Archive Template](https://github.com/eddelbuettel/drat) [![CRAN Version](http://www.r-pkg.org/badges/version-ago/drat)](https://cran.r-project.org/package=drat)
+- devtools: [Tools to make an R developer's life easier](https://github.com/hadley/devtools) [![CRAN Version](http://www.r-pkg.org/badges/version-ago/devtools)](https://cran.r-project.org/package=devtools) 

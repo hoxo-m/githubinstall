@@ -26,4 +26,3 @@ gh_suggest("uwitter/BnomalyDetection")
 # [1] "twitter/AnomalyDetection"
 
 }
-

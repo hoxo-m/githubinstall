@@ -20,4 +20,3 @@ The "repo" argument allows to contain "ref" as
 The function detects that "repo" contains "ref" and separates into pure repo and ref.
 If "repo" contains "ref" and "ref" argument is specified, the values in "repo" take precedence.
 }
-

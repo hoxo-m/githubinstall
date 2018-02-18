@@ -23,4 +23,3 @@ The default "dependencies" is NA that means c("Depends", "Imports", "LinkingTo")
 If "build_vignettes" is TRUE, the install needs "Suggests" dependency in many cases.
 So we recommend in such case to set "dependencies" to TRUE that means c("Depends", "Imports", "LinkingTo", "Suggests").
 }
-

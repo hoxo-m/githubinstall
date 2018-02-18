@@ -26,4 +26,3 @@ gh_guess_username("yuhui")
 }
 
 }
-

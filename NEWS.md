@@ -3,6 +3,7 @@
 ## Bug fix
 
 - Fixes crashing with repositories named NA. (#32)
+- Use `mockery::stub` instead of `testthat::mock_with` for CRAN check error (#35)
 
 # githubinstall 0.2.1
 
