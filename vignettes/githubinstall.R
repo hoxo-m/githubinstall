@@ -2,6 +2,12 @@
 knitr::opts_chunk$set(echo = TRUE)
 
 ## ----eval=FALSE----------------------------------------------------------
+#  install_github("DeveloperName/PackageName")
+
+## ----eval=FALSE----------------------------------------------------------
+#  githubinstall("PackageName")
+
+## ----eval=FALSE----------------------------------------------------------
 #  install.packages("dplyr")
 
 ## ----eval=FALSE----------------------------------------------------------
@@ -50,7 +56,7 @@ library(githubinstall)
 #  gh_install_packages("densratio", ref = "e8233e6")
 
 ## ----eval=FALSE----------------------------------------------------------
-#  gh_install_packages("dplyr", ref = github_pull("2058"))
+#  gh_install_packages("dplyr", ref = github_pull("3274"))
 
 ## ------------------------------------------------------------------------
 gh_suggest("AnomalyDetection")
@@ -77,10 +83,13 @@ transform(head(hadleyverse), title = substr(title, 1, 50))
 #  githubinstall(repos) # I have not tried it
 
 ## ----eval=FALSE----------------------------------------------------------
-#  gh_search_packages("lasso")
+#  lasso_packages <- gh_search_packages("lasso")
+#  head(lasso_packages)
 
 ## ----echo=FALSE----------------------------------------------------------
-transform(gh_search_packages("lasso"), title = paste0(" ", substr(title, 1, 35), ".."))
+lasso_packages <- transform(gh_search_packages("lasso"), title = paste0(" ", substr(title, 1, 36), 
+                                                           ifelse(nchar(title) <= 36, "  ", "..")))
+head(lasso_packages)
 
 ## ----eval=FALSE----------------------------------------------------------
 #  gh_show_source("mutate", repo = "dplyr")

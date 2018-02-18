@@ -13,13 +13,31 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Abstract
+
+There is an `install_github` function to install R packages hosted on GitHub in the **devtools** package. 
+But it requests developer's name.
+
+```{r eval=FALSE}
+install_github("DeveloperName/PackageName")
+```
+
+The **githubinstall** package provides a function `githubinstall`. It does not need developer's name. 
+
+```{r eval=FALSE}
+githubinstall("PackageName")
+```
+
+The package also provides some helpful functions for R packages hosted on GitHub.
+
 ## 1. Overview
 
-A growing number of R packages are created by various people in the world.
-A part of the cause of it is the **devtools** package that makes it easy to develop R packages [[1]](https://www.rstudio.com/products/rpackages/devtools/).
-The **devtools** package not only facilitates the process to develop R packages but also provides an another way to distribute R packages.
 
-When developers publish R packages that created by them, the CRAN [[2]](https://cran.r-project.org) is commonly used.
+Various people in the world create a growing number of R packages.
+A part of the cause of it is the **devtools** package that makes it easy to develop R packages [[1]](https://www.rstudio.com/products/rpackages/devtools/).
+The **devtools** package not only facilitates the process to develop R packages but also provides another way to distribute R packages.
+
+When developers publish R packages that created by them, they commonly use CRAN [[2]](https://cran.r-project.org).
 You can install packages that are available on CRAN using `install.package()`.
 For example, you can install **dplyr** package as follows:
 
@@ -37,21 +55,21 @@ install_github("hadley/dplyr")
 Therefore, developers can distribute R packages that are developing on GitHub.
 Besides, there are some developers that they have no intention to submit to CRAN.
 For instance, Twitter, Inc. provides **AnomalyDetection** package on GitHub, but they won't submit to CRAN [[3]](https://blog.twitter.com/2015/introducing-practical-and-robust-anomaly-detection-in-a-time-series).
-You can install such packages easily using **devtools**.
+You can install such packages conveniently using **devtools**.
 
 ```{r eval=FALSE}
 library(devtools)
 install_github("twitter/AnomalyDetection")
 ```
 
-There is a difference between `install.packages()` and `install_github()` in the required argument.
-`install.packages()` takes package names, while `install_github()` needs repository names.
+There is a difference between `install.packages()` and `install_github()` in their required argument.
+`install.packages()` takes package names, while `install_github()` needs repository names in addition.
 It means that when you want to install a package on GitHub, you must remember its repository name correctly.
 
 The trouble is that the usernames of GitHub are often hard to remember.
 Developers consider their package names so that users can understand their functionalities intuitively.
 However, they often decide username incautiously.
-For instance, **ggfortify** is a great package on GitHub, but who created it?
+For instance, **ggfortify** is an excellent package on GitHub, but who created it?
 What is its username?
 The answer is *sinhrks* [[4]](https://github.com/sinhrks/ggfortify).
 It seems to be difficult to remember it.
@@ -134,11 +152,11 @@ Do you want to install the package (Y/n)?
 ```
 
 The function suggests GitHub repositories.
-If you type 'Y' or 'y' and press 'Enter' (the default is 'Y'), then installation of the package will begin.
-The suggestion is made of looking for a list of R packages on GitHub.
-The list is provided by [Gepuro Task Views](http://rpkg.gepuro.net).
+If you type 'Y' or 'y' and press 'Enter' (the default is 'Y'), then the installation of the package will begin.
+The suggestion is made by looking for a list of R packages on GitHub.
+[Gepuro Task Views](http://rpkg.gepuro.net) provides the list.
 
-If multiple candidates are found, you can select one of them.
+If it found multiple candidates, you can select one of them.
 
 ```{r eval=FALSE}
 gh_install_packages("cats")
@@ -165,9 +183,7 @@ githubinstall("AnomalyDetection")
 
 #### 3.1.1. Specify Git References (Branch, Tag, Commit and Pull Request)
 
-**A new feature has added.**
-
-You can install packages with specifying Git references (branch, tag, commit and pull request).
+You can install packages by specifying Git references (branch, tag, commit and pull request).
 
 Developers are divided in policy to manage R packages on GitHub.
 If a package is going to be developed in "develop" branch, you may want to install the package from the branch.
@@ -179,16 +195,16 @@ For instance, you can install **awaptools** from the ["develop" branch](https://
 gh_install_packages("awaptools", ref = "develop")
 ```
 
-You may sometimes encounter failing to install packages because its repository HEAD is broken.
+You may sometimes encounter failing to install packages because its repository HEAD is not valid no longer.
 In such case, you can specify a tag or commit to `ref`.
-In almost cases, tags are added on an unbroken commit.
+In most cases, developers add tags on an unbroken commit.
 For instance, you can install **densratio** from the ["v0.0.3" tag](https://github.com/hoxo-m/densratio/releases/tag/v0.0.3) as follows:
 
 ```{r eval=FALSE}
 gh_install_packages("densratio", ref = "v0.0.3")
 ```
 
-If you can find no such tags, the previous commit may be not broken.
+Even if you cannot find such tags, you can install packages from any commit that is valid.
 For instance, you can install **densratio** from the ["e8233e6" commit](https://github.com/hoxo-m/densratio/commit/e8233e651dbef2b34a8c9c2e4432594a13ea8de7) as follows:
 
 ```{r eval=FALSE}
@@ -197,10 +213,10 @@ gh_install_packages("densratio", ref = "e8233e6")
 
 Finally, you may find a patch for fixing bugs as a pull request.
 In such case, you can specify pull requests to `ref` using `github_pull()`.
-For instance, you can install **dplyr** from the [pull request #2058](https://github.com/hadley/dplyr/pull/2058) as follows:
+For instance, you can install **dplyr** from the [pull request #2058](https://github.com/hadley/dplyr/pull/3274) as follows:
 
 ```{r eval=FALSE}
-gh_install_packages("dplyr", ref = github_pull("2058"))
+gh_install_packages("dplyr", ref = github_pull("3274"))
 ```
 
 ### 3.2. Suggest Repositories
@@ -258,11 +274,14 @@ githubinstall(repos) # I have not tried it
 For example, if you want to search packages that are relevant to *lasso*, run the following.
 
 ```{r eval=FALSE}
-gh_search_packages("lasso")
+lasso_packages <- gh_search_packages("lasso")
+head(lasso_packages)
 ```
 
 ```{r echo=FALSE}
-transform(gh_search_packages("lasso"), title = paste0(" ", substr(title, 1, 35), ".."))
+lasso_packages <- transform(gh_search_packages("lasso"), title = paste0(" ", substr(title, 1, 36), 
+                                                           ifelse(nchar(title) <= 36, "  ", "..")))
+head(lasso_packages)
 ```
 
 ### 3.5. Show the Source Code of Functions on GitHub
@@ -273,7 +292,7 @@ transform(gh_search_packages("lasso"), title = paste0(" ", substr(title, 1, 35),
 gh_show_source("mutate", repo = "dplyr")
 ```
 
-If you have loaded the package that the function belongs to, you can input the function directly.
+If you have loaded the package that the function belongs to, you can input it directly.
 
 ```{r eval=FALSE}
 library(dplyr)
@@ -300,8 +319,8 @@ gh_update_package_list()
 
 ## 4. Related Work
 
-- devtools: [Tools to make an R developer's life easier](https://github.com/hadley/devtools)
-- ghit: [Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit)
-- drat: [Drat R Archive Template](https://github.com/eddelbuettel/drat)
+- remotes: [Install R packages from GitHub, Bitbucket, git, svn repositories, - ghit: [Lightweight GitHub Package Installer](https://github.com/cloudyr/ghit)
+URLs](https://github.com/MangoTheCat/remotes)
 - pacman: [A package management tools for R](https://github.com/trinker/pacman)
-- remotes: [Install R packages from GitHub, Bitbucket, git, svn repositories, URLs](https://github.com/MangoTheCat/remotes)
+- drat: [Drat R Archive Template](https://github.com/eddelbuettel/drat)
+- devtools: [Tools to make an R developer's life easier](https://github.com/hadley/devtools)
