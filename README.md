@@ -1,18 +1,17 @@
-“A Helpful Way to Install R Packages Hosted on GitHub”
-======================================================
+# A Helpful Way to Install R Packages Hosted on GitHub
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 [![Travis-CI Build
 Status](https://travis-ci.org/hoxo-m/githubinstall.svg?branch=master)](https://travis-ci.org/hoxo-m/githubinstall)
 [![CRAN
 Version](http://www.r-pkg.org/badges/version-ago/githubinstall)](https://cran.r-project.org/package=githubinstall)
-[![CRAN
-Downloads](http://cranlogs.r-pkg.org/badges/githubinstall)](http://cranlogs.r-pkg.org/badges/githubinstall)
-[![Coverage
+<http://cranlogs.r-pkg.org/badges/githubinstall> [![Coverage
 Status](https://coveralls.io/repos/github/hoxo-m/githubinstall/badge.svg?branch=master)](https://coveralls.io/github/hoxo-m/githubinstall?branch=master)
+[![Say
+Thanks\!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/hoxo-m)
 
-Abstract
---------
+## Abstract
 
 There is an `install_github` function to install R packages hosted on
 GitHub in the **devtools** package. But it requests developer’s name.
@@ -31,8 +30,7 @@ githubinstall("PackageName")
 The package also provides some helpful functions for R packages hosted
 on GitHub.
 
-1 Overview
-----------
+## 1 Overview
 
 Various people in the world create a growing number of R packages. A
 part of the cause of it is the **devtools** package that makes it easy
@@ -43,7 +41,7 @@ packages but also provides another way to distribute R packages.
 
 When developers publish R packages that created by them, they commonly
 use CRAN [\[2\]](https://cran.r-project.org). You can install packages
-that are available on CRAN using `install.package()`. For example, you
+that are available on CRAN using `install.packages()`. For example, you
 can install **dplyr** package as follows:
 
 ``` r
@@ -92,9 +90,11 @@ library(githubinstall)
 githubinstall("AnomalyDetection")
 ```
 
-    Suggestion:
-     - twitter/AnomalyDetection  Anomaly Detection with R
-    Do you want to install the package (Y/n)?  
+``` 
+Suggestion:
+ - twitter/AnomalyDetection  Anomaly Detection with R
+Do you want to install the package (Y/n)?  
+```
 
 `githubinstall()` suggests GitHub repositories from input package names
 and asks whether you install it.
@@ -109,8 +109,7 @@ githubinstall("AnomalyDetect")
 githubinstall("anomaly-detection")
 ```
 
-2 Installation
---------------
+## 2 Installation
 
 You can install the **githubinstall** package from CRAN.
 
@@ -118,7 +117,8 @@ You can install the **githubinstall** package from CRAN.
 install.packages("githubinstall")
 ```
 
-You can also install the package from GitHub.
+You can also install the package from
+GitHub.
 
 ``` r
 install.packages("devtools") # if you have not installed "devtools" package
@@ -127,20 +127,19 @@ devtools::install_github("hoxo-m/githubinstall")
 
 The source code for **githubinstall** package is available on GitHub at
 
--   <https://github.com/hoxo-m/githubinstall>.
+  - <https://github.com/hoxo-m/githubinstall>.
 
-3 Details
----------
+## 3 Details
 
 The **githubinstall** package provides several useful functions.
 
--   `gh_install_packages()` or `githubinstall()`
--   `gh_suggest()`
--   `gh_suggest_username()`
--   `gh_list_packages()`
--   `gh_search_packages()`
--   `gh_show_source()`
--   `gh_update_package_list()`
+  - `gh_install_packages()` or `githubinstall()`
+  - `gh_suggest()`
+  - `gh_suggest_username()`
+  - `gh_list_packages()`
+  - `gh_search_packages()`
+  - `gh_show_source()`
+  - `gh_update_package_list()`
 
 The functions have common prefix `gh`. `githubinstall()` is an alias of
 `gh_install_packages()`.
@@ -160,9 +159,11 @@ package names.
 gh_install_packages("AnomalyDetection")
 ```
 
-    Suggestion:
-     - twitter/AnomalyDetection  Anomaly Detection with R
-    Do you want to install the package (Y/n)?  
+``` 
+Suggestion:
+ - twitter/AnomalyDetection  Anomaly Detection with R
+Do you want to install the package (Y/n)?  
+```
 
 The function suggests GitHub repositories. If you type ‘Y’ or ‘y’ and
 press ‘Enter’ (the default is ‘Y’), then the installation of the package
@@ -177,14 +178,14 @@ gh_install_packages("cats")
 ```
 
     Select a number or, hit 0 to cancel. 
-
+    
     1: amurali2/cats      cats
     2: danielwilhelm/cats No description or website provided.
     3: hilaryparker/cats  An R package for cat-related functions #rcatladies
     4: lolibear/cats      No description or website provided.
     5: rafalszota/cats    No description or website provided.
     6: tahir275/cats      ff
-
+    
     Selection: 
 
 `githubinstall()` is an alias of `gh_install_packages()`.
@@ -215,8 +216,9 @@ You may sometimes encounter failing to install packages because its
 repository HEAD is not valid no longer. In such case, you can specify a
 tag or commit to `ref`. In most cases, developers add tags on an
 unbroken commit. For instance, you can install **densratio** from the
-[“v0.0.3” tag](https://github.com/hoxo-m/densratio/releases/tag/v0.0.3)
-as follows:
+[“v0.0.3”
+tag](https://github.com/hoxo-m/densratio/releases/tag/v0.0.3) as
+follows:
 
 ``` r
 gh_install_packages("densratio", ref = "v0.0.3")
@@ -235,7 +237,7 @@ gh_install_packages("densratio", ref = "e8233e6")
 Finally, you may find a patch for fixing bugs as a pull request. In such
 case, you can specify pull requests to `ref` using `github_pull()`. For
 instance, you can install **dplyr** from the [pull request
-\#2058](https://github.com/hadley/dplyr/pull/3274) as follows:
+\#3274](https://github.com/hadley/dplyr/pull/3274) as follows:
 
 ``` r
 gh_install_packages("dplyr", ref = github_pull("3274"))
@@ -250,6 +252,11 @@ But you may just want to know what will be suggestions.
 
 ``` r
 gh_suggest("AnomalyDetection")
+#> Warning in fread(download_url, sep = "\t", header = FALSE, stringsAsFactors
+#> = FALSE, : Found and resolved improper quoting out-of-sample. First healed
+#> line 4848: <<Puriney honfleuR "Evening, honfleuR" by Seurat>>. If the
+#> fields are not quoted (e.g. field separator does not appear within any
+#> field), try quote="" to avoid this warning.
 #> [1] "twitter/AnomalyDetection"
 ```
 
@@ -368,21 +375,20 @@ explicitly.
 gh_update_package_list()
 ```
 
-4 Related Work
---------------
+## 4 Related Work
 
--   remotes: [Install R packages from GitHub, Bitbucket, git, svn
+  - remotes: [Install R packages from GitHub, Bitbucket, git, svn
     repositories, URLs](https://github.com/MangoTheCat/remotes) [![CRAN
     Version](http://www.r-pkg.org/badges/version-ago/remotes)](https://cran.r-project.org/package=remotes)
--   ghit: [Lightweight GitHub Package
+  - ghit: [Lightweight GitHub Package
     Installer](https://github.com/cloudyr/ghit) [![CRAN
     Version](http://www.r-pkg.org/badges/version-ago/ghit)](https://cran.r-project.org/package=ghit)
--   pacman: [A package management tools for
+  - pacman: [A package management tools for
     R](https://github.com/trinker/pacman) [![CRAN
     Version](http://www.r-pkg.org/badges/version-ago/pacman)](https://cran.r-project.org/package=pacman)
--   drat: [Drat R Archive
+  - drat: [Drat R Archive
     Template](https://github.com/eddelbuettel/drat) [![CRAN
     Version](http://www.r-pkg.org/badges/version-ago/drat)](https://cran.r-project.org/package=drat)
--   devtools: [Tools to make an R developer’s life
+  - devtools: [Tools to make an R developer’s life
     easier](https://github.com/hadley/devtools) [![CRAN
     Version](http://www.r-pkg.org/badges/version-ago/devtools)](https://cran.r-project.org/package=devtools)

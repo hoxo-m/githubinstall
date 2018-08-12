@@ -2,12 +2,12 @@
 author: Koji MAKIYAMA (@hoxo_m)
 output:
   md_document:
-    variant: markdown_github
+    variant: gfm
   html_document:
     keep_md: true
 ---
 
-# "A Helpful Way to Install R Packages Hosted on GitHub"
+# A Helpful Way to Install R Packages Hosted on GitHub
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -23,6 +23,7 @@ knitr::opts_chunk$set(
 [![CRAN Version](http://www.r-pkg.org/badges/version-ago/githubinstall)](https://cran.r-project.org/package=githubinstall)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/githubinstall)](http://cranlogs.r-pkg.org/badges/githubinstall)
 [![Coverage Status](https://coveralls.io/repos/github/hoxo-m/githubinstall/badge.svg?branch=master)](https://coveralls.io/github/hoxo-m/githubinstall?branch=master)
+[![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/hoxo-m)
 
 ## Abstract
 
@@ -48,7 +49,7 @@ A part of the cause of it is the **devtools** package that makes it easy to deve
 The **devtools** package not only facilitates the process to develop R packages but also provides another way to distribute R packages.
 
 When developers publish R packages that created by them, they commonly use CRAN [[2]](https://cran.r-project.org).
-You can install packages that are available on CRAN using `install.package()`.
+You can install packages that are available on CRAN using `install.packages()`.
 For example, you can install **dplyr** package as follows:
 
 ```{r eval=FALSE}
@@ -223,7 +224,7 @@ gh_install_packages("densratio", ref = "e8233e6")
 
 Finally, you may find a patch for fixing bugs as a pull request.
 In such case, you can specify pull requests to `ref` using `github_pull()`.
-For instance, you can install **dplyr** from the [pull request #2058](https://github.com/hadley/dplyr/pull/3274) as follows:
+For instance, you can install **dplyr** from the [pull request #3274](https://github.com/hadley/dplyr/pull/3274) as follows:
 
 ```{r eval=FALSE}
 gh_install_packages("dplyr", ref = github_pull("3274"))
